@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Configurações da Conta</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+    
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 10px auto;
+      border: 2px solid #ccc;
+      object-fit: cover;
+    }
+
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .info {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="email"], input[type="date"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #3498db;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 10px 5px;
+    }
+
+    .btn:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-logout {
+      background-color: #e74c3c;
+    }
+
+    .btn-logout:hover {
+      background-color: #c0392b;
+    }
+
+    .upload-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: #3498db;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Editar Perfil</h1>
+
+    <img id="profilePreview" class="profile-pic" src="user (1).png">
+    <label for="profileInput" class="upload-label">Trocar foto</label>
+    <input type="file" id="profileInput" accept="image/*">
+    
+
+    <div class="info">
+      <label for="nome">Nome completo:</label>
+      <input type="text" id="nome">
+    </div>
+    <div class="info">
+      <label for="usuario">Nome de usuário:</label>
+      <input type="text" id="usuario">
+    </div>
+    <div class="info">
+      <label for="email">Email/Telefone:</label>
+      <input type="email" id="email">
+    </div>
+    <div class="info">
+      <label for="data">Data de nascimento:</label>
+      <input type="date" id="data">
+    </div>
+
+    <button class="btn" onclick="salvarEdicao()">Salvar Alterações</button>
+    <button class="btn" onclick="voltarHome()">Voltar para a Home</button>
+    <button class="btn btn-logout" onclick="window.location.href='../login/login.html'">Sair</button>
+    
+  </div>
+
+  <script>
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn !== 'true') {
+      window.location.href = '../login/login.html';
+    }
+
+    // Preencher campos
+    const nomeInput = document.getElementById('nome');
+    const usuarioInput = document.getElementById('usuario');
+    const emailInput = document.getElementById('email');
+    const dataInput = document.getElementById('data');
+    const profilePreview = document.getElementById('profilePreview');
+
+    // Se não tiver foto salva, define uma padrão
+    if (!localStorage.getItem('userPhoto') || localStorage.getItem('userPhoto') === 'null') {
+  localStorage.setItem('userPhoto', '../imgs/user(1).png');
+}
+
+profilePreview.src = localStorage.getItem('userPhoto') || 'https://via.placeholder.com/120';
+
+
+    nomeInput.value = localStorage.getItem('userName') || '';
+    usuarioInput.value = localStorage.getItem('userUsername') || '';
+    emailInput.value = localStorage.getItem('userEmail') || '';
+    dataInput.value = localStorage.getItem('userDate') || '';
+
+
+
+    // Foto de perfil
+    document.getElementById('profileInput').addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          profilePreview.src = e.target.result;
+          localStorage.setItem('userPhoto', e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+
+    function voltarHome() {
+        window.location.href = '../Home/home.html';
+    }
+
+
+    // Salvar alterações
+    function salvarEdicao() {
+      localStorage.setItem('userName', nomeInput.value);
+      localStorage.setItem('userUsername', usuarioInput.value);
+      localStorage.setItem('userEmail', emailInput.value);
+      localStorage.setItem('userDate', dataInput.value);
+
+      // Atualiza no banco de dados de usuários
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const emailAntigo = localStorage.getItem('userEmail');
+      const index = users.findIndex(u => u.email === emailAntigo);
+      if (index !== -1) {
+        users[index].name = nomeInput.value;
+        users[index].username = usuarioInput.value;
+        users[index].email = emailInput.value;
+        users[index].data = dataInput.value;
+        localStorage.setItem('users', JSON.stringify(users));
+      }
+
+      alert("Informações atualizadas com sucesso!");
+    }
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = '../login/login.html';
+    }
+  </script>
+</body>
+</html>

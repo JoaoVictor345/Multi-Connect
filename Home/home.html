@@ -1,0 +1,192 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="home.css" />
+  <title>Início</title>
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <div class="hamburger" id="hamburger">
+        <div class="line"></div><div class="line"></div><div class="line"></div>
+      </div>
+      <img class="symbol" src="/imgs/linkacao.png" alt="Multi-Connect" />
+      <div class="logo"><a href="#">MultiConnect</a></div>
+    </div>
+
+    <div class="menu" id="menu">
+      <ul class="nav-list">
+        <li><a href="#" id="link1">Início</a></li>
+        <li><a href="../Lojas/lojas.html">Lojas</a></li>
+        <li><a href="#" id="link3">Sobre</a></li>
+        <li><a href="../Config/Config.html">Configurações</a></li>
+      </ul>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="header-right">
+      <div class="perfil-wrapper" id="perfilArea" style="display: none;">
+        <img src="" alt="Perfil" id="perfilFoto" class="perfil-foto" />
+        <div id="menuPerfil" class="menu-perfil">
+          <button class="btn-red" onclick="window.location.href='../Lojas/lojas.html'" style="color: black;">Lojas</button><br>
+          <button onclick="window.location.href='../Config/Config.html'" style="color: black;">Histórico</button><br>
+          <button onclick="window.location.href='../Config/Config.html'" style="color: black;">Configurações</button>
+          <button onclick="logout()">Sair</button>
+        </div>
+      </div>
+      <div class="auth-buttons" id="authButtons" style="display: none;">
+        <a href="../login/login.html" class="btn-login">Login</a>
+        <a href="../cadastro/cadastro.html" class="btn-cadastrar">Cadastrar-se</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <div id="welcome">
+        <h1 id="greeting">Olá, Usuário!</h1>
+        <p>Bem-vindo à Multi-Connect, sua plataforma de conexões inteligentes.</p>
+      </div>
+    </section>
+
+    <section class="historico">
+      <div id="historico">
+        <h1>Histórico de Compras</h1>
+        <p>Veja o que você já comprou!</p>
+      </div>
+      <div class="card-container" id="cardContainer"></div>
+    </section>
+
+    <section class="lojas">
+      <div id="lojas">
+        <h1>Lojas</h1>
+        <p>Veja as lojas disponíveis!</p>
+      </div>
+      <div class="store-container" id="storeContainer"></div>
+    </section>
+  </main>
+
+  <script src="../Lojas/lojasData.js"></script>
+  <script>
+    function setGreeting() {
+      const hour = new Date().getHours();
+      let greeting = hour < 12 ? "Bom dia" : hour < 18 ? "Boa tarde" : "Boa noite";
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const userName = localStorage.getItem('userName');
+      const greetingText = isLoggedIn && userName ? `${greeting}, ${userName}!` : `${greeting}, visitante!`;
+      document.getElementById("greeting").textContent = greetingText;
+
+      if (!isLoggedIn) {
+        document.querySelector(".historico").innerHTML = `
+          <div id="historico">
+            <h1>Histórico de Compras</h1>
+            <p>Faça login para acessar seu histórico de compras.</p>
+          </div>`;
+      }
+    }
+
+    function ajustarHeader() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const perfilArea = document.getElementById('perfilArea');
+      const authButtons = document.getElementById('authButtons');
+      const perfilFoto = document.getElementById('perfilFoto');
+
+      if (isLoggedIn) {
+        const foto = localStorage.getItem('userPhoto') || '../imgs/user.png';
+        perfilFoto.src = foto;
+        perfilArea.style.display = 'flex';
+        authButtons.style.display = 'none';
+      } else {
+        perfilArea.style.display = 'none';
+        authButtons.style.display = 'flex';
+      }
+    }
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = '../login/login.html';
+    }
+
+    function renderCards() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      if (!isLoggedIn) return;
+
+      const produtos = [
+        { nome: "Makita", descricao: "som da makita: zzzzzzzzzzh",imagem: "../products/makita.png",link: "#" },
+        { nome: "Pia",descricao: "piupiupiupiupiu",imagem: "../products/Pia.png",link: "#"},
+        { nome: "Shrek mouses",descricao: "Shrek é foda dms",imagem: "../products/shrek.png",link: "#"},
+        { nome: "Carro do bobisponja",descricao: "Carro do bobisponja é foda dms",imagem: "../products/bobisponja.png",link: "#"},
+        { nome: "Produto 2",descricao: "Descrição do Produto 2",imagem: "../products/produto2.png",link: "#"},
+        { nome: "Produto 1",descricao: "Descrição do Produto 1",imagem: "../products/produto1.png",link: "#"},
+        { nome: "Produto 3",descricao: "Descrição do Produto 3",imagem: "../products/produto3.png",link: "#"},
+        { nome: "Produto 4",descricao: "Descrição do Produto 4",imagem: "../products/produto4.png",link: "#"}
+      ];
+
+      const container = document.getElementById("cardContainer");
+      produtos.forEach(produto => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+          <img class="card-img" src="${produto.imagem}" alt="${produto.nome}">
+          <h2>${produto.nome}</h2>
+          <p>${produto.descricao}</p>
+          <a href="${produto.link}">
+            <button class="card-button">Ver mais</button>
+          </a>`;
+        container.appendChild(card);
+      });
+    }
+
+    function renderStores() {
+      const container = document.getElementById("storeContainer");
+      lojas.forEach(loja => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+          <img class="card-img" src="${loja.imagem}" alt="${loja.nome}">
+          <h2>${loja.nome}</h2>
+          <p>${loja.descricao}</p>
+          <a href="${loja.link}">
+            <button class="card-button">Ver mais</button>
+          </a>`;
+        container.appendChild(card);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setGreeting();
+      ajustarHeader();
+      renderCards();
+      renderStores();
+
+      document.getElementById('perfilFoto')?.addEventListener('click', () => {
+        const menuPerfil = document.getElementById('menuPerfil');
+        menuPerfil.style.display = menuPerfil.style.display === 'block' ? 'none' : 'block';
+      });
+
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.perfil-wrapper')) {
+          document.getElementById('menuPerfil').style.display = 'none';
+        }
+      });
+
+      document.getElementById("hamburger").addEventListener("click", () => {
+        const menu = document.getElementById("menu");
+        const overlay = document.getElementById("overlay");
+        menu.classList.toggle("open");
+        overlay.style.display = menu.classList.contains("open") ? "flex" : "none";
+      });
+
+      document.getElementById("overlay").addEventListener("click", () => {
+        document.getElementById("menu").classList.remove("open");
+        document.getElementById("overlay").style.display = "none";
+      });
+    });
+  </script>
+</body>
+</html>

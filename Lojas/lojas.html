@@ -1,0 +1,81 @@
+<!-- lojas.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lojas - MultiConnect</title>
+  <link rel="stylesheet" href="lojas.css">
+</head>
+<body>
+  <header>
+    <div class="hamburger" id="hamburger">
+      <div class="line"></div><div class="line"></div><div class="line"></div>
+    </div>
+    <div class="menu" id="menu">
+      <ul class="nav-list">
+        <li><a href="../Home/home.html">Início</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li><a href="../Config/Config.html">Configurações</a></li>
+      </ul>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <h1 class="logo" style="text-align: center; color: white;">Lojas</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Pesquisar lojas..." oninput="filterStores(this.value)">
+    </div>
+    
+    <div class="add-store">
+      <button class="btn-add" onclick="window.location.href='../Cadastro-loja/cadastro-loja.html'">Adicionar Loja</button>  
+
+    </div>
+    
+  </header>
+
+  <section class="store-container" id="storeContainer"></section>
+
+  <script src="lojasData.js"></script>
+  <script>
+    function renderStores(query = '') {
+      const container = document.getElementById("storeContainer");
+      container.innerHTML = ''; // limpa antes de renderizar
+
+      lojas
+        .filter(loja => loja.nome.toLowerCase().includes(query.toLowerCase()) || loja.descricao.toLowerCase().includes(query.toLowerCase()))
+        .forEach(loja => {
+          const card = document.createElement("div");
+          card.classList.add("card");
+          card.innerHTML = `
+            <img class="card-img" src="${loja.imagem}" alt="${loja.nome}">
+            <h2>${loja.nome}</h2>
+            <p>${loja.descricao}</p>
+            <a href="${loja.link}">
+              <button class="card-button">Ver mais</button>
+            </a>`;
+          container.appendChild(card);
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderStores();
+
+      document.getElementById("hamburger").addEventListener("click", () => {
+        const menu = document.getElementById("menu");
+        const overlay = document.getElementById("overlay");
+        menu.classList.toggle("open");
+        overlay.style.display = menu.classList.contains("open") ? "flex" : "none";
+      });
+
+      document.getElementById("overlay").addEventListener("click", () => {
+        document.getElementById("menu").classList.remove("open");
+        document.getElementById("overlay").style.display = "none";
+      });
+    });
+
+    function filterStores(query) {
+      renderStores(query);
+    }
+  </script>
+</body>
+</html>

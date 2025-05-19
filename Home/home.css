@@ -1,0 +1,287 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins';
+}
+
+body {
+  background-color: #D5E5FF;
+  font-family: 'Exo 2', 'poppins';
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 70px;
+  background-color: #1b6ee3;
+  color: white;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 2px;
+}
+
+.symbol {
+  width: 80px;
+  height: auto;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.logo a {
+  color: white;
+  font-family: 'poppins';
+  text-decoration: none;
+}
+
+.perfil-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.perfil-foto {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.menu-perfil {
+  display: none;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background-color: white;
+  color: black;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 10px;
+  z-index: 99;
+}
+
+.menu-perfil button {
+  background-color: transparent;
+  border: none;
+  color: #e74c3c;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-login, .btn-cadastrar {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn-login {
+  background-color: white;
+  border: 2px solid white;
+  color: #3498db;
+}
+
+.btn-cadastrar {
+  background-color: #3498db;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-login:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-cadastrar:hover {
+  background-color: #217dbb;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: #1b6ee394;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+  z-index: 1001;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  transform: translateX(-100%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.menu.open {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  position: fixed;
+}
+
+.menu ul {
+  list-style: none;
+}
+
+.menu ul li {
+  margin: 20px;
+}
+
+.menu ul li a {
+  color: white;
+  font-size: 22px;
+  text-decoration: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  display: none;
+}
+
+.welcome {
+  background-image: url('../imgs/quem-e-robert-prevost-novo-papa-960x540.webp');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: white;
+}
+
+.historico, .lojas {
+  background-color: #D5E5FF;
+  padding: 40px 20px;
+}
+
+#historico h1, #lojas h1 {
+  text-align: center;
+  font-size: 36px;
+  color: #1b6ee3;
+}
+
+#historico p, #lojas p {
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+}
+
+.card-container,
+.store-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    flex: 0 0 auto;
+    width: 300px;
+    height: 450px; /* Altura fixa */
+    text-align: center;
+    transition: 0.3s;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+
+.card h2 {
+  font-size: 24px;
+  color: #1b6ee3;
+  margin: 10px 0;
+}
+
+.card p {
+  font-size: 16px;
+  color: #555;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow: hidden;
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+.card-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #1b6ee3;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-button:hover {
+  background-color: #155ab6;
+}

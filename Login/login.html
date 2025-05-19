@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../imagens/Multi-Connect.ico" type="image/x-icon">
+    <title>Login - Multi-Connect</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="textbox">
+                  <input type="text" id="loginUser" placeholder="Usuário/Email" required>
+                </div>
+                <div class="textbox" id="senha">
+                  <input type="password" id="senhaInput" placeholder="Digite sua senha" required>
+                  <button id="ativarsenha" type="button" onclick="togglePasswordVisibility()">
+                    <img src="../imgs/olhofechado.png" alt="olho aberto" class="olho" id="olhoFechado">
+                  </button>
+                </div>
+                <div class="forgot-password"><a href="#">Esqueceu a senha?</a></div>
+                <button class="btn" type="submit">Entrar</button>
+              </form>
+              </form>
+            <div class="register-link">
+                <p>Ainda não tem uma conta? <a href="../cadastro/cadastro.html" class="registro">Cadastre-se</a></p>
+            </div>
+            <div class="divisor"><em>-----------OU-----------</em></div>
+
+            <div class="social-media">
+                <div class="social-links">
+                    <a href=""><img src="../imgs/facebook.png" alt=""></a>
+                </div>
+                <div class="social-links">
+                    <a href=""><img src="../imgs/google.png" alt=""></a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><img src="../imgs/github.png" alt=""></a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><img src="../imgs/linkedin.avif" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../Scripts/script.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+          event.preventDefault();
+      
+          const loginInput = document.getElementById('loginUser').value;
+          const senha = document.getElementById('senhaInput').value;
+      
+          const users = JSON.parse(localStorage.getItem('users')) || [];
+      
+          const usuario = users.find(user =>
+            (user.username === loginInput || user.email === loginInput) && user.password === senha
+          );
+      
+          if (!usuario) {
+            // Notificação se a conta não existir
+            const notificacao = document.createElement('div');
+            notificacao.textContent = "Usuário ou senha incorretos. Verifique os dados.";
+            notificacao.style.position = 'fixed';
+            notificacao.style.bottom = '20px';
+            notificacao.style.left = '50%';
+            notificacao.style.transform = 'translateX(-50%)';
+            notificacao.style.backgroundColor = '#e74c3c';
+            notificacao.style.color = '#fff';
+            notificacao.style.padding = '12px 20px';
+            notificacao.style.borderRadius = '5px';
+            notificacao.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
+            notificacao.style.zIndex = '9999';
+            document.body.appendChild(notificacao);
+      
+            setTimeout(() => notificacao.remove(), 3000);
+            return;
+          }
+      
+          // Login bem-sucedido
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('userName', usuario.name);
+          localStorage.setItem('userUsername', usuario.username);
+          localStorage.setItem('userEmail', usuario.email);
+          localStorage.setItem('userDate', usuario.data);
+      
+          window.location.href = '../Home/home.html';
+        });
+      </script>
+      
+</body>
+</html>
