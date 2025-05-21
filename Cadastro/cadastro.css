@@ -43,9 +43,21 @@ body{
     filter: drop-shadow(1px 1px 0px black );
 }
 
+.voltar{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font1);
+    color: white;
+    font-size: 20px;
+}
+
 .lado-esquerdo {
   flex: 1;
-  background-color: #a7a7a7;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,11 +81,9 @@ body{
 
 .signup-box{
     background-color: #fffffbb6;
-    border: solid rgba(33, 75, 183, 0.642);
     height: 520px;
-    width: 350px;
+    width: 550px;
     padding: 30px;
-    margin-bottom: 100px;
     position: relative;
     border-radius: 10px;
 }
@@ -85,13 +95,13 @@ a {
 }
 
 h2 {
+
     text-align: center;
     color: #185ec0;
     margin-top: 0px;
-    margin-bottom: 15px;
+    margin-bottom: 50px;
     font-family: var(--font1);
     font-size: 35px;
-    text-shadow: 1px 1px 1px black;
 }
 
 .textbox {
@@ -101,17 +111,17 @@ h2 {
 .textbox input {
     width: 100%;
     padding: 10px;
-    border: 2px solid #000000;
+    border: none;
     border-radius: 5px;
     outline: none;
     transition: border-color 0.3s;
     font-family: var(--font3);
-    background-color: #fffffff4;
+    background-color: #E6E6E6;
 }
 
 
 .textbox input:focus {
-    border-color: #196adbd2;
+    border: solid 2px #185ec0;
 }
 
 #senha {
@@ -124,7 +134,7 @@ h2 {
 #ativarsenha{
     position: absolute;
     top: -5%;
-    left: 87%;
+    left: 93%;
     background-color: transparent;
     height: 34px;
     padding: 7.5px;
@@ -143,13 +153,15 @@ h2 {
 
 #data{
     width: 100%;
+    background-color: #E6E6E6;
     padding: 5px;
     margin-bottom: 10px;
+    border: none;
     border-radius: 5px;
-    border: 2px solid black;
     transition: border-color 0.3s;
     font-size: 16px;
     font-family: var(--font1);
+    color: gray;
 }
 
 #data:focus{
@@ -162,9 +174,10 @@ h2 {
     width: 100%;
     background-color:#436eb8;
     color: white;
-    padding: 7.5px;
+    padding: 12px;
     border-radius: 5px;
     border: none;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
     font-family: var(--font1);
