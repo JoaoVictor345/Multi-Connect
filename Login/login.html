@@ -1,95 +1,85 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../imagens/Multi-Connect.ico" type="image/x-icon">
-    <title>Login - Multi-Connect</title>
-    <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <title>Login Multi-Connect</title>
 </head>
 <body>
-    <div class="container">
-        <div class="login-box">
-            <h2>Login</h2>
-            <form id="loginForm">
-                <div class="textbox">
-                  <input type="text" id="loginUser" placeholder="Usuário/Email" required>
-                </div>
-                <div class="textbox" id="senha">
-                  <input type="password" id="senhaInput" placeholder="Digite sua senha" required>
-                  <button id="ativarsenha" type="button" onclick="togglePasswordVisibility()">
-                    <img src="../imgs/olhofechado.png" alt="olho aberto" class="olho" id="olhoFechado">
-                  </button>
-                </div>
-                <div class="forgot-password"><a href="#">Esqueceu a senha?</a></div>
-                <button class="btn" type="submit">Entrar</button>
-              </form>
-              </form>
-            <div class="register-link">
-                <p>Ainda não tem uma conta? <a href="../cadastro/cadastro.html" class="registro">Cadastre-se</a></p>
-            </div>
-            <div class="divisor"><em>-----------OU-----------</em></div>
-
-            <div class="social-media">
-                <div class="social-links">
-                    <a href=""><img src="../imgs/facebook.png" alt=""></a>
-                </div>
-                <div class="social-links">
-                    <a href=""><img src="../imgs/google.png" alt=""></a>
-                </div>
-                <div class="social-links">
-                    <a href="#"><img src="../imgs/github.png" alt=""></a>
-                </div>
-                <div class="social-links">
-                    <a href="#"><img src="../imgs/linkedin.avif" alt=""></a>
-                </div>
-            </div>
-        </div>
+  <div class="tela">
+    <div class="lado-esquerdo">
+      <img src="../imgs/investimentos.avif" alt="Imagem decorativa" />
     </div>
-    <script src="../Scripts/script.js"></script>
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function (event) {
-          event.preventDefault();
-      
-          const loginInput = document.getElementById('loginUser').value;
-          const senha = document.getElementById('senhaInput').value;
-      
-          const users = JSON.parse(localStorage.getItem('users')) || [];
-      
-          const usuario = users.find(user =>
-            (user.username === loginInput || user.email === loginInput) && user.password === senha
-          );
-      
-          if (!usuario) {
-            // Notificação se a conta não existir
-            const notificacao = document.createElement('div');
-            notificacao.textContent = "Usuário ou senha incorretos. Verifique os dados.";
-            notificacao.style.position = 'fixed';
-            notificacao.style.bottom = '20px';
-            notificacao.style.left = '50%';
-            notificacao.style.transform = 'translateX(-50%)';
-            notificacao.style.backgroundColor = '#e74c3c';
-            notificacao.style.color = '#fff';
-            notificacao.style.padding = '12px 20px';
-            notificacao.style.borderRadius = '5px';
-            notificacao.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
-            notificacao.style.zIndex = '9999';
-            document.body.appendChild(notificacao);
-      
-            setTimeout(() => notificacao.remove(), 3000);
-            return;
-          }
-      
-          // Login bem-sucedido
-          localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('userName', usuario.name);
-          localStorage.setItem('userUsername', usuario.username);
-          localStorage.setItem('userEmail', usuario.email);
-          localStorage.setItem('userDate', usuario.data);
-      
-          window.location.href = '../Home/home.html';
-        });
-      </script>
-      
+    <div class="lado-direito">
+      <span class="voltar">
+        <a class="txt" href="../Home/home.html"><i class="bi bi-caret-left-fill"></i> Voltar</a>
+      </span>
+      <div class="login-box">
+        <h2>Bem-vindo de volta!</h2>
+        <form id="loginForm" method="get">
+          <div class="textbox">
+            <input id="username" type="text" placeholder="Email ou Usuário" required />
+          </div>
+          <div class="textbox senha-box">
+            <input id="senhaInput" type="password" placeholder="Senha" required />
+            <button id="ativarsenha" type="button" onclick="togglePasswordVisibility()">
+              <img src="../imgs/olhofechado.png" alt="mostrar/ocultar" class="olho" id="olhoFechado">
+            </button>
+          </div>
+          <button class="btn" type="submit">Entrar</button>
+        </form>
+        <div class="signup-link">
+          <p>Ainda não tem conta? <a href="../Cadastro/cadastro.html">Cadastre-se</a></p>
+        </div>
+        <div class="divisor"><p><hr>OU<hr></p></div>
+        <div class="social-media">
+          <a href="#"><img src="../imgs/facebook.png" alt="Facebook"></a>
+          <a href="#"><img src="../imgs/google.png" alt="Google"></a>
+          <a href="#"><img src="../imgs/github.png" alt="GitHub"></a>
+          <a href="#"><img src="../imgs/linkedin.avif" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../Scripts/script.js"></script>
+  <script>
+    function togglePasswordVisibility() {
+      const input = document.getElementById('senhaInput');
+      const olho = document.getElementById('olhoFechado');
+      if (input.type === 'password') {
+        input.type = 'text';
+        olho.src = '../imgs/olhoaberto.png';
+      } else {
+        input.type = 'password';
+        olho.src = '../imgs/olhofechado.png';
+      }
+    }
+
+    // Redireciona se já estiver logado
+    window.onload = () => {
+      if (localStorage.getItem('isLoggedIn') === 'true') {
+        window.location.href = '../Home/home.html';
+      }
+    };
+
+    document.getElementById('loginForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const usernameOrEmail = document.getElementById('username').value;
+      const password = document.getElementById('senhaInput').value;
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const user = users.find(u =>
+        (u.email === usernameOrEmail || u.username === usernameOrEmail) &&
+        u.password === password
+      );
+      if (!user) {
+        alert('Usuário ou senha incorretos.');
+        return;
+      }
+      localStorage.setItem('isLoggedIn', 'true');
+      window.location.href = '../Home/home.html';
+    });
+  </script>
 </body>
 </html>
