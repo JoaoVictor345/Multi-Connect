@@ -17,6 +17,9 @@
   </div>
 
   <div class="lado-direito">
+    <span class="voltar">
+        <a class="txt" href="../Home/home.html"><i class="bi bi-caret-left-fill"></i> Voltar</a>
+      </span>
     <div class="forms-container">
       <div class="forms">
         <!-- Login -->
@@ -124,7 +127,6 @@
       }
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
-
     const user = users.find(u =>
       (u.email === usernameOrEmail || u.username === usernameOrEmail) && u.password === senha
     );

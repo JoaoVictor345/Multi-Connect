@@ -52,6 +52,29 @@ body {
   align-items: center;
 }
 
+.voltar a {
+    text-decoration: none;
+    color: #1b6ee3;
+    font-family: var(--font1);
+    font-size: 20px;
+}
+
+.voltar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font1);
+  color: white;      /* cor escura para contraste no fundo branco */
+  font-size: 18px;
+  text-decoration: none; /* se quiser remover sublinhado */
+}
+.voltar i {
+  margin-right: 5px;
+}
+
 .forms-container {
   width: 400px;
   overflow: hidden;
