@@ -297,3 +297,13 @@ header {
   outline-offset: 2px;
 }
 
+.card-container,
+.store-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE e Edge antigo */
+}
+
+.card-container::-webkit-scrollbar,
+.store-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari e Edge */
+}
