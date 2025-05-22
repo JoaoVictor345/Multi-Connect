@@ -214,12 +214,27 @@ h2 {
     text-decoration: underline;
 }
 
-.divisor{
-    text-align: center;
-    font-family: var(--font1);
-    font-size: 20px;
-    margin-top: 20px;
-    color: #185ec0;
+.divisor {
+  display: flex;
+  align-items: center;
+  font-family: var(--font1);
+  font-size: 20px;
+  margin-top: 20px;
+  color: #185ec0;
+}
+
+.divisor p {
+  display: flex;
+  align-items: center;
+  font-family: var(--font1);
+  color: #185ec0;
+  
+}
+
+.divisor hr {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #185ec0;
 }
 
 .social-media{
