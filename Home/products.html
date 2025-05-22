@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalhes do Produto</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 700px; margin: auto; }
+    img { max-width: 100%; height: auto; border-radius: 8px; }
+    .produto-container { text-align: center; }
+    h1 { margin-top: 10px; }
+    p { font-size: 1.1rem; margin: 10px 0; }
+    .preco { font-size: 1.3rem; font-weight: bold; color: #2a9d8f; margin: 15px 0; }
+    button { background-color: #264653; color: white; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #1b3a4b; }
+    a { display: inline-block; margin-top: 20px; color: #264653; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="produto-container" id="produtoContainer">
+  </div>
+
+  <!-- Inclua o arquivo produtos antes do seu script -->
+  <script src="./products.js"></script>
+
+  <script>
+    function getParametroURL(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    }
+
+    function carregarProduto() {
+      const id = parseInt(getParametroURL('id'));
+      const container = document.getElementById('produtoContainer');
+
+      if (!id) {
+        container.innerHTML = '<p>Produto não especificado. <a href="home.html">Voltar para a home</a></p>';
+        return;
+      }
+
+      // 'produtos' está disponível globalmente porque incluímos products.js antes
+      const produto = produtos.find(p => p.id === id);
+
+      if (!produto) {
+        container.innerHTML = '<p>Produto não encontrado. <a href="home.html">Voltar para a home</a></p>';
+        return;
+      }
+
+      container.innerHTML = `
+        <img src="${produto.imagem}" alt="${produto.nome}" />
+        <h1>${produto.nome}</h1>
+        <p>${produto.descricao}</p>
+        <p class="preco">R$ ${produto.preco.toFixed(2)}</p>
+        <button onclick="alert('Produto adicionado ao carrinho!')">Comprar</button>
+        <br/>
+        <a href="home.html">← Voltar para a home</a>
+      `;
+    }
+
+    window.onload = carregarProduto;
+  </script>
+
+</body>
+</html>

@@ -71,6 +71,7 @@
     </section>
   </main>
 
+  <script src="./products.js"></script>
   <script src="../Lojas/lojasData.js"></script>
   <script>
     function setGreeting() {
@@ -116,18 +117,9 @@
       const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
       if (!isLoggedIn) return;
 
-      const produtos = [
-        { nome: "Makita", descricao: "som da makita: zzzzzzzzzzh",imagem: "../products/makita.png",link: "#" },
-        { nome: "Pia",descricao: "piupiupiupiupiu",imagem: "../products/Pia.png",link: "#"},
-        { nome: "Shrek mouses",descricao: "Shrek é foda dms",imagem: "../products/shrek.png",link: "#"},
-        { nome: "Carro do bobisponja",descricao: "Carro do bobisponja é foda dms",imagem: "../products/bobisponja.png",link: "#"},
-        { nome: "Produto 2",descricao: "Descrição do Produto 2",imagem: "../products/produto2.png",link: "#"},
-        { nome: "Produto 1",descricao: "Descrição do Produto 1",imagem: "../products/produto1.png",link: "#"},
-        { nome: "Produto 3",descricao: "Descrição do Produto 3",imagem: "../products/produto3.png",link: "#"},
-        { nome: "Produto 4",descricao: "Descrição do Produto 4",imagem: "../products/produto4.png",link: "#"}
-      ];
-
       const container = document.getElementById("cardContainer");
+      container.innerHTML = ''; // limpa antes
+
       produtos.forEach(produto => {
         const card = document.createElement("div");
         card.classList.add("card");
@@ -135,12 +127,18 @@
           <img class="card-img" src="${produto.imagem}" alt="${produto.nome}">
           <h2>${produto.nome}</h2>
           <p>${produto.descricao}</p>
-          <a href="${produto.link}">
+          <p>Preço: R$ ${produto.preco.toFixed(2)}</p>
+          <a href="./products.html?id=${produto.id}">
             <button class="card-button">Ver mais</button>
           </a>`;
         container.appendChild(card);
       });
+
+      if (produtos.length === 0) {
+        container.innerHTML = '<p>Nenhum produto encontrado.</p>';
+      }
     }
+
 
     function renderStores() {
       const container = document.getElementById("storeContainer");
