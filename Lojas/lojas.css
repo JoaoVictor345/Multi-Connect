@@ -22,6 +22,7 @@ body {
   header {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     align-items: center;
     padding: 0 20px;
     height: 70px;
@@ -34,12 +35,26 @@ body {
     margin: 20px;
   }
   .search-bar input {
-    width: 300px;
+    width: 350px;
     padding: 10px;
     border: 2px solid #1b6ee3;
     border-radius: 5px;
     font-size: 16px;
   }
+
+  .navigation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .pesquisa{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
   .store-container {
     display: flex;
     flex-direction: column;
@@ -84,12 +99,13 @@ body {
     height: 100px;
     border-radius: 10px;
     object-fit: cover;
-    margin-right: 15px; /* Espaço entre a imagem e o texto */
+    margin-right: 15px; 
+    box-shadow: 2px 2px 2px 2px #1b6ee3;
 }
 
   .store-info {
     display: flex;
-    align-items: center;  /* Align logo and text vertically */
+    align-items: center;
 }
   .card-button {
     background-color: #1b6ee3;
@@ -177,10 +193,56 @@ body {
     margin: 2px;
   }
 
+  .logo img{
+    width: 120px;
+  }
+
   .logo{
-    width: 50px;
-    height: 50px;
+    display: flex;
+  }
+
+  .title{
+    position: relative;
+    left: -30px;
+    margin-top: 25px;
+    font-size: 35px;
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+  }
+
+
+  .search{
+    transition: 0.6s;
+    width: 100%;
+  }
+
+  .search:focus{
+    transition: 0.6s;
+    border: solid #063395;
+    outline: none;
+    border-radius: 30px;
+  }
+
+  .btn-add{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: end;
+    width: 145px;
+    height: 35px;
+    font-size: 13px;
+    padding-right: 12px;
+    color: white;
+    background-color: #1b6ee3;
     border-radius: 10px;
-    object-fit: cover;
-    margin-right: 15px;
+    border: none;
+    box-shadow: 1px 1px 2px white;
+    cursor: pointer;
+  }
+
+  .btn-add i{
+    font-size: 17px;
+    margin: 3px;
   }
