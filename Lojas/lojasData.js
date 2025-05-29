@@ -5,6 +5,9 @@ const lojas = [
     descricao: "Loja especializada em eletrônicos e gadgets de última geração.",
     avaliacao: "⭐⭐⭐⭐",
     imagem: "../imgs/techwave.avif",
+    local: "rua 234",
+    tipovaga: "CLT",
+    servico: "T.I.",
     link: "#" 
   },
   { 
@@ -12,6 +15,9 @@ const lojas = [
     descricao: "Produtos sustentáveis para o lar e jardim, com foco em ecologia.",
     avaliacao: "⭐⭐⭐⭐⭐", 
     imagem: "../imgs/casaverde.jpg",
+    local: "rua blé",
+    tipovaga: "freelancer",
+    servico: "Desenvolvedor Web.",
     link: "#" 
   },
   { 
@@ -19,6 +25,9 @@ const lojas = [
     descricao: "Moda feminina contemporânea com coleções exclusivas.",
     avaliacao: "⭐⭐⭐", 
     imagem: "../imgs/bellamoda.avif",
+    local: "rua do joao victor",
+    tipovaga: "estágio",
+    servico: "Atendente.",
     link: "#" 
   },
   { 
@@ -26,6 +35,9 @@ const lojas = [
     descricao: "A livraria perfeita para quem ama clássicos e lançamentos.", 
     avaliacao: "⭐⭐⭐⭐⭐", 
     imagem: "../imgs/betterbooks.avif",
+    local: "rua joao levir",
+    tipovaga: "CLT",
+    servico: "Bibliotecário.",
     link: "#" 
   },
   { 
@@ -33,6 +45,9 @@ const lojas = [
     descricao: "Tudo para seu pet: ração, brinquedos, acessórios e carinho.",
     avaliacao: "⭐⭐⭐⭐",
     imagem: "../imgs/homepets.avif",
+    local: "rua do felp",
+    tipovaga: "CLT",
+    servico: "Vendedor.",
     link: "#" 
   },
   { 
@@ -40,6 +55,9 @@ const lojas = [
     descricao: "Bicicletas urbanas e elétricas com design moderno e desempenho top.",
     avaliacao: "⭐⭐⭐⭐",
     imagem: "../imgs/bicycle.avif",
+    local: "rua do vascaino da let",
+    tipovaga: "estágio",
+    servico: "Atendente.",
     link: "#" 
   },
   {
@@ -47,6 +65,9 @@ const lojas = [
    descricao: "Confeitaria artesanal com doces que encantam pelo sabor e visual.",
    avaliacao: "⭐⭐⭐⭐⭐",
    imagem: "../imgs/doces.avif",
+    local: "rua do ivande",
+    tipovaga: "freelancer",
+    servico: "Desenvolvedor web.",
    link: "#" 
   },
   { 
@@ -54,6 +75,9 @@ const lojas = [
      descricao: "Equipamentos de informática e assistência técnica especializada.",
      avaliacao: "⭐⭐⭐",
      imagem: "../imgs/clicktech.avif",
+    local: "rua do xupeta",
+    tipovaga: "CLT",
+    servico: "técnico de informática.",
      link: "#" 
   },
   { 
@@ -61,6 +85,9 @@ const lojas = [
      descricao: "Velas, óleos e itens para aromaterapia e bem-estar.",
      avaliacao: "⭐⭐⭐⭐⭐",
      imagem: "../imgs/aroma_zen.png",
+    local: "rua da let do vasco",
+    tipovaga: "CLT",
+    servico: "Marketing",
      link: "#"
   },
   { 
@@ -68,6 +95,9 @@ const lojas = [
     descricao: "Produtos e colecionáveis para fãs de séries, HQs, games e animes.",
     avaliacao: "⭐⭐⭐⭐",
     imagem: "../imgs/geek_gaming.jpg",
+    local: "rua do shaolean(vulgo vito manel)",
+    tipovaga: "estágio",
+    servico: "Atendente de caixa.",
     link: "#"
   }
 ];
