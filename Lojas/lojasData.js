@@ -9,6 +9,7 @@ const lojas = [
     tipovaga: "CLT",
     servico: "T.I.",
     contratando: true,
+    trabalho: "Organização de documentos, atendimento ao publico e manutenção de servidores.",
     link: "#" 
   },
   { 
@@ -20,6 +21,7 @@ const lojas = [
     tipovaga: "freelancer",
     servico: "Desenvolvedor Web.",
     contratando: false,
+    trabalho: "Desenvolvimeto de web site.",
     link: "#" 
   },
   { 
@@ -31,6 +33,7 @@ const lojas = [
     tipovaga: "estágio",
     servico: "Atendente.",
     contratando: true,
+    trabalho: "Atendimento ao público.",
     link: "#" 
   },
   { 
@@ -42,6 +45,7 @@ const lojas = [
     tipovaga: "CLT",
     servico: "Bibliotecário.",
     contratando: false,
+    trabalho: "Atendimento ao público.",
     link: "#" 
   },
   { 
@@ -53,6 +57,7 @@ const lojas = [
     tipovaga: "CLT",
     servico: "Vendedor.",
     contratando: true,
+    trabalho: "Atendimento ao público.",
     link: "#" 
   },
   { 
@@ -64,6 +69,7 @@ const lojas = [
     tipovaga: "estágio",
     servico: "Atendente.",
     contratando: false,
+    trabalho: "Atendimento ao público.",
     link: "#" 
   },
   {
@@ -75,6 +81,7 @@ const lojas = [
     tipovaga: "freelancer",
     servico: "Desenvolvedor web.",
     contratando: true,
+    trabalho: "Desenvolvimento de web site.",
    link: "#" 
   },
   { 
@@ -86,6 +93,7 @@ const lojas = [
     tipovaga: "CLT",
     servico: "técnico de informática.",
     contratando: false,
+    trabalho: "Manutenção de dispositivos, atendimento ao publico e manutenção de servidores.",
      link: "#" 
   },
   { 
@@ -97,6 +105,7 @@ const lojas = [
     tipovaga: "CLT",
     servico: "Marketing",
     contratando: true,
+    trabalho: "Gerenciamento de redes sociais",
      link: "#"
   },
   { 
@@ -108,6 +117,7 @@ const lojas = [
     tipovaga: "estágio",
     servico: "Atendente de caixa.",
     contratando: false,
+    trabalho: "Atendimento ao público.",
     link: "#"
   }
 ];
