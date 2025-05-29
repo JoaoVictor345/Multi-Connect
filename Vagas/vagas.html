@@ -1,13 +1,12 @@
-<!-- lojas.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lojas - MultiConnect</title>
+  <title>Vagas - WorkConnect</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="lojas.css">
-    <link rel="shortcut icon" href="../imgs/Multi-Favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="vagas.css">
+  <link rel="shortcut icon" href="../imgs/Multi-Favicon.ico" type="image/x-icon">
 </head>
 <body>
   <header>
@@ -21,9 +20,9 @@
         </div>
         <ul class="nav-list">
           <div class="links1">
-            <li><a href="../Home/home.html" id=""><i class="bi bi-house-door"></i> Início</a></li>
+            <li><a href="../Home/home.html"><i class="bi bi-house-door"></i> Início</a></li>
+                      <li><a href="../Lojas/lojas.html"><i class="bi bi-shop"></i> Lojas</a></li>
             <li><a href="#"><i class="bi bi-people"></i> WorkConnect</a></li>
-            <li><a href="#"><i class="bi bi-question-circle"></i> Sobre</a></li>
           </div>
           <div class="links2">
             <li><a href="../Config/Config.html"><i class="bi bi-gear"></i> Configurações</a></li>
@@ -33,48 +32,47 @@
       <div class="overlay" id="overlay"></div>
       <div class="logo">
         <img src="../imgs/linkacao.png" alt="">
-        <a href="lojas.html" class="title">Lojas</a>
+        <a href="vagas.html" class="title">Vagas</a>
       </div>
     </div>
     <div class="pesquisa">
       <div class="search-bar">
-        <input type="text" placeholder="Pesquisar lojas..." oninput="filterStores(this.value)"
-        class="search">
-      </div>
-      
-      <div class="add-store">
-        <button class="btn-add" onclick="window.location.href='../Cadastro-loja/cadastro-loja.html'"><i class="bi bi-plus-square"></i> Adicionar Loja</button>
+        <input type="text" placeholder="Pesquisar vagas..." oninput="filterJobs(this.value)" class="search">
       </div>
     </div>
-    
   </header>
 
-  <section class="store-container" id="storeContainer"></section>
+  <section class="store-container" id="jobContainer"></section>
 
-  <script src="lojasData.js"></script>
+  <script src="vagasData.js"></script>
   <script>
-    function renderStores(query = '') {
-      const container = document.getElementById("storeContainer");
-      container.innerHTML = ''; // limpa antes de renderizar
+    function renderJobs(query = '') {
+      const container = document.getElementById("jobContainer");
+      container.innerHTML = '';
 
-      lojas
-        .filter(loja => loja.nome.toLowerCase().includes(query.toLowerCase()) || loja.descricao.toLowerCase().includes(query.toLowerCase()))
-        .forEach(loja => {
+      vagas
+        .filter(vaga => vaga.titulo.toLowerCase().includes(query.toLowerCase()) || vaga.descricao.toLowerCase().includes(query.toLowerCase()))
+        .forEach(vaga => {
           const card = document.createElement("div");
           card.classList.add("card");
           card.innerHTML = `
-            <img class="card-img" src="${loja.imagem}" alt="${loja.nome}">
-            <h2>${loja.nome}</h2>
-            <p>${loja.descricao}</p>
-            <a href="${loja.link}">
+            <div class="store-info">
+              <img class="card-img" src="${vaga.imagem}" alt="${vaga.titulo}">
+              <div class="details">
+                <h2>${vaga.titulo}</h2>
+                <p>${vaga.descricao}</p>
+              </div>
+            </div>
+            <a href="${vaga.link}" target="_blank">
               <button class="card-button">Ver mais</button>
-            </a>`;
+            </a>
+          `;
           container.appendChild(card);
         });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      renderStores();
+      renderJobs();
 
       document.getElementById("hamburger").addEventListener("click", () => {
         const menu = document.getElementById("menu");
@@ -89,8 +87,8 @@
       });
     });
 
-    function filterStores(query) {
-      renderStores(query);
+    function filterJobs(query) {
+      renderJobs(query);
     }
   </script>
 </body>

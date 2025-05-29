@@ -1,0 +1,283 @@
+@charset "UTF-8";
+
+/* Imports de fontes */
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background-color: #d5e5ff;
+    overflow-x: hidden;
+}
+
+/* ---------------- HEADER ---------------- */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 70px;
+    background: linear-gradient(90deg, #1b6ee3, #409fff);
+    color: white;
+}
+
+/* Navegação */
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.logo img {
+    width: 120px;
+    filter: drop-shadow(2px 2px 0px black);
+}
+
+.title {
+    position: relative;
+    left: -30px;
+    font-size: 35px;
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+/* ---------------- MENU LATERAL ---------------- */
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: white;
+    padding-top: 60px;
+    z-index: 1001;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+}
+
+.menu.open {
+    transform: translateX(0);
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu ul li {
+    margin: 20px;
+}
+
+.menu ul li a {
+    color: #000;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+.menu li {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.menu li:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.logo-nav {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: -40px;
+    width: 100%;
+}
+
+.logo-nav img {
+    width: 180px;
+    filter: drop-shadow(2px 0px 0px #1b6ee3);
+}
+
+/* Overlay do menu */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1000;
+}
+
+/* ---------------- HAMBURGUER ---------------- */
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 3px;
+}
+
+/* ---------------- PESQUISA E BOTÃO ---------------- */
+
+.pesquisa {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-bar input {
+    width: 350px;
+    padding: 10px;
+    border: 2px solid #1b6ee3;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.4s;
+}
+
+.search-bar input:focus {
+    border-color: #063395;
+    outline: none;
+    border-radius: 30px;
+}
+
+.btn-add {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 35px;
+    padding: 0 15px;
+    background-color: #1b6ee3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 1px 1px 0px white;
+    transition: 0.3s;
+}
+
+.btn-add:hover {
+    background-color: #063395;
+}
+
+/* ---------------- CARDS DE LOJA ---------------- */
+
+.store-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 15px;
+    box-shadow: 2px 2px 2px #1b6ee3;
+}
+
+.card h2 {
+    font-size: 24px;
+    color: #1b6ee3;
+}
+
+.card p {
+    font-size: 16px;
+    color: #444;
+    flex: 1;
+    padding: 0 15px;
+    word-break: break-word;
+}
+
+.card-button {
+    background-color: #1b6ee3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card-button:hover {
+    background-color: #063395;
+}
+
+/* ---------------- RESPONSIVIDADE ---------------- */
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .pesquisa {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .search-bar input {
+        width: 90%;
+    }
+
+    .store-container {
+        padding: 0 10px;
+    }
+
+    .card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .card-img {
+        margin-right: 0;
+    }
+
+    .title {
+        left: 0;
+        margin-top: 5px;
+    }
+}
+
