@@ -41,7 +41,7 @@
 
     <div class="header-right">
       <div class="perfil-wrapper" id="perfilArea">
-        <img src="../imgs/user.png" alt="" id="perfilFoto" class="perfil-foto" />
+        <img src="../imgs/user(1).png" alt="User" id="perfilFoto" class="perfil-foto" />
         <div id="menuPerfil" class="menu-perfil">
           <button class="btn-red" onclick="window.location.href='../Lojas/lojas.html'" style="color: black;">Lojas</button><br>
           <button onclick="window.location.href='../Config/Config.html'" style="color: black;">Histórico</button><br>
@@ -108,7 +108,7 @@
       const perfilFoto = document.getElementById('perfilFoto');
 
       if (isLoggedIn) {
-        const foto = localStorage.getItem('userPhoto') || '../imgs/user.png';
+        const foto = localStorage.getItem('userPhoto') || '../imgs/user(1).png';
         perfilFoto.src = foto;
         perfilArea.style.display = 'flex';
         authButtons.style.display = 'none';
