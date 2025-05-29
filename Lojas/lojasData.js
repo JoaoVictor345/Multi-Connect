@@ -8,6 +8,7 @@ const lojas = [
     local: "rua 234",
     tipovaga: "CLT",
     servico: "T.I.",
+    contratando: true,
     link: "#" 
   },
   { 
@@ -18,6 +19,7 @@ const lojas = [
     local: "rua blé",
     tipovaga: "freelancer",
     servico: "Desenvolvedor Web.",
+    contratando: false,
     link: "#" 
   },
   { 
@@ -28,6 +30,7 @@ const lojas = [
     local: "rua do joao victor",
     tipovaga: "estágio",
     servico: "Atendente.",
+    contratando: true,
     link: "#" 
   },
   { 
@@ -38,6 +41,7 @@ const lojas = [
     local: "rua joao levir",
     tipovaga: "CLT",
     servico: "Bibliotecário.",
+    contratando: false,
     link: "#" 
   },
   { 
@@ -48,6 +52,7 @@ const lojas = [
     local: "rua do felp",
     tipovaga: "CLT",
     servico: "Vendedor.",
+    contratando: true,
     link: "#" 
   },
   { 
@@ -58,6 +63,7 @@ const lojas = [
     local: "rua do vascaino da let",
     tipovaga: "estágio",
     servico: "Atendente.",
+    contratando: false,
     link: "#" 
   },
   {
@@ -68,6 +74,7 @@ const lojas = [
     local: "rua do ivande",
     tipovaga: "freelancer",
     servico: "Desenvolvedor web.",
+    contratando: true,
    link: "#" 
   },
   { 
@@ -78,6 +85,7 @@ const lojas = [
     local: "rua do xupeta",
     tipovaga: "CLT",
     servico: "técnico de informática.",
+    contratando: false,
      link: "#" 
   },
   { 
@@ -88,6 +96,7 @@ const lojas = [
     local: "rua da let do vasco",
     tipovaga: "CLT",
     servico: "Marketing",
+    contratando: true,
      link: "#"
   },
   { 
@@ -98,6 +107,7 @@ const lojas = [
     local: "rua do shaolean(vulgo vito manel)",
     tipovaga: "estágio",
     servico: "Atendente de caixa.",
+    contratando: false,
     link: "#"
   }
 ];
