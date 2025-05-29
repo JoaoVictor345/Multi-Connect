@@ -52,8 +52,9 @@ header {
 }
 
 .symbol {
-  width: 80px;
+  width: 120px;
   height: auto;
+  filter: drop-shadow(1px 1px 0px black);
 }
 
 .logo {
@@ -144,7 +145,7 @@ header {
   left: 0;
   height: 100vh;
   width: 250px;
-  background-color: #1b6ee394;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   padding-top: 60px;
@@ -153,7 +154,7 @@ header {
   transform: translateX(-100%);
   opacity: 0;
   visibility: hidden;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(0px);
 }
 
 .menu.open {
@@ -164,17 +165,73 @@ header {
 }
 
 .menu ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+  text-align: left;
   list-style: none;
 }
 
 .menu ul li {
-  margin: 20px;
+  width: 100%;
 }
 
 .menu ul li a {
-  color: white;
+  display: flex;
+  gap: 10px;
+  color: rgb(0, 0, 0);
   font-size: 22px;
   text-decoration: none;
+  width: 200px;
+}
+
+
+.menu li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.menu li:hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.303);
+  transform: translateY(-2px);
+}
+
+.logo-nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -60px;
+  }
+
+.logo-nav img{
+    width: 200px;
+    position: relative;
+    left: -10px;
+    filter: drop-shadow(2px 0px 0px #1b6ee3);
+  }
+
+.links1{
+  height: 200px;
+  display: flex;
+  position: relative;
+  top: -50px;
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.links2{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  top: 90px;
+  height: 185px;
 }
 
 .overlay {
@@ -189,6 +246,7 @@ header {
 }
 
 .welcome {
+  background-image: url('');
   background-color: #70a7ff;
   background-attachment: fixed;
   background-size: cover;
@@ -200,6 +258,14 @@ header {
   height: 100vh;
   text-align: center;
   color: white;
+}
+
+.welcome h1 {
+  text-shadow: 1px 2px 0px black;
+}
+
+.welcome p{
+  text-shadow: 1px 2px 0px black;
 }
 
 .historico, .lojas {

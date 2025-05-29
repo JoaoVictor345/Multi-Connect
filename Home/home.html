@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="home.css" />
     <link rel="shortcut icon" href="../imgs/Multi-Favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <title>Início</title>
 </head>
 <body>
@@ -20,19 +21,27 @@
     </div>
 
     <div class="menu" id="menu">
+      <div class="logo-nav">
+        <img src="../imgs/Multi-connect1.png" alt="">
+      </div>
       <ul class="nav-list">
-        <li><a href="#" id="link1">Início</a></li>
-        <li><a href="../Lojas/lojas.html">Lojas</a></li>
-        <li><a href="#" id="link3">Sobre</a></li>
-        <li><a href="../Config/Config.html">Configurações</a></li>
+        <div class="links1">
+          <li><a href="#" id="link1"><i class="bi bi-house-door"></i> Início</a></li>
+          <li><a href="../Lojas/lojas.html"><i class="bi bi-shop"></i> Lojas</a></li>
+          <li><a href="#" id="link3"><i class="bi bi-question-circle"></i>Sobre</a></li>
+          <li><a href="#"><i class="bi bi-people"></i>WorkConnect</a></li>
+        </div>
+        <div class="links2">
+          <li><a href="../Config/Config.html"><i class="bi bi-gear"></i> Configurações</a></li>
+        </div>
       </ul>
     </div>
 
     <div class="overlay" id="overlay"></div>
 
     <div class="header-right">
-      <div class="perfil-wrapper" id="perfilArea" style="display: none;">
-        <img src="" alt="Perfil" id="perfilFoto" class="perfil-foto" />
+      <div class="perfil-wrapper" id="perfilArea">
+        <img src="../imgs/user.png" alt="" id="perfilFoto" class="perfil-foto" />
         <div id="menuPerfil" class="menu-perfil">
           <button class="btn-red" onclick="window.location.href='../Lojas/lojas.html'" style="color: black;">Lojas</button><br>
           <button onclick="window.location.href='../Config/Config.html'" style="color: black;">Histórico</button><br>
