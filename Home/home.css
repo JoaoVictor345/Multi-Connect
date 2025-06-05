@@ -192,6 +192,7 @@ header {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 40px;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
