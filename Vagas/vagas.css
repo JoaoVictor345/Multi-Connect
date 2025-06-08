@@ -269,8 +269,7 @@ header {
 
 .button {
     display: flex;
-    justify-content: flex-end;
-    border: solid black;
+    justify-content: center;
 }
 
 .card-button {

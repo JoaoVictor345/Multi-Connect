@@ -104,7 +104,7 @@ const lojas = [
     local: "rua da let do vasco",
     tipovaga: "CLT",
     servico: "Marketing",
-    contratando: true,
+    contratando: false,
     trabalho: "Gerenciamento de redes sociais",
      link: "#"
   },
@@ -116,7 +116,7 @@ const lojas = [
     local: "rua do shaolean(vulgo vito manel)",
     tipovaga: "estágio",
     servico: "Atendente de caixa.",
-    contratando: false,
+    contratando: true,
     trabalho: "Atendimento ao público.",
     link: "#"
   }
