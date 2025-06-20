@@ -16,7 +16,7 @@
       <div class="hamburger" id="hamburger">
         <div class="line"></div><div class="line"></div><div class="line"></div>
       </div>
-      <img class="symbol" src="/imgs/linkacao.png" alt="Multi-Connect" />
+      <img class="symbol" src="../imgs/linkacao.png" alt="Multi-Connect" />
       <div class="logo"><a href="#">MultiConnect</a></div>
     </div>
 
@@ -40,13 +40,9 @@
 
     <div class="header-right">
       <div class="perfil-wrapper" id="perfilArea">
-        <img src="../imgs/user(1).png" alt="User" id="perfilFoto" class="perfil-foto" />
-        <div id="menuPerfil" class="menu-perfil">
-          <button class="btn-red" onclick="window.location.href='../Lojas/lojas.html'" style="color: black;">Lojas</button><br>
-          <button onclick="window.location.href='../Config/Config.html'" style="color: black;">Histórico</button><br>
-          <button onclick="window.location.href='../Config/Config.html'" style="color: black;">Configurações</button>
-          <button onclick="logout()">Sair</button>
-        </div>
+        <a href="../Config/Config.html">
+          <img src="../imgs/user(1).png" alt="User" id="perfilFoto" class="perfil-foto" />
+        </a>
       </div>
       <div class="auth-buttons" id="authButtons" style="display: none;">
         <a href="../login-cadastro/login-cadastro.html" class="btn-login">Login</a>
@@ -115,11 +111,6 @@
         perfilArea.style.display = 'none';
         authButtons.style.display = 'flex';
       }
-    }
-
-    function logout() {
-      localStorage.clear();
-      window.location.href = '../login-cadastro/index.html';
     }
 
     function renderCards() {
@@ -204,6 +195,11 @@
       container.scrollLeft += e.deltaY;  // Move o scroll para os lados
     });
   });
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = '../login-cadastro/login-cadastro.htmla';
+    }
   </script>
 </body>
 </html>

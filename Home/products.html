@@ -1,66 +1,803 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Detalhes do Produto</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; max-width: 700px; margin: auto; }
-    img { max-width: 100%; height: auto; border-radius: 8px; }
-    .produto-container { text-align: center; }
-    h1 { margin-top: 10px; }
-    p { font-size: 1.1rem; margin: 10px 0; }
-    .preco { font-size: 1.3rem; font-weight: bold; color: #2a9d8f; margin: 15px 0; }
-    button { background-color: #264653; color: white; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 5px; cursor: pointer; }
-    button:hover { background-color: #1b3a4b; }
-    a { display: inline-block; margin-top: 20px; color: #264653; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto - E-commerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 40px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 50px 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff6b35;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            color: white;
+        }
+
+        .nav-icons span {
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .nav-icons span:hover {
+            color: #ff6b35;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .breadcrumb-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Product Images */
+        .product-images {
+            padding: 30px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #f0f0f0;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.05);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: #1e3c72;
+            transform: scale(1.1);
+        }
+
+        /* Product Info */
+        .product-info {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .rating-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+        }
+
+        .rating-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .price-container {
+            margin-bottom: 25px;
+        }
+
+        .current-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e53e3e;
+            margin-right: 15px;
+        }
+
+        .original-price {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 10px;
+        }
+
+        .discount-badge {
+            background: #e53e3e;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .product-description {
+            margin: 25px 0;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Quantity Selector */
+        .quantity-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .quantity-label {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #f7fafc;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #4a5568;
+            transition: background 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: #edf2f7;
+        }
+
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1e3c72;
+            color: #1e3c72;
+        }
+
+        .btn-outline:hover {
+            background: #1e3c72;
+            color: white;
+        }
+
+        /* Features Section */
+        .features-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4a5568;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            color: #1e3c72;
+        }
+
+        /* Tabs Section */
+        .tabs-section {
+            grid-column: 1 / -1;
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8fafc;
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            padding: 15px 25px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #718096;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #1e3c72;
+            border-bottom-color: #1e3c72;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Reviews */
+        .review-item {
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: white;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .review-date {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                margin: 15px;
+                gap: 0;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-bar {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .product-title {
+                font-size: 1.5rem;
+            }
+
+            .current-price {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs-header {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">🛒 ShopBlue</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar produtos...">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="nav-icons">
+                <span title="Favoritos">❤️</span>
+                <span title="Carrinho">🛒</span>
+                <span title="Perfil">👤</span>
+            </div>
+        </div>
+    </header>
 
-  <div class="produto-container" id="produtoContainer">
-  </div>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="#" onclick="history.back()">← Voltar</a> / 
+            <a href="home.html">Home</a> / 
+            <span id="breadcrumb-category">Categoria</span> / 
+            <span id="breadcrumb-product">Produto</span>
+        </div>
+    </div>
 
-  <!-- Inclua o arquivo produtos antes do seu script -->
-  <script src="./products.js"></script>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Product Images -->
+        <div class="product-images">
+            <img id="mainImage" class="main-image" src="" alt="Produto">
+            <div class="thumbnail-container" id="thumbnailContainer">
+                <!-- Thumbnails serão geradas dinamicamente -->
+            </div>
+        </div>
 
-  <script>
-    function getParametroURL(param) {
-      const params = new URLSearchParams(window.location.search);
-      return params.get(param);
-    }
+        <!-- Product Info -->
+        <div class="product-info">
+            <h1 class="product-title" id="productTitle">Carregando...</h1>
+            
+            <div class="rating-container">
+                <div class="stars" id="productRating">⭐⭐⭐⭐⭐</div>
+                <span class="rating-text">(4.8) • 1.2k avaliações • 3.5k vendidos</span>
+            </div>
 
-    function carregarProduto() {
-      const id = parseInt(getParametroURL('id'));
-      const container = document.getElementById('produtoContainer');
+            <div class="price-container">
+                <span class="current-price" id="currentPrice">R$ 0,00</span>
+                <span class="original-price" id="originalPrice">R$ 0,00</span>
+                <span class="discount-badge">-25%</span>
+            </div>
 
-      if (!id) {
-        container.innerHTML = '<p>Produto não especificado. <a href="home.html">Voltar para a home</a></p>';
-        return;
-      }
+            <div class="product-description" id="productDescription">
+                Carregando descrição...
+            </div>
 
-      // 'produtos' está disponível globalmente porque incluímos products.js antes
-      const produto = produtos.find(p => p.id === id);
+            <div class="features-section">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">🚚</span>
+                        <span>Frete Grátis</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">↩️</span>
+                        <span>Devolução Grátis</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛡️</span>
+                        <span>Garantia</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💳</span>
+                        <span>Parcelamento</span>
+                    </div>
+                </div>
+            </div>
 
-      if (!produto) {
-        container.innerHTML = '<p>Produto não encontrado. <a href="home.html">Voltar para a home</a></p>';
-        return;
-      }
+            <div class="quantity-container">
+                <span class="quantity-label">Quantidade:</span>
+                <div class="quantity-selector">
+                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                    <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="99">
+                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                </div>
+                <span class="stock-info">15 disponíveis</span>
+            </div>
 
-      container.innerHTML = `
-        <img src="${produto.imagem}" alt="${produto.nome}" />
-        <h1>${produto.nome}</h1>
-        <p>${produto.descricao}</p>
-        <p class="preco">R$ ${produto.preco.toFixed(2)}</p>
-        <button onclick="alert('Produto adicionado ao carrinho!')">Comprar</button>
-        <br/>
-        <a href="home.html">← Voltar para a home</a>
-      `;
-    }
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="buyNow()">Comprar Agora</button>
+                <button class="btn btn-secondary" onclick="addToCart()">Adicionar ao Carrinho</button>
+                <button class="btn btn-outline" onclick="addToWishlist()">❤️</button>
+            </div>
+        </div>
 
-    window.onload = carregarProduto;
-  </script>
+        <!-- Tabs Section -->
+        <div class="tabs-section">
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="showTab('description')">Descrição</button>
+                <button class="tab-btn" onclick="showTab('specifications')">Especificações</button>
+                <button class="tab-btn" onclick="showTab('reviews')">Avaliações</button>
+                <button class="tab-btn" onclick="showTab('shipping')">Entrega</button>
+            </div>
 
+            <div id="description" class="tab-content active">
+                <h3>Descrição Detalhada</h3>
+                <p>Este é um produto de alta qualidade, desenvolvido com os melhores materiais e tecnologia avançada. Perfeito para uso diário, oferece durabilidade e performance excepcionais.</p>
+                <ul>
+                    <li>Material premium de alta durabilidade</li>
+                    <li>Design moderno e elegante</li>
+                    <li>Tecnologia avançada</li>
+                    <li>Garantia de qualidade</li>
+                </ul>
+            </div>
+
+            <div id="specifications" class="tab-content">
+                <h3>Especificações Técnicas</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 10px; font-weight: 600;">Marca</td>
+                        <td style="padding: 10px;">ShopBlue</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 10px; font-weight: 600;">Modelo</td>
+                        <td style="padding: 10px;">Premium 2024</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 10px; font-weight: 600;">Cor</td>
+                        <td style="padding: 10px;">Variadas</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 10px; font-weight: 600;">Garantia</td>
+                        <td style="padding: 10px;">12 meses</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="reviews" class="tab-content">
+                <h3>Avaliações dos Clientes</h3>
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="reviewer-name">João Silva</span>
+                        <span class="review-date">15/06/2024</span>
+                    </div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>Produto excelente! Superou minhas expectativas. Entrega rápida e embalagem perfeita.</p>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="reviewer-name">Maria Santos</span>
+                        <span class="review-date">10/06/2024</span>
+                    </div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>Qualidade incrível pelo preço. Recomendo para todos!</p>
+                </div>
+            </div>
+
+            <div id="shipping" class="tab-content">
+                <h3>Informações de Entrega</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="padding: 20px; background: white; border-radius: 10px;">
+                        <h4>🚚 Entrega Expressa</h4>
+                        <p>Receba em 1-2 dias úteis</p>
+                        <p><strong>Grátis</strong> para pedidos acima de R$ 100</p>
+                    </div>
+                    <div style="padding: 20px; background: white; border-radius: 10px;">
+                        <h4>📦 Entrega Padrão</h4>
+                        <p>Receba em 3-7 dias úteis</p>
+                        <p><strong>Grátis</strong> para este produto</p>
+                    </div>
+                    <div style="padding: 20px; background: white; border-radius: 10px;">
+                        <h4>🏪 Retirar na Loja</h4>
+                        <p>Disponível em 2 horas</p>
+                        <p><strong>Grátis</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Produtos de exemplo (usando seu formato)
+        const produtos = [
+            { 
+                id: 1, 
+                nome: "Camisa Slim Preta", 
+                descricao: "Camisa Slim preta básica, perfeita para ocasiões formais e casuais. Tecido de alta qualidade com corte moderno.", 
+                imagem: "../products/CamisaSlim.jpeg", 
+                preco: 89.90,
+                precoOriginal: 119.90,
+                imagens: ["../products/CamisaSlim.jpeg", "../products/CamisaSlim.jpeg", "../products/CamisaSlim.jpeg"]
+            },
+            { 
+                id: 2, 
+                nome: "Tênis Esportivo Premium", 
+                descricao: "Tênis esportivo de alta performance com tecnologia de amortecimento avançada.", 
+                imagem: "../products/produto2.png", 
+                preco: 299.90,
+                precoOriginal: 399.90,
+                imagens: ["../products/produto2.png", "../products/produto2.png", "../products/produto2.png"]
+            },
+            { 
+                id: 5, 
+                nome: "Produto 2", 
+                descricao: "Descrição do Produto 2", 
+                imagem: "../products/produto2.png", 
+                preco: 75.00,
+                precoOriginal: 100.00,
+                imagens: ["../products/produto2.png"]
+            },
+            { 
+                id: 6, 
+                nome: "Produto 1", 
+                descricao: "Descrição do Produto 1", 
+                imagem: "../products/produto1.png", 
+                preco: 35.00,
+                precoOriginal: 50.00,
+                imagens: ["../products/produto1.png"]
+            },
+            { 
+                id: 7, 
+                nome: "Produto 3", 
+                descricao: "Descrição do Produto 3", 
+                imagem: "../products/produto3.png", 
+                preco: 20.00,
+                precoOriginal: 30.00,
+                imagens: ["../products/produto3.png"]
+            },
+            { 
+                id: 8, 
+                nome: "Produto 4", 
+                descricao: "Descrição do Produto 4", 
+                imagem: "../products/produto4.png", 
+                preco: 99.99,
+                precoOriginal: 149.99,
+                imagens: ["../products/produto4.png"]
+            }
+        ];
+
+        // Funções
+        function getParametroURL(param) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(param);
+        }
+
+        function carregarProduto() {
+            const id = parseInt(getParametroURL('id'));
+            
+            if (!id) {
+                window.location.href = 'home.html';
+                return;
+            }
+
+            const produto = produtos.find(p => p.id === id);
+            
+            if (!produto) {
+                window.location.href = 'home.html';
+                return;
+            }
+
+            // Atualizar informações do produto
+            document.getElementById('productTitle').textContent = produto.nome;
+            document.getElementById('productDescription').textContent = produto.descricao;
+            document.getElementById('currentPrice').textContent = `R$ ${produto.preco.toFixed(2).replace('.', ',')}`;
+            document.getElementById('originalPrice').textContent = `R$ ${(produto.precoOriginal || produto.preco * 1.3).toFixed(2).replace('.', ',')}`;
+            document.getElementById('breadcrumb-product').textContent = produto.nome;
+            
+            // Atualizar imagem principal
+            document.getElementById('mainImage').src = produto.imagem;
+            document.getElementById('mainImage').alt = produto.nome;
+            
+            // Gerar thumbnails
+            const thumbnailContainer = document.getElementById('thumbnailContainer');
+            const imagens = produto.imagens || [produto.imagem];
+            thumbnailContainer.innerHTML = '';
+            
+            imagens.forEach((img, index) => {
+                const thumbnail = document.createElement('img');
+                thumbnail.src = img;
+                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.onclick = () => changeMainImage(img, index);
+                thumbnailContainer.appendChild(thumbnail);
+            });
+        }
+
+        function changeMainImage(src, index) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        }
+
+        function showTab(tabName) {
+            // Esconder todas as tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar tab selecionada
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function increaseQuantity() {
+            const input = document.getElementById('quantity');
+            const currentValue = parseInt(input.value);
+            if (currentValue < 99) {
+                input.value = currentValue + 1;
+            }
+        }
+
+        function decreaseQuantity() {
+            const input = document.getElementById('quantity');
+            const currentValue = parseInt(input.value);
+            if (currentValue > 1) {
+                input.value = currentValue - 1;
+            }
+        }
+
+        function buyNow() {
+            const quantidade = document.getElementById('quantity').value;
+            alert(`🎉 Redirecionando para pagamento!\nQuantidade: ${quantidade}`);
+        }
+
+        function addToCart() {
+            const quantidade = document.getElementById('quantity').value;
+            alert(`🛒 ${quantidade} item(s) adicionado(s) ao carrinho!`);
+        }
+
+        function addToWishlist() {
+            alert('❤️ Produto adicionado aos favoritos!');
+        }
+
+        // Carregar produto quando a página carregar
+        window.onload = carregarProduto;
+    </script>
 </body>
 </html>

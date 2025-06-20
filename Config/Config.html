@@ -122,7 +122,7 @@
 
     <button class="btn" onclick="salvarEdicao()">Salvar Alterações</button>
     <button class="btn" onclick="voltarHome()">Voltar para a Home</button>
-    <button class="btn btn-logout" onclick="window.location.href='../login-cadastro/login-cadastro.html'">Sair</button>
+    <button class="btn btn-logout" onclick="logout()">Sair</button>
     
   </div>
 
@@ -197,7 +197,7 @@ profilePreview.src = localStorage.getItem('userPhoto') || 'https://via.placehold
 
     function logout() {
       localStorage.clear();
-      window.location.href = '../login/login.html';
+      window.location.href = '../login-cadastro/login-cadastro.html';
     }
   </script>
 </body>

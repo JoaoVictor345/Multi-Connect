@@ -247,9 +247,8 @@ header {
 }
 
 .welcome {
-  background-image: url('');
+  background-image: url('../imgs/clouds.png');
   background-color: #70a7ff;
-  background-attachment: fixed;
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat;
