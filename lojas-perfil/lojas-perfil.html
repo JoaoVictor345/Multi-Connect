@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Master - Loja Oficial | Shopee Brasil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header Shopee Style */
+        .header {
+            background: linear-gradient(135deg, #ee4d2d 0%, #ff6533 100%);
+            padding: 0 16px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-btn {
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+            text-decoration: none;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 50px 10px 16px;
+            border: none;
+            border-radius: 4px;
+            background: white;
+            font-size: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: #ee4d2d;
+            border: none;
+            padding: 0 16px;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-icon {
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .header-icon:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #fff;
+            color: #ee4d2d;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* Store Cover Shopee Style */
+        .store-cover {
+            background: linear-gradient(135deg, #ee4d2d 0%, #ff6533 100%);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .store-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .store-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #ee4d2d;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .store-info {
+            flex: 1;
+            color: white;
+        }
+
+        .store-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .store-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+
+        .store-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge.verified {
+            background: #00b14f;
+        }
+
+        .store-stats {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+        }
+
+        .store-stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .store-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .action-btn.primary {
+            background: white;
+            color: #ee4d2d;
+            border-color: white;
+        }
+
+        .action-btn.primary:hover {
+            background: #f0f0f0;
+        }
+
+        /* Navigation Tabs Shopee Style */
+        .store-nav {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 60px;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .nav-tab {
+            padding: 16px 24px;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-tab.active {
+            color: #ee4d2d;
+            border-bottom-color: #ee4d2d;
+            font-weight: 600;
+        }
+
+        .nav-tab:hover {
+            color: #ee4d2d;
+        }
+
+        /* Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+
+        /* Products Section */
+        .products-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .filter-sort {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .sort-btn {
+            padding: 8px 16px;
+            border: 1px solid #e5e5e5;
+            background: white;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sort-btn:hover {
+            border-color: #ee4d2d;
+            color: #ee4d2d;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .product-card {
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            transition: all 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .product-image {
+            position: relative;
+            height: 180px;
+            background: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .product-image.tech-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .product-image.tech-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+        .product-image.tech-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
+        .product-image.tech-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; }
+
+        .discount-tag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #ee4d2d;
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+            min-width: 50px;
+        }
+
+        .flash-sale {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ff4757;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .product-info {
+            padding: 12px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            height: 36px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .current-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ee4d2d;
+        }
+
+        .old-price {
+            font-size: 12px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .product-sold {
+            font-size: 11px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .shop-performance {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .performance-item {
+            text-align: center;
+            padding: 12px;
+            background: #f8f8f8;
+            border-radius: 4px;
+        }
+
+        .performance-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ee4d2d;
+        }
+
+        .performance-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .chat-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ee4d2d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 8px;
+        }
+
+        .chat-btn:hover {
+            background: #d63916;
+        }
+
+        .follow-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #ee4d2d;
+            border: 1px solid #ee4d2d;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .follow-btn:hover {
+            background: #ee4d2d;
+            color: white;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Vouchers Section */
+        .vouchers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .voucher-card {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .voucher-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .voucher-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .voucher-discount {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .voucher-condition {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                padding: 16px 8px;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+
+            .store-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .store-stats {
+                justify-content: center;
+            }
+
+            .store-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .search-container {
+                margin: 0 12px;
+            }
+
+            .nav-container {
+                overflow-x: auto;
+            }
+
+            .nav-tab {
+                white-space: nowrap;
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <a href="#" class="logo">Shopee</a>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Buscar na Tech Master...">
+            <button class="search-btn">🔍</button>
+        </div>
+        
+        <div class="header-icons">
+            <div class="header-icon">
+                🛒
+                <span class="cart-badge">3</span>
+            </div>
+            <div class="header-icon">💬</div>
+            <div class="header-icon">🔔</div>
+        </div>
+    </header>
+
+    <!-- Store Cover -->
+    <div class="store-cover">
+        <div class="store-header">
+            <div class="store-avatar">TM</div>
+            <div class="store-info">
+                <h1 class="store-name">Tech Master</h1>
+                <p class="store-subtitle">Loja Oficial • Ativa há 6 anos</p>
+                <div class="store-badges">
+                    <span class="badge verified">✓ VERIFICADA</span>
+                    <span class="badge">PREFERIDA</span>
+                    <span class="badge">FRETE GRÁTIS</span>
+                </div>
+                <div class="store-stats">
+                    <div class="store-stat">
+                        <span>⭐</span>
+                        <span>4.8 (15.3k avaliações)</span>
+                    </div>
+                    <div class="store-stat">
+                        <span>👥</span>
+                        <span>89.5k seguidores</span>
+                    </div>
+                    <div class="store-stat">
+                        <span>📦</span>
+                        <span>1.2k produtos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="store-actions">
+                <button class="action-btn primary">💬 Chat</button>
+                <button class="action-btn">+ Seguir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="store-nav">
+        <div class="nav-container">
+            <button class="nav-tab active" onclick="showTab('home')">Loja</button>
+            <button class="nav-tab" onclick="showTab('products')">Todos os Produtos</button>
+            <button class="nav-tab" onclick="showTab('categories')">Categorias</button>
+            <button class="nav-tab" onclick="showTab('about')">Sobre</button>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Home Tab -->
+            <div id="home" class="tab-content active">
+                <!-- Vouchers -->
+                <div class="products-container">
+                    <h3 class="section-title" style="margin-bottom: 16px;">🎫 Cupons da Loja</h3>
+                    <div class="vouchers-grid">
+                        <div class="voucher-card">
+                            <div class="voucher-discount">15% OFF</div>
+                            <div class="voucher-condition">Min. R$ 299</div>
+                        </div>
+                        <div class="voucher-card" style="background: linear-gradient(135deg, #5f27cd 0%, #341f97 100%);">
+                            <div class="voucher-discount">R$ 50 OFF</div>
+                            <div class="voucher-condition">Min. R$ 500</div>
+                        </div>
+                        <div class="voucher-card" style="background: linear-gradient(135deg, #00d2d3 0%, #54a0ff 100%);">
+                            <div class="voucher-discount">FRETE GRÁTIS</div>
+                            <div class="voucher-condition">Min. R$ 199</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flash Sale -->
+                <div class="products-container" style="margin-top: 20px;">
+                    <div class="section-header">
+                        <h3 class="section-title">⚡ Flash Sale</h3>
+                        <div class="filter-sort">
+                            <span style="color: #ee4d2d; font-weight: 600;">Termina em: 02:45:32</span>
+                        </div>
+                    </div>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image tech-1">📱
+                                <div class="flash-sale">FLASH SALE</div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">iPhone 15 Pro Max 256GB Titânio Natural</h3>
+                                <div class="product-price">
+                                    <span class="current-price">R$ 7.899</span>
+                                    <span class="old-price">R$ 8.999</span>
+                                </div>
+                                <div class="product-bottom">
+                                    <div class="product-rating">
+                                        <span style="color: #ffa502;">⭐⭐⭐⭐⭐</span>
+                                        <span>(89)</span>
+                                    </div>
+                                    <div class="product-sold">234 vendidos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image tech-3">🎧
+                                <div class="flash-sale">FLASH SALE</div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">AirPods Pro 2ª Geração com Case MagSafe</h3>
+                                <div class="product-price">
+                                    <span class="current-price">R$ 1.799</span>
+                                    <span class="old-price">R$ 2.299</span>
+                                </div>
+                                <div class="product-bottom">
+                                    <div class="product-rating">
+                                        <span style="color: #ffa502;">⭐⭐⭐⭐⭐</span>
+                                        <span>(156)</span>
+                                    </div>
+                                    <div class="product-sold">89 vendidos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image tech-4">⌚
+                                <div class="discount-tag">25%</div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Apple Watch Series 9 GPS 45mm</h3>
+                                <div class="product-price">
+                                    <span class="current-price">R$ 3.299</span>
+                                    <span class="old-price">R$ 4.399</span>
+                                </div>
+                                <div class="product-bottom">
+                                    <div class="product-rating">
+                                        <span style="color: #ffa502;">⭐⭐⭐⭐⭐</span>
+                                        <span>(78)</span>
+                                    </div>
+                                    <div class="product-sold">45 vendidos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Best Sellers -->
+                <div class="products-container" style="margin-top: 20px;">
+                    <div class="section-header">
+                        <h3 class="section-title">🔥 Mais Vendidos</h3>
+                        <div class="filter-sort">
+                            <button class="sort-btn">Mais Relevantes</button>
+                            <button class="sort-btn">Preço</button>
+                            <button class="sort-btn">Vendidos</button>
+                        </div>
+                    </div>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image tech-2">💻</div>
+                            <div class="product-info">
+                                <h3 class="product-name">MacBook Air M3 13" 512GB SSD 8GB RAM</h3>
+                                <div class="product-price">
+                                    <span class="current-price">R$ 12.999</span>
+                                </div>
+                                <div class="product-bottom">
+                                    <div class="product-rating">
+                                        <span style="color: #ffa502;">⭐⭐⭐⭐⭐</span>
+                                        <span>(45)</span>
+                                    </div>
+                                    <div class="product-sold">12 vendidos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image tech-1">📺
+                                <div class="discount-tag">20%</div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Smart TV Samsung 55" 4K UHD</h3>
+                                <div class="product-price">
+                                    <span class="current-price">R$ 2.399</span>
+                                    <span class="old-price">R$ 2.999</span>
+                                </div>
+                                <div class="product-bottom">
+                                    <div class="product-rating">
+                                        <span style="color: #ffa502;">⭐⭐⭐⭐⭐</span>
+                                        <span>(234)</span>
+                                    </div>
+                                    <div class="product-sold">156 vendidos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image tech-3">🖥️</div>
+                            <div class="product-info">
+                                <h3 class="product-name">Monitor Gaming LG UltraWide 34" 144Hz</h3>
+                                <div class="product-price">
+                                    <span class="current-price">R$ 1.899</span>
+                                </div>
+                                <div class="product-bottom">
+                                    <div class="product-rating">
+                                        <span style="color: #ffa502;">⭐⭐⭐⭐⭐</span>
+                                        <span>(67)</span>
+                                    </div>
+                                    <div class="product-sold">23 vendidos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image tech-4">🎮</div>
+                            <div class="product-info">
+                                <h3 class="product-name">PlayStation 5 Console + Controle</h3>
+                                <div class="product-price">
+                                    <span class="current-price">R$ 4.199</span>
+                                </div>
+                                <div class="product-bottom">
+                                    <div class="product-rating">
+                                        <span style="color: #ffa502;">⭐⭐⭐⭐⭐</span>
+                                        <span>(123)</span>
+                                    </div>
+                                    <div class="product-sold">34 vendidos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image tech-2">📷</div>
+                            <div class="product-info">
+                                <h3 class="product-name">Câmera Canon EOS R50 + Lente 18-45mm</h3>
+                                <div class="product-price">
+                                    <span class="current-price">R$ 3.599</span>
+                                </div>
+                                <div class="product-bottom">
+                                                                        <div class="product-rating">
+                                        <span style="color: #ffa502;">⭐⭐⭐⭐⭐</span>
+                                        <span>(67)</span>
+                                    </div>
+                                    <div class="product-sold">18 vendidos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="products" class="tab-content">
+                <div class="products-container">
+                    <h3 class="section-title">Todos os Produtos</h3>
+                    <p>Lista completa de produtos da loja...</p>
+                </div>
+            </div>
+
+            <!-- Categories Tab -->
+            <div id="categories" class="tab-content">
+                <div class="products-container">
+                    <h3 class="section-title">Categorias</h3>
+                    <p>Lista de categorias disponíveis na loja...</p>
+                </div>
+            </div>
+
+            <!-- About Tab -->
+            <div id="about" class="tab-content">
+                <div class="products-container">
+                    <h3 class="section-title">Sobre a Loja</h3>
+                    <p>Informações sobre a história, missão e políticas da loja...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-title">Informações da Loja</div>
+                <div class="info-item">📍 Localização: São Paulo, Brasil</div>
+                <div class="info-item">⏰ Horário de atendimento: 9h às 18h</div>
+
+                <div class="shop-performance">
+                    <div class="performance-item">
+                        <div class="performance-value">98%</div>
+                        <div class="performance-label">Avaliações Positivas</div>
+                    </div>
+                    <div class="performance-item">
+                        <div class="performance-value">95%</div>
+                        <div class="performance-label">Entrega no Prazo</div>
+                    </div>
+                </div>
+
+                <button class="chat-btn">💬 Chat com a Loja</button>
+                <button class="follow-btn">+ Seguir Loja</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função voltar para a página anterior
+        function goBack() {
+            window.history.back();
+        }
+
+        // Função para trocar entre as abas
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) targetTab.classList.add('active');
+
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(btn => btn.classList.remove('active'));
+
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                if (btn.getAttribute('onclick').includes(tabId)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+    </script>
+    <script src="../lojas/lojasData.js"></script>
+<script>
+  // Função para pegar parâmetros da URL
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const lojaParam = getQueryParam('loja');
+    const loja = lojasData[lojaParam];
+
+    if (!loja) {
+      document.body.innerHTML = "<h2 style='padding:20px;'>Loja não encontrada!</h2>";
+      return;
+    }
+
+    // Troca o nome da loja
+    document.title = `${loja.nome} - Loja Oficial | MultiConnect`;
+
+    document.querySelector('.store-name').innerText = loja.nome;
+    document.querySelector('.store-subtitle').innerText = loja.slogan;
+    document.querySelector('.store-avatar').innerText = loja.avatar;
+
+    // Troca cor do banner
+    document.querySelector('.store-cover').style.background = `linear-gradient(135deg, ${loja.corPrincipal} 0%, ${loja.corSecundaria} 100%)`;
+
+    // Renderiza os produtos
+    const grid = document.querySelector('.products-grid');
+    grid.innerHTML = '';
+
+    loja.produtos.forEach(produto => {
+      grid.innerHTML += `
+        <div class="product-card">
+          <div class="product-image ${produto.imagemClasse}">🛍️</div>
+          <div class="product-info">
+            <h3 class="product-name">${produto.nome}</h3>
+            <div class="product-price">
+              <span class="current-price">${produto.preco}</span>
+              ${produto.precoAntigo ? `<span class="old-price">${produto.precoAntigo}</span>` : ''}
+            </div>
+            <div class="product-bottom">
+              <div class="product-rating">
+                <span style="color: #ffa502;">⭐⭐⭐⭐⭐</span>
+                <span>(${produto.avaliacoes})</span>
+              </div>
+              <div class="product-sold">${produto.vendidos} vendidos</div>
+            </div>
+          </div>
+        </div>`;
+    });
+  });
+</script>
+
+<script src="../Lojas/lojasData.js"></script>
+<script>
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const lojaId = getQueryParam('loja');
+    const loja = lojas.find(l => l.id === lojaId);
+
+    if (!loja) {
+      document.body.innerHTML = "<h2>Loja não encontrada!</h2>";
+      return;
+    }
+
+    // Aplicar tema de cores
+    document.body.style.backgroundColor = loja.corFundo;
+    document.querySelector('header').style.backgroundColor = loja.corTema;
+
+    // Nome e descrição
+    document.getElementById('loja-nome').innerText = loja.nome;
+    document.getElementById('loja-descricao').innerText = loja.descricao;
+
+    // Imagem da loja
+    document.getElementById('loja-img').src = loja.imagem;
+
+    // Produtos
+    const container = document.getElementById('produtos-container');
+    loja.produtos.forEach(prod => {
+      const prodDiv = document.createElement('div');
+      prodDiv.innerHTML = `
+        <img src="${prod.imagem}" alt="${prod.nome}" style="width:150px;">
+        <h3>${prod.nome}</h3>
+        <p>${prod.preco}</p>
+      `;
+      prodDiv.style.border = "1px solid #ccc";
+      prodDiv.style.padding = "10px";
+      prodDiv.style.marginBottom = "10px";
+      container.appendChild(prodDiv);
+    });
+  });
+</script>
+
+
+</body>
+</html>

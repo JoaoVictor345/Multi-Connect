@@ -1,40 +1,64 @@
 // lojasData.js
 const lojas = [
   { 
+    id: "techwave",
     nome: "TechWave",
     descricao: "Loja especializada em eletrônicos e gadgets de última geração.",
     avaliacao: "⭐⭐⭐⭐",
     imagem: "../imgs/techwave.avif",
-    local: "rua 234",
+    local: "Rua 234",
     tipovaga: "CLT",
     servico: "T.I.",
     contratando: true,
-    trabalho: "Organização de documentos, atendimento ao publico e manutenção de servidores.",
-    link: "#" 
+    trabalho: "Organização de documentos, atendimento ao público e manutenção de servidores.",
+    corTema: "#007bff",  // Azul
+    corFundo: "#e0f0ff",
+    produtos: [
+      { nome: "Smartphone X200", preco: "R$ 1.299", imagem: "../imgs/smartphone.jpg" },
+      { nome: "Headset Pro", preco: "R$ 299", imagem: "../imgs/headset.jpg" },
+      { nome: "Mouse Gamer RGB", preco: "R$ 149", imagem: "../imgs/mouse.jpg" },
+      { nome: "Teclado Mecânico", preco: "R$ 499", imagem: "../imgs/teclado.jpg" }
+    ]
   },
   { 
+    id: "casaverde",
     nome: "Casa Verde",
     descricao: "Produtos sustentáveis para o lar e jardim, com foco em ecologia.",
     avaliacao: "⭐⭐⭐⭐⭐", 
     imagem: "../imgs/casaverde.jpg",
-    local: "rua blé",
-    tipovaga: "freelancer",
+    local: "Rua Blé",
+    tipovaga: "Freelancer",
     servico: "Desenvolvedor Web.",
     contratando: false,
-    trabalho: "Desenvolvimeto de web site.",
-    link: "#" 
+    trabalho: "Desenvolvimento de website.",
+    corTema: "#28a745",  // Verde
+    corFundo: "#e8f5e9",
+    produtos: [
+      { nome: "Vaso reciclável", preco: "R$ 39", imagem: "../imgs/vaso.jpg" },
+      { nome: "Kit jardinagem", preco: "R$ 120", imagem: "../imgs/kit-jardim.jpg" },
+      { nome: "Composteira doméstica", preco: "R$ 249", imagem: "../imgs/composteira.jpg" },
+      { nome: "Luminária solar", preco: "R$ 79", imagem: "../imgs/luminaria.jpg" }
+    ]
   },
   { 
+    id: "bellamoda",
     nome: "Bella Moda",
     descricao: "Moda feminina contemporânea com coleções exclusivas.",
     avaliacao: "⭐⭐⭐", 
     imagem: "../imgs/bellamoda.avif",
-    local: "rua do joao victor",
-    tipovaga: "estágio",
+    local: "Rua do João Victor",
+    tipovaga: "Estágio",
     servico: "Atendente.",
     contratando: true,
     trabalho: "Atendimento ao público.",
-    link: "#" 
+    corTema: "#e83e8c",  // Rosa
+    corFundo: "#fde0f0",
+    produtos: [
+      { nome: "Vestido Longo", preco: "R$ 189", imagem: "../imgs/vestido-longo.jpg" },
+      { nome: "Blusa de Seda", preco: "R$ 129", imagem: "../imgs/blusa.jpg" },
+      { nome: "Jaqueta Jeans", preco: "R$ 299", imagem: "../imgs/jaqueta.jpg" },
+      { nome: "Saia Midi", preco: "R$ 149", imagem: "../imgs/saia.jpg" }
+    ]
   },
   { 
     nome: "Livros & Cia", 
