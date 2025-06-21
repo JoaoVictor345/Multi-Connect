@@ -19,8 +19,8 @@ const produtos = [
             },
             { 
                 id: 5, 
-                nome: "Produto 2", 
-                descricao: "Descrição do Produto 2", 
+                nome: "Produto 1", 
+                descricao: "Descrição do Produto 1", 
                 imagem: "../products/produto2.png", 
                 preco: 75.00,
                 precoOriginal: 100.00,
@@ -28,8 +28,8 @@ const produtos = [
             },
             { 
                 id: 6, 
-                nome: "Produto 1", 
-                descricao: "Descrição do Produto 1", 
+                nome: "Produto 2", 
+                descricao: "Descrição do Produto 2", 
                 imagem: "../products/produto1.png", 
                 preco: 35.00,
                 precoOriginal: 50.00,
