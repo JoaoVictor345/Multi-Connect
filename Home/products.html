@@ -483,7 +483,7 @@
             </div>
             <div class="nav-icons">
                 <span title="Favoritos"><i class="bi bi-star-fill"></i></span>
-                <span title="Carrinho"><i class="bi bi-cart4"></i></span>
+                <span title="Carrinho" onclick="carrinho()" ><i class="bi bi-cart4"></i></span>
                 <div class="perfil-wrapper" id="perfilArea">
                   <a href="../Config/Config.html">
                       <img src="../imgs/user(1).png" alt="User" id="perfilFoto" class="perfil-foto" style="width:32px; height:32px; border-radius:50%;">
@@ -778,6 +778,16 @@
     }
 
     document.addEventListener('DOMContentLoaded', ajustarHeader);
+
+    function carrinho() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (!isLoggedIn) {
+            alert('Você precisa estar logado para acessar o carrinho.');
+            window.location.href = '../Login/login.html';
+            return;
+        }
+        window.location.href = '../carrinho/index.html';
+    }
 </script>
 
 </body>

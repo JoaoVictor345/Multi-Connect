@@ -674,7 +674,7 @@
     <header class="header">
         <div class="header-left">
             <div class="back-btn" onclick="goBack()">←</div>
-            <a href="#" class="logo">Multi-Connect  </a>
+            <a href="#" class="logo">Multi-Connect</a>
         </div>
         
         <div class="search-container">
@@ -684,11 +684,11 @@
         
         <div class="header-icons">
             <div class="header-icon">
-                🛒
-                <span class="cart-badge">3</span>
+                <span title="Carrinho" onclick="carrinho()" ><i class="bi bi-cart4"></i></span>
+                
             </div>
-            <div class="header-icon">💬</div>
-            <div class="header-icon">🔔</div>
+            <div class="header-icon"><i class="bi bi-chat-left-dots-fill"></i></div>
+            <div class="header-icon"><i class="bi bi-bell-fill"></i></div>
         </div>
     </header>
 
@@ -722,7 +722,7 @@
                 </div>
             </div>
             <div class="store-actions">
-                <button class="action-btn primary">💬 Chat</button>
+                <button class="action-btn primary"><i class="bi bi-chat-left-dots-fill"></i> Chat</button>
                 <button class="action-btn">+ Seguir</button>
             </div>
         </div>
@@ -1033,6 +1033,7 @@
     document.querySelector('.store-name').innerText = loja.nome;
     document.querySelector('.store-subtitle').innerText = loja.slogan;
     document.querySelector('.store-avatar').innerText = loja.avatar;
+    document.querySelector('.logo').innerText = loja.nome;
 
     // Troca cor do banner
     document.querySelector('.store-cover').style.background = `linear-gradient(135deg, ${loja.corPrincipal} 0%, ${loja.corSecundaria} 100%)`;
@@ -1139,13 +1140,9 @@
       btn.style.color = '#fff';
     });
 
-    document.querySelectorAll('.action-btn:not(.primary)').forEach(btn => {
-      btn.style.color = loja.corTema;
-      btn.style.borderColor = loja.corTema;
-    });
-
     // Atualiza nome/avatar
-    document.querySelector('.store-name').innerText = loja.nome;
+    document.querySelector('.store-name').innerText = loja.nome; 
+    document.querySelector('.logo').innerText = loja.nome;
     document.querySelector('.store-subtitle').innerText = loja.descricao;
     document.getElementById('loja-avatar').src = loja.imagem;
     document.querySelector('.search-input').placeholder = `Buscar na ${loja.nome}...`;
@@ -1168,6 +1165,15 @@
         </div>`;
     });
   });
+  function carrinho() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (!isLoggedIn) {
+            alert('Você precisa estar logado para acessar o carrinho.');
+            window.location.href = '../Login/login.html';
+            return;
+        }
+        window.location.href = '../carrinho/index.html';
+    }
 </script>
 
 
