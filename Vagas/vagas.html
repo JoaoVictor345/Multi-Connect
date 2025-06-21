@@ -12,19 +12,22 @@
 
   <header>
     
-    <div class="navigation">
+    <div class="header-left">
       <div class="hamburger" id="hamburger">
         <div class="line"></div><div class="line"></div><div class="line"></div>
       </div>
           <div class="menu" id="menu">
-      <div class="logo-nav">
-        <img src="../imgs/Multi-connect1.png" alt="">
+      <div class="menu-header">
+        <div class="logo-nav">
+          <img src="../imgs/Multi-connect1.png" alt="">
+        </div>
+        <p class="menu-subtitle">Sua plataforma de conexões</p>
       </div>
       <ul class="nav-list">
         <div class="links1">
           <li><a href="../Home/home.html" id="link1"><i class="bi bi-house-door"></i> Início</a></li>
           <li><a href="../Lojas/lojas.html"><i class="bi bi-shop"></i> Lojas</a></li>
-          <li><a href="vagas.html"><i class="bi bi-people"></i>WorkConnect</a></li>
+          <li><a href="vagas.html" class="active"><i class="bi bi-people"></i>WorkConnect</a></li>
         </div>
         <div class="links2">
           <li><a href="../Config/Config.html"><i class="bi bi-gear"></i> Configurações</a></li>
@@ -88,19 +91,37 @@
     document.addEventListener("DOMContentLoaded", () => {
       renderJobs();
 
-      document.getElementById("hamburger").addEventListener("click", () => {
-        const menu = document.getElementById("menu");
-        const overlay = document.getElementById("overlay");
+ const hamburger = document.getElementById("hamburger");
+      const menu = document.getElementById("menu");
+      const overlay = document.getElementById("overlay");
+
+      hamburger.addEventListener("click", () => {
+        // Toggle da classe active no hambúrguer para a animação
+        hamburger.classList.toggle("active");
+        
+        // Toggle do menu
         menu.classList.toggle("open");
-        overlay.style.display = menu.classList.contains("open") ? "flex" : "none";
+        
+        // Mostrar/ocultar overlay
+        if (menu.classList.contains("open")) {
+          overlay.style.display = "block";
+          setTimeout(() => overlay.classList.add("show"), 10);
+        } else {
+          overlay.classList.remove("show");
+          setTimeout(() => overlay.style.display = "none", 300);
+        }
       });
 
-      document.getElementById("overlay").addEventListener("click", () => {
-        document.getElementById("menu").classList.remove("open");
-        document.getElementById("overlay").style.display = "none";
+      overlay.addEventListener("click", () => {
+        // Remove a classe active do hambúrguer
+        hamburger.classList.remove("active");
+        
+        // Fecha o menu
+        menu.classList.remove("open");
+        overlay.classList.remove("show");
+        setTimeout(() => overlay.style.display = "none", 300);
       });
     });
-
     function filterJobs(query) {
       renderJobs(query);
     }

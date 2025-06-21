@@ -1,34 +1,37 @@
-<!-- home.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="home.css" />
-    <link rel="shortcut icon" href="../imgs/Multi-Favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <title>Início</title>
+  <link rel="shortcut icon" href="../imgs/Multi-Favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <title>Início - MultiConnect</title>
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
-
   <header>
     <div class="header-left">
       <div class="hamburger" id="hamburger">
-        <div class="line"></div><div class="line"></div><div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
       </div>
       <img class="symbol" src="../imgs/linkacao.png" alt="Multi-Connect" />
       <div class="logo"><a href="#">MultiConnect</a></div>
     </div>
 
     <div class="menu" id="menu">
-      <div class="logo-nav">
-        <img src="../imgs/Multi-connect1.png" alt="">
+      <div class="menu-header">
+        <div class="logo-nav">
+          <img src="../imgs/Multi-connect1.png" alt="MultiConnect">
+        </div>
+        <p class="menu-subtitle">Sua plataforma de conexões</p>
       </div>
       <ul class="nav-list">
         <div class="links1">
-          <li><a href="#" id="link1"><i class="bi bi-house-door"></i> Início</a></li>
+          <li><a href="#" id="link1" class="active"><i class="bi bi-house-door"></i> Início</a></li>
           <li><a href="../Lojas/lojas.html"><i class="bi bi-shop"></i> Lojas</a></li>
-          <li><a href="../Vagas/vagas.html"><i class="bi bi-people"></i>WorkConnect</a></li>
+          <li><a href="../Vagas/vagas.html"><i class="bi bi-people"></i> WorkConnect</a></li>
         </div>
         <div class="links2">
           <li><a href="../Config/Config.html"><i class="bi bi-gear"></i> Configurações</a></li>
@@ -39,6 +42,11 @@
     <div class="overlay" id="overlay"></div>
 
     <div class="header-right">
+      <div class="search-bar">
+          <input type="text" placeholder="Buscar produtos...">
+            <button class="search-btn"><i class="bi bi-search"></i>
+            </button>
+      </div>
       <div class="perfil-wrapper" id="perfilArea">
         <a href="../Config/Config.html">
           <img src="../imgs/user(1).png" alt="User" id="perfilFoto" class="perfil-foto" />
@@ -75,8 +83,7 @@
       <div class="store-container" id="storeContainer"></div>
     </section>
   </main>
-
-  <script src="./products.js"></script>
+  <script src="products.js"></script>
   <script src="../Lojas/lojasData.js"></script>
   <script>
     function setGreeting() {
@@ -118,7 +125,7 @@
       if (!isLoggedIn) return;
 
       const container = document.getElementById("cardContainer");
-      container.innerHTML = ''; // limpa antes
+      container.innerHTML = '';
 
       produtos.forEach(produto => {
         const card = document.createElement("div");
@@ -138,7 +145,6 @@
         container.innerHTML = '<p>Nenhum produto encontrado.</p>';
       }
     }
-
 
     function renderStores() {
       const container = document.getElementById("storeContainer");
@@ -162,43 +168,58 @@
       renderCards();
       renderStores();
 
-      document.getElementById('perfilFoto')?.addEventListener('click', () => {
-        const menuPerfil = document.getElementById('menuPerfil');
-        menuPerfil.style.display = menuPerfil.style.display === 'block' ? 'none' : 'block';
-      });
+      // Menu hambúrguer com animação melhorada
+      const hamburger = document.getElementById("hamburger");
+      const menu = document.getElementById("menu");
+      const overlay = document.getElementById("overlay");
 
-      document.addEventListener('click', e => {
-        if (!e.target.closest('.perfil-wrapper')) {
-          document.getElementById('menuPerfil').style.display = 'none';
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menu.classList.toggle("open");
+        overlay.classList.toggle("show");
+        
+        if (menu.classList.contains("open")) {
+          overlay.style.display = "block";
+          document.body.style.overflow = "hidden";
+        } else {
+          overlay.style.display = "none";
+          document.body.style.overflow = "auto";
         }
       });
 
-      document.getElementById("hamburger").addEventListener("click", () => {
-        const menu = document.getElementById("menu");
-        const overlay = document.getElementById("overlay");
-        menu.classList.toggle("open");
-        overlay.style.display = menu.classList.contains("open") ? "flex" : "none";
+      overlay.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        menu.classList.remove("open");
+        overlay.classList.remove("show");
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto";
       });
 
-      document.getElementById("overlay").addEventListener("click", () => {
-        document.getElementById("menu").classList.remove("open");
-        document.getElementById("overlay").style.display = "none";
+      // Fechar menu ao clicar em um link
+      const menuLinks = document.querySelectorAll('.menu a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove("active");
+          menu.classList.remove("open");
+          overlay.classList.remove("show");
+          overlay.style.display = "none";
+          document.body.style.overflow = "auto";
+        });
+      });
+
+      // Scroll horizontal nos containers
+      const containers = document.querySelectorAll('.card-container, .store-container');
+      containers.forEach(container => {
+        container.addEventListener('wheel', (e) => {
+          e.preventDefault();
+          container.scrollLeft += e.deltaY;
+        });
       });
     });
-
-     // Seleciona todas as seções que possuem scroll horizontal
-  const containers = document.querySelectorAll('.card-container, .store-container');
-
-  containers.forEach(container => {
-    container.addEventListener('wheel', (e) => {
-      e.preventDefault();  // Evita que a página role pra baixo
-      container.scrollLeft += e.deltaY;  // Move o scroll para os lados
-    });
-  });
 
     function logout() {
       localStorage.clear();
-      window.location.href = '../login-cadastro/login-cadastro.htmla';
+      window.location.href = '../login-cadastro/login-cadastro.html';
     }
   </script>
 </body>
