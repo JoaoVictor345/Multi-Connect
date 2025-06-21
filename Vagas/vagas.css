@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-/* ---------------- IMPORTAÇÃO DE FONTES ---------------- */
 @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
@@ -17,7 +16,6 @@ body {
     overflow-x: hidden;
 }
 
-/* ---------------- HEADER ---------------- */
 header {
     display: flex;
     justify-content: space-between;
@@ -28,7 +26,7 @@ header {
     color: white;
 }
 
-/* Navegação */
+
 .header-left {
     display: flex;
     align-items: center;
@@ -351,21 +349,36 @@ header {
     gap: 15px;
 }
 
-.search-bar input {
-    width: 350px;
-    padding: 10px;
-    border: 2px solid #1b6ee3;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: 0.4s;
-}
+  .search-bar{
+        flex: 1;
+        max-width: 500px;
+        margin: 0 20px;
+        position: relative;
+    }
 
-.search-bar input:focus {
-    border-color: #063395;
-    outline: none;
-    border-radius: 30px;
-}
+    .search-bar input {
+        width: 100%;
+        padding: 12px 50px 12px 20px;
+        border: none;
+        border-radius: 25px;
+        font-size: 14px;
+        outline: none;
+    }
 
+    .search-btn {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #092884;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        color: white;
+        cursor: pointer;
+    }
+
+    
 .btn-add {
     display: flex;
     align-items: center;
