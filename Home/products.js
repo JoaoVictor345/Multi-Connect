@@ -6,7 +6,7 @@ const produtos = [
         imagem: "../products/CamisaSlim.jpeg", 
         preco: 89.90,
         precoOriginal: 129.90,
-        imagens: ["../products/CamisaSlim.jpeg", "../products/CamisaSlim.jpeg", "../products/CamisaSlim.jpeg"]
+        imagens: ["../products/CamisaSlim.jpeg", "../products/camisas.webp", "../products/camisa3.jpeg"]
     },
     { 
         id: 2, 
