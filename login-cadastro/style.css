@@ -118,7 +118,9 @@
     }
 
     .textbox {
-      margin-bottom: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .textbox input {
@@ -143,9 +145,19 @@
       position: relative;
     }
 
+    .senha-box a{
+      text-decoration: none;
+      font-weight: bolder;
+      color: #185ec0;
+    }
+
+    .senha-box a:hover{
+      text-decoration: underline;
+    }
+
     .senha-box button {
       position: absolute;
-      top: 50%;
+      top: 35%;
       right: 12px;
       transform: translateY(-50%);
       background: transparent;
@@ -267,7 +279,6 @@
         height: auto;
         max-height: calc(100vh - 20px);
         border-radius: 0;
-        overflow-x: hidden;
       }
 
       .lado-esquerdo {
