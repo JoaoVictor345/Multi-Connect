@@ -44,14 +44,22 @@
 
     <div class="header-right">
       <div class="search-bar">
-          <input type="text" id="searchInput" placeholder="Buscar produtos..." onfocus="showCities()" oninput="filterCities()">
+          <input type="text" id="searchInput" placeholder="Buscar produtos..." onfocus="showProducts()" oninput="filterProducts()">
             <button class="search-btn"><i class="bi bi-search"></i></button>
-            <div id="cityList" class="city-list"></div>
-      </div>
-      <div class="perfil-wrapper" id="perfilArea">
-        <a href="../Config/Config.html">
-          <img src="../imgs/user(1).png" alt="User" id="perfilFoto" class="perfil-foto" />
-        </a>
+            <div id="productList" class="city-list"><div class="product-item">
+                <img src="imagem_do_produto.jpg" alt="nome do produto" />
+                <div class="product-info">
+                  <div class="product-name">Nome do Produto</div>
+                  <div class="product-price">R$ 99,99</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="perfil-wrapper" id="perfilArea">
+            <a href="../Config/Config.html">
+              <img src="../imgs/user(1).png" alt="User" id="perfilFoto" class="perfil-foto" />
+            </a>
       </div>
       <div class="auth-buttons" id="authButtons" style="display: none;">
         <a href="../login-cadastro/login-cadastro.html" class="btn-login">Login</a>
@@ -59,7 +67,7 @@
       </div>
     </div>
   </header>
-
+  
   <main>
     <section class="welcome">
       <div id="welcome">
@@ -67,9 +75,10 @@
         <p>Bem-vindo à Multi-Connect, sua plataforma de conexões inteligentes.</p>
       </div>
       <div class="search-bar">
-          <input type="text" placeholder="Informe sua cidade...">
-         <button class="search-btn"><i class="bi bi-search"></i>
-          </button>
+        <input type="text" id="cityInput" placeholder="Informe sua cidade..."  onfocus="showCities()" oninput="filterCities()">
+        <button class="search-btn"><i class="bi bi-search"></i>
+        </button>
+        <div id="cityList" class="city-list"></div>
       </div>
     </section>
 
@@ -234,44 +243,138 @@
     "Curitiba", "Belém", "Goiânia", "Natal", "Campo Grande"
   ];
 
-  const input = document.getElementById("searchInput");
-  const cityList = document.getElementById("cityList");
+  const cityInput = document.getElementById("cityInput");
+const cityList = document.getElementById("cityList");
 
-  function showCities() {
-    cityList.innerHTML = "";
-    cidades.forEach(cidade => {
-      const item = document.createElement("div");
-      item.textContent = cidade;
-      item.onclick = () => {
-        input.value = cidade;
-        cityList.style.display = "none";
-      };
-      cityList.appendChild(item);
-    });
-    cityList.style.display = "block";
-  }
+function showCities() {
+  cityList.innerHTML = "";
+  cidades.forEach(cidade => {
+    const item = document.createElement("div");
+    item.textContent = cidade;
+    item.onclick = () => {
+      cityInput.value = cidade;  // <-- usa o input certo
+      cityList.style.display = "none";
+    };
+    cityList.appendChild(item);
+  });
+  cityList.style.display = "block";
+}
 
-  function filterCities() {
-    const termo = input.value.toLowerCase();
-    const filtradas = cidades.filter(cidade => cidade.toLowerCase().includes(termo));
-    cityList.innerHTML = "";
-    filtradas.forEach(cidade => {
-      const item = document.createElement("div");
-      item.textContent = cidade;
-      item.onclick = () => {
-        input.value = cidade;
-        cityList.style.display = "none";
-      };
-      cityList.appendChild(item);
-    });
-    cityList.style.display = filtradas.length ? "block" : "none";
-  }
+function filterCities() {
+  const termo = cityInput.value.toLowerCase();
+  const filtradas = cidades.filter(cidade => cidade.toLowerCase().includes(termo));
+  cityList.innerHTML = "";
+  filtradas.forEach(cidade => {
+    const item = document.createElement("div");
+    item.textContent = cidade;
+    item.onclick = () => {
+      cityInput.value = cidade;  // <-- usa o input certo
+      cityList.style.display = "none";
+    };
+    cityList.appendChild(item);
+  });
+  cityList.style.display = filtradas.length ? "block" : "none";
+}
+
+
+  const productInput = document.getElementById("searchInput");
+const productList = document.getElementById("productList");
+
+function showProducts() {
+  productList.innerHTML = "";
+  nomesProdutos.forEach(nome => {
+    const item = document.createElement("div");
+    item.textContent = nome;
+    item.onclick = () => {
+      productInput.value = nome;
+      productList.style.display = "none";
+    };
+    productList.appendChild(item);
+  });
+  productList.style.display = "block";
+}
+
+function filterProducts() {
+  const termo = productInput.value.toLowerCase();
+  const filtrados = nomesProdutos.filter(nome => nome.toLowerCase().includes(termo));
+  productList.innerHTML = "";
+  filtrados.forEach(nome => {
+    const item = document.createElement("div");
+    item.textContent = nome;
+    item.onclick = () => {
+      productInput.value = nome;
+      productList.style.display = "none";
+    };
+    productList.appendChild(item);
+  });
+  productList.style.display = filtrados.length ? "block" : "none";
+}
+
 
   document.addEventListener("click", function(event) {
-    if (!event.target.closest(".search-bar")) {
-      cityList.style.display = "none";
-    }
+  if (!event.target.closest(".search-bar")) {
+    cityList.style.display = "none";
+    productList.style.display = "none";
+  }
+});
+
+
+  const nomesProdutos = produtos.map(p => p.nome);
+
+
+  function showProducts() {
+  productList.innerHTML = "";
+  produtos.forEach(produto => {
+    const item = document.createElement("div");
+    item.classList.add("product-item");
+
+    item.innerHTML = `
+      <img src="${produto.imagem}" alt="${produto.nome}">
+      <div class="product-info">
+        <div class="product-name">${produto.nome}</div>
+        <div class="product-price">R$ ${produto.preco.toFixed(2)}</div>
+      </div>
+    `;
+
+    item.onclick = () => {
+      productInput.value = produto.nome;
+      productList.style.display = "none";
+    };
+
+    productList.appendChild(item);
   });
+  productList.style.display = "block";
+}
+
+function filterProducts() {
+  const termo = productInput.value.toLowerCase();
+  const filtrados = produtos.filter(p => p.nome.toLowerCase().includes(termo));
+  productList.innerHTML = "";
+
+  filtrados.forEach(produto => {
+    const item = document.createElement("div");
+    item.classList.add("product-item");
+
+    item.innerHTML = `
+      <img src="${produto.imagem}" alt="${produto.nome}">
+      <div class="product-info">
+        <div class="product-name">${produto.nome}</div>
+        <div class="product-price">R$ ${produto.preco.toFixed(2)}</div>
+      </div>
+    `;
+
+    item.onclick = () => {
+      productInput.value = produto.nome;
+      productList.style.display = "none";
+    };
+
+    productList.appendChild(item);
+  });
+
+  productList.style.display = filtrados.length ? "block" : "none";
+}
+
+  
   </script>
   
 </body>

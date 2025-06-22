@@ -66,6 +66,86 @@
       gap: 10px;
     }
 
+    /* Ajuste para a barra de pesquisa do header */
+.header-right .search-bar {
+  position: relative;
+  width: 400px;
+  margin-left: 10px;
+}
+
+/* Estilo da lista de produtos */
+#productList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 250px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  z-index: 1000;
+  display: none;
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE e Edge */
+}
+#productList::-webkit-scrollbar {
+  display: none; /* Chrome, Safari e Opera */
+}
+
+/* Cada item da lista */
+.product-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.product-item:hover {
+  background-color: #f0f0f0;
+}
+
+.product-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+/* Muda aqui: deixa o info em linha e espaça nome e preço */
+.product-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  min-width: 0; /* importante para o flex funcionar bem e evitar overflow */
+}
+
+.product-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;      /* faz o nome ocupar o máximo espaço possível */
+  min-width: 0;      /* permite a redução do nome no overflow */
+  margin-right: 12px;
+}
+
+.product-price {
+  font-size: 0.8rem;
+  color: #666;
+  flex-shrink: 0;  /* não deixa o preço encolher */
+  white-space: nowrap;
+}
     /* MENU HAMBÚRGUER REMODELADO */
     .hamburger {
       display: flex;
@@ -190,6 +270,35 @@
     .city-list div:hover {
       background-color: #eee;
     }
+
+    #productList {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 99;
+  display: none;
+  border-radius: 15px;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#productList::-webkit-scrollbar {
+  display: none;
+}
+
+#productList div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+#productList div:hover {
+  background-color: #eee;
+}
+
     
     .btn-login, .btn-cadastrar {
       padding: 6px 12px;
