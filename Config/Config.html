@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações do Perfil</title>
+    <title>Configurações</title>
     <style>
         * {
             margin: 0;
@@ -12,447 +12,250 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+            color: #212529;
+            line-height: 1.5;
             min-height: 100vh;
-            padding: 20px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 600px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
+            padding: 40px 20px;
         }
 
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            padding: 40px;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 300;
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 16px;
         }
 
         .back-btn {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            background: rgba(255, 255, 255, 0.2);
+            background: none;
             border: none;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 50px;
+            font-size: 24px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            color: #6c757d;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
         }
 
         .back-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateX(-5px);
+            background: #e9ecef;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1976d2;
         }
 
         .profile-section {
-            padding: 50px;
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 50px;
-            align-items: start;
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+            border: 1px solid rgba(25, 118, 210, 0.1);
         }
 
-        .profile-card {
-            background: linear-gradient(145deg, #f8fafc, #e2e8f0);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 20px;
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e3f2fd;
         }
 
         .profile-photo-container {
             position: relative;
-            margin-bottom: 25px;
         }
 
         .profile-photo {
-            width: 150px;
-            height: 150px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .profile-photo:hover {
-            transform: scale(1.05);
+            border: 2px solid #e3f2fd;
+            background-color: #1976d2;
         }
 
         .photo-upload-btn {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            bottom: -2px;
+            right: -2px;
+            background: #007bff;
             border: none;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 28px;
+            height: 28px;
             cursor: pointer;
-            font-size: 1.2rem;
             color: white;
-            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
-            transition: all 0.3s ease;
+            font-size: 12px;
+            transition: background-color 0.2s ease;
         }
 
         .photo-upload-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.6);
+            background: #0056b3;
         }
 
         .photo-input {
             display: none;
         }
 
-        .profile-info {
-            color: #4a5568;
-        }
-
-        .profile-info h3 {
-            color: #2d3748;
-            margin-bottom: 5px;
-            font-size: 1.3rem;
+        .profile-info h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
 
         .profile-info p {
-            color: #718096;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        .status-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-
-        .form-section {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .form-section h2 {
-            color: #2d3748;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .form-section h2::before {
-            content: '⚙️';
-            font-size: 1.5rem;
-        }
-
-        .form-grid {
-            display: grid;
-            gap: 25px;
+            color: #6c757d;
+            font-size: 14px;
         }
 
         .form-group {
-            position: relative;
+            margin-bottom: 24px;
         }
 
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .form-group.half-width {
+        .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 16px;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #4a5568;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .label-icon {
-            font-size: 1.1rem;
+            font-weight: 500;
+            color: #495057;
+            font-size: 14px;
         }
 
         input[type="text"],
         input[type="email"],
-        input[type="tel"],
         input[type="date"] {
             width: 100%;
-            padding: 16px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: #f8fafc;
-            color: #2d3748;
+            padding: 12px 16px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.2s ease;
         }
 
         input:focus {
             outline: none;
-            border-color: #4facfe;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
-            transform: translateY(-2px);
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
         }
 
-        input:not(:placeholder-shown) {
-            background: white;
-            border-color: #38a169;
-        }
-
-        .action-buttons {
+        .actions {
             display: flex;
-            gap: 20px;
-            margin-top: 40px;
-            justify-content: center;
+            gap: 12px;
+            margin-top: 32px;
         }
 
         .btn {
-            padding: 16px 32px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            min-width: 160px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: #007bff;
             color: white;
-            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+            background: #0056b3;
         }
 
-        .btn-danger {
-            background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+        .btn-outline {
+            background: transparent;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
+        .btn-outline:hover {
+            background: #dc3545;
             color: white;
-            box-shadow: 0 5px 15px rgba(245, 101, 101, 0.3);
         }
 
-        .btn-danger:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(245, 101, 101, 0.4);
-        }
-
-        .info-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .info-card {
-            background: linear-gradient(145deg, #f7fafc, #edf2f7);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-        }
-
-        .info-card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .info-card h3 {
-            color: #2d3748;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        .info-card p {
-            color: #718096;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .profile-section {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                padding: 30px 20px;
-            }
-
-            .profile-card {
-                position: static;
-                padding: 30px 20px;
-            }
-
-            .form-section {
-                padding: 30px 20px;
-            }
-
-            .form-group.half-width {
-                grid-template-columns: 1fr;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 280px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .back-btn {
-                position: static;
-                margin-bottom: 20px;
-            }
-
-            .info-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid #4facfe;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Success Animation */
-        .success-message {
+        /* Success notification */
+        .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #48bb78, #38a169);
+            background: #28a745;
             color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
             transform: translateX(100%);
             transition: transform 0.3s ease;
             z-index: 1000;
         }
 
-        .success-message.show {
+        .notification.show {
             transform: translateX(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .container {
+                padding: 20px 16px;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Loading state */
+        .btn.loading {
+            opacity: 0.7;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
-          <div class="header-content">
-              <button class="back-btn" onclick="history.back();
-">← Voltar</button>
-                <h1>Meu Perfil</h1>
-                <p>Gerencie suas informações pessoais</p>
-            </div>
+            <button class="back-btn" onclick="history.back()">←</button>
+            <h1>Configurações</h1>
         </div>
 
-        <!-- Profile Section -->
         <div class="profile-section">
-            <!-- Profile Card -->
-            <div class="profile-card">
+            <div class="profile-header">
                 <div class="profile-photo-container">
-                    <img id="profilePreview" class="profile-photo" src="https://via.placeholder.com/150" alt="Foto de Perfil">
+                    <img id="profilePreview" class="profile-photo" src="https://via.placeholder.com/80" alt="Foto de Perfil">
                     <button class="photo-upload-btn" onclick="document.getElementById('profileInput').click()">
                         📷
                     </button>
@@ -460,97 +263,84 @@
                 </div>
                 
                 <div class="profile-info">
-                    <h3 id="displayName">Carregando...</h3>
+                    <h2 id="displayName">Carregando...</h2>
                     <p id="displayEmail">email@exemplo.com</p>
-                    <span class="status-badge">✅ Conta Ativa</span>
                 </div>
             </div>
 
-                <!-- Form -->
-                <div class="form-grid">
-                    <div class="form-group half-width">
-                        <div>
-                            <label for="nome">
-                                <span class="label-icon">👤</span>
-                                Nome Completo
-                            </label>
-                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo">
-                        </div>
-                        <div>
-                            <label for="usuario">
-                                <span class="label-icon">@</span>
-                                Nome de Usuário
-                            </label>
-                            <input type="text" id="usuario" name="usuario" placeholder="Digite seu nome de usuário">
-                        </div>
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome">
                     </div>
-
-                    <div class="form-group half-width">
-                        <div>
-                            <label for="email">
-                                <span class="label-icon">📧</span>
-                                Email / Telefone
-                            </label>
-                            <input type="email" id="email" name="email" placeholder="Digite seu email ou telefone">
-                        </div>
-                        <div>
-                            <label for="data">
-                                <span class="label-icon">📅</span>
-                                Data de Nascimento
-                            </label>
-                            <input type="date" id="data" name="data">
-                        </div>
+                    <div class="form-group">
+                        <label for="usuario">Nome de usuário</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="@usuario">
                     </div>
                 </div>
 
-                <!-- Action Buttons -->
-                <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="salvarEdicao()">
-                        Salvar Alterações
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="data">Data de nascimento</label>
+                        <input type="date" id="data" name="data">
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="btn btn-primary" onclick="salvarEdicao()">
+                        Salvar alterações
                     </button>
-                    <button class="btn btn-danger" onclick="logout()">
-                         Sair da Conta
+                    <button type="button" class="btn btn-outline" onclick="logout()">
+                        Sair da conta
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
-    <!-- Success Message -->
-    <div id="successMessage" class="success-message">
-        ✅ Informações atualizadas com sucesso!
+    <div id="notification" class="notification">
+        Informações atualizadas com sucesso!
     </div>
 
     <script>
+        // Verificar login
         const isLoggedIn = localStorage.getItem('isLoggedIn');
         if (isLoggedIn !== 'true') {
             window.location.href = '../login/login.html';
         }
 
-        // Preencher campos
+        // Elementos
         const nomeInput = document.getElementById('nome');
         const usuarioInput = document.getElementById('usuario');
         const emailInput = document.getElementById('email');
         const dataInput = document.getElementById('data');
         const profilePreview = document.getElementById('profilePreview');
 
-        // Se não tiver foto salva, define uma padrão
-        if (!localStorage.getItem('userPhoto') || localStorage.getItem('userPhoto') === 'null') {
-            localStorage.setItem('userPhoto', '../imgs/user(1).png');
+        // Carregar dados salvos
+        function carregarDados() {
+            // Foto de perfil
+            if (!localStorage.getItem('userPhoto') || localStorage.getItem('userPhoto') === 'null') {
+                localStorage.setItem('userPhoto', '../imgs/user(1).png');
+            }
+            profilePreview.src = localStorage.getItem('userPhoto') || 'https://via.placeholder.com/80';
+
+            // Dados do formulário
+            nomeInput.value = localStorage.getItem('userName') || '';
+            usuarioInput.value = localStorage.getItem('userUsername') || '';
+            emailInput.value = localStorage.getItem('userEmail') || '';
+            dataInput.value = localStorage.getItem('userDate') || '';
+
+            // Informações de exibição
+            document.getElementById('displayName').textContent = localStorage.getItem('userName') || 'Usuário';
+            document.getElementById('displayEmail').textContent = localStorage.getItem('userEmail') || 'email@exemplo.com';
         }
 
-        profilePreview.src = localStorage.getItem('userPhoto') || 'https://via.placeholder.com/150';
-
-        nomeInput.value = localStorage.getItem('userName') || '';
-        usuarioInput.value = localStorage.getItem('userUsername') || '';
-        emailInput.value = localStorage.getItem('userEmail') || '';
-        dataInput.value = localStorage.getItem('userDate') || '';
-
-        // Atualizar informações de exibição
-        document.getElementById('displayName').textContent = localStorage.getItem('userName') || 'Usuário';
-        document.getElementById('displayEmail').textContent = localStorage.getItem('userEmail') || 'email@exemplo.com';
-
-        // Foto de perfil
+        // Upload de foto
         document.getElementById('profileInput').addEventListener('change', function () {
             const file = this.files[0];
             if (file) {
@@ -563,18 +353,14 @@
             }
         });
 
-        function voltarHome() {
-            window.location.href = '../Home/home.html';
-        }
-
         // Salvar alterações
         function salvarEdicao() {
-            // Adicionar efeito de loading
             const btn = event.target;
             btn.classList.add('loading');
             btn.textContent = 'Salvando...';
             
             setTimeout(() => {
+                // Salvar no localStorage
                 localStorage.setItem('userName', nomeInput.value);
                 localStorage.setItem('userUsername', usuarioInput.value);
                 localStorage.setItem('userEmail', emailInput.value);
@@ -584,7 +370,7 @@
                 document.getElementById('displayName').textContent = nomeInput.value || 'Usuário';
                 document.getElementById('displayEmail').textContent = emailInput.value || 'email@exemplo.com';
 
-                // Atualiza no banco de dados de usuários
+                // Atualizar no banco de usuários
                 const users = JSON.parse(localStorage.getItem('users')) || [];
                 const emailAntigo = localStorage.getItem('userEmail');
                 const index = users.findIndex(u => u.email === emailAntigo);
@@ -596,30 +382,28 @@
                     localStorage.setItem('users', JSON.stringify(users));
                 }
 
-                // Remover loading e mostrar sucesso
+                // Remover loading
                 btn.classList.remove('loading');
-                btn.textContent = '💾 Salvar Alterações';
+                btn.textContent = 'Salvar alterações';
                 
-                // Mostrar mensagem de sucesso
-                const successMessage = document.getElementById('successMessage');
-                successMessage.classList.add('show');
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
                 setTimeout(() => {
-                    successMessage.classList.remove('show');
+                    notification.classList.remove('show');
                 }, 3000);
-
-                // Alert original mantido
-                alert("Informações atualizadas com sucesso!");
-            }, 1000);
+            }, 800);
         }
 
+        // Logout
         function logout() {
-            if (confirm('Tem certeza que deseja sair da sua conta?')) {
+            if (confirm('Deseja sair da sua conta?')) {
                 localStorage.clear();
                 window.location.href = '../login-cadastro/login-cadastro.html';
             }
         }
 
-        // Atualizar informações em tempo real
+        // Atualizar exibição em tempo real
         nomeInput.addEventListener('input', () => {
             document.getElementById('displayName').textContent = nomeInput.value || 'Usuário';
         });
@@ -627,6 +411,9 @@
         emailInput.addEventListener('input', () => {
             document.getElementById('displayEmail').textContent = emailInput.value || 'email@exemplo.com';
         });
+
+        // Inicializar
+        carregarDados();
     </script>
 </body>
 </html>

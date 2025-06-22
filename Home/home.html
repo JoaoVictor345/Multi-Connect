@@ -43,9 +43,9 @@
 
     <div class="header-right">
       <div class="search-bar">
-          <input type="text" placeholder="Buscar produtos...">
-            <button class="search-btn"><i class="bi bi-search"></i>
-            </button>
+          <input type="text" id="searchInput" placeholder="Buscar produtos..." onfocus="showCities()" oninput="filterCities()">
+            <button class="search-btn"><i class="bi bi-search"></i></button>
+            <div id="cityList" class="city-list"></div>
       </div>
       <div class="perfil-wrapper" id="perfilArea">
         <a href="../Config/Config.html">
@@ -221,6 +221,52 @@
       localStorage.clear();
       window.location.href = '../login-cadastro/login-cadastro.html';
     }
+
+    const cidades = [
+    "São Paulo", "Rio de Janeiro", "Belo Horizonte", "Fortaleza",
+    "Recife", "Salvador", "Porto Alegre", "Brasília", "Manaus",
+    "Curitiba", "Belém", "Goiânia", "Natal", "Campo Grande"
+  ];
+
+  const input = document.getElementById("searchInput");
+  const cityList = document.getElementById("cityList");
+
+  function showCities() {
+    cityList.innerHTML = "";
+    cidades.forEach(cidade => {
+      const item = document.createElement("div");
+      item.textContent = cidade;
+      item.onclick = () => {
+        input.value = cidade;
+        cityList.style.display = "none";
+      };
+      cityList.appendChild(item);
+    });
+    cityList.style.display = "block";
+  }
+
+  function filterCities() {
+    const termo = input.value.toLowerCase();
+    const filtradas = cidades.filter(cidade => cidade.toLowerCase().includes(termo));
+    cityList.innerHTML = "";
+    filtradas.forEach(cidade => {
+      const item = document.createElement("div");
+      item.textContent = cidade;
+      item.onclick = () => {
+        input.value = cidade;
+        cityList.style.display = "none";
+      };
+      cityList.appendChild(item);
+    });
+    cityList.style.display = filtradas.length ? "block" : "none";
+  }
+
+  document.addEventListener("click", function(event) {
+    if (!event.target.closest(".search-bar")) {
+      cityList.style.display = "none";
+    }
+  });
   </script>
+  
 </body>
 </html>

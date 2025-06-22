@@ -167,6 +167,30 @@
       gap: 10px;
     }
 
+    .city-list {
+      color: black;
+      border-radius: 15px;
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
+      z-index: 99;
+       scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE e Edge antigos */
+    }
+
+    .city-list div {
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .city-list div:hover {
+      background-color: #eee;
+    }
+    
     .btn-login, .btn-cadastrar {
       padding: 6px 12px;
       border-radius: 20px;
