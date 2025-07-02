@@ -171,6 +171,11 @@
       height: 20px;
     }
 
+    #signupOlhoFechado{
+      position: relative;
+      top: 10px;
+    }
+
     .btn {
       width: 100%;
       background: linear-gradient(135deg, #436eb8, #1b6ee3);
