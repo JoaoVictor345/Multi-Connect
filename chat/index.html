@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi Connect - Chat</title>
+
+  <style>
+    :root {
+      --c-primary: #2196f3;
+      --c-border: #e0e0e0;
+      --c-bg: #f8f9fa;
+    }
+
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        sans-serif;
+      background: #f0f0f0;
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ───────────────────────── Sidebar ───────────────────────── */
+    .sidebar {
+      width: 300px;
+      background: #fff;
+      border-right: 1px solid var(--c-border);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: width 0.3s ease;
+      contain: layout;
+      will-change: width;
+      z-index: 2;
+    }
+    .sidebar-header {
+      background: var(--c-primary);
+      color: #fff;
+      padding: 20px 15px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .toggle-sidebar {
+      position: absolute;
+      top: 15px;
+      right: -20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--c-primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+      z-index: 10;
+      font-size: 18px;
+    }
+    .sidebar.collapsed {
+      width: 0;
+      border-right: none;
+      overflow: hidden;
+    }
+    .sidebar.collapsed .toggle-sidebar {
+      transform: rotate(180deg);
+    }
+    .sidebar.collapsed .sidebar-header,
+    .sidebar.collapsed .search-box,
+    .sidebar.collapsed .chat-list {
+      display: none;
+    }
+    .search-box {
+      padding: 15px;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid var(--c-border);
+      border-radius: 20px;
+      outline: none;
+      font-size: 14px;
+    }
+    .search-input:focus {
+      border-color: var(--c-primary);
+    }
+    .chat-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+    .chat-item {
+      padding: 15px;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .chat-item:hover {
+      background: #f5f5f5;
+    }
+    .chat-item.active {
+      background: #e3f2fd;
+      border-right: 3px solid var(--c-primary);
+    }
+    .chat-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    .store-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: #333;
+    }
+    .chat-time {
+      font-size: 12px;
+      color: #999;
+    }
+    .last-message {
+      font-size: 13px;
+      color: #666;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .unread-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--c-primary);
+      color: #fff;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ──────────────────────── Chat main ──────────────────────── */
+    .chat-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--c-bg);
+      min-width: 0;
+      z-index: 1;
+    }
+    .chat-header {
+      background: #fff;
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--c-border);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .store-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--c-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .store-info h3 {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 2px;
+    }
+    .store-status {
+      font-size: 12px;
+      color: #666;
+    }
+    .online {
+      color: #4caf50;
+    }
+    .messages-area {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      scroll-behavior: smooth;
+      overscroll-behavior: contain;
+    }
+    .message {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    .message.sent {
+      justify-content: flex-end;
+    }
+    .message-bubble {
+      max-width: 70%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.4;
+      word-wrap: break-word;
+      position: relative;
+    }
+    .message.received .message-bubble {
+      background: #fff;
+      color: #333;
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    .message.sent .message-bubble {
+      background: var(--c-primary);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .message-time {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 4px;
+      text-align: right;
+    }
+    .quick-replies {
+      padding: 10px 20px;
+      background: #fff;
+      border-top: 1px solid var(--c-border);
+      display: none;
+    }
+    .quick-replies.show {
+      display: block;
+    }
+    .quick-reply-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .quick-reply {
+      background: #e3f2fd;
+      color: var(--c-primary);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 16px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .quick-reply:hover {
+      background: var(--c-primary);
+      color: #fff;
+    }
+    .input-area {
+      background: #fff;
+      padding: 15px 20px;
+      border-top: 1px solid var(--c-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .message-input {
+      flex: 1;
+      border: 1px solid var(--c-border);
+      outline: none;
+      padding: 12px 16px;
+      border-radius: 25px;
+      font-size: 14px;
+      resize: none;
+      max-height: 100px;
+    }
+    .message-input:focus {
+      border-color: var(--c-primary);
+    }
+    .send-button {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--c-primary);
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .send-button:hover {
+      background: #1976d2;
+      transform: scale(1.05);
+    }
+    .send-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .typing-indicator {
+      display: none;
+      padding: 10px 0;
+    }
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+      padding: 8px 16px;
+      background: #fff;
+      border-radius: 18px;
+      width: fit-content;
+      border-bottom-left-radius: 4px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      background: #999;
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+    }
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 16px;
+    }
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
+    @keyframes typing {
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+      }
+      30% {
+        transform: translateY(-8px);
+      }
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 280px;
+      }
+      .messages-area {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <button
+      id="toggleSidebar"
+      class="toggle-sidebar"
+      title="Mostrar/ocultar histórico"
+    >
+      💬
+    </button>
+
+    <div class="sidebar-header">Multi Connect</div>
+
+    <div class="search-box">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Buscar lojas..."
+        id="searchInput"
+      />
+    </div>
+
+    <div class="chat-list" id="chatList"></div>
+  </div>
+
+  <!-- Chat Main -->
+  <div class="chat-main">
+    <div id="emptyState" class="empty-state">
+      <div class="empty-state-icon">💬</div>
+      <div>Selecione uma loja para começar a conversar</div>
+    </div>
+
+    <div
+      id="chatArea"
+      style="display: none; flex: 1; display: flex; flex-direction: column;"
+    >
+      <div class="chat-header">
+        <div class="store-avatar" id="storeAvatar">T</div>
+        <div class="store-info">
+          <h3 id="storeName">Nome da Loja</h3>
+          <div class="store-status online" id="storeStatus">Online agora</div>
+        </div>
+      </div>
+
+      <div class="messages-area" id="messagesArea"></div>
+
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="typing-dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+
+      <div class="quick-replies" id="quickReplies">
+        <div class="quick-reply-chips">
+          <button
+            class="quick-reply"
+            onclick="sendQuickReply('Olá! Gostaria de saber mais sobre seus produtos.')"
+          >
+            👋 Cumprimentar
+          </button>
+          <button
+            class="quick-reply"
+            onclick="sendQuickReply('Vocês estão contratando?')"
+          >
+            💼 Vagas
+          </button>
+          <button
+            class="quick-reply"
+            onclick="sendQuickReply('Quais produtos vocês têm disponíveis?')"
+          >
+            🛍️ Produtos
+          </button>
+          <button
+            class="quick-reply"
+            onclick="sendQuickReply('Qual o horário de funcionamento?')"
+          >
+            ⏰ Horário
+          </button>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <textarea
+          class="message-input"
+          id="messageInput"
+          placeholder="Digite sua mensagem..."
+          rows="1"
+        ></textarea>
+        <button class="send-button" id="sendButton" onclick="sendMessage()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../lojas/lojasData.js"></script>
+  <script>
+    let currentStore = null;
+    let chatHistory = {};
+    let shouldAutoScroll = true;
+
+    // DOM
+    const chatList = document.getElementById('chatList');
+    const searchInput = document.getElementById('searchInput');
+    const emptyState = document.getElementById('emptyState');
+    const chatArea = document.getElementById('chatArea');
+    const storeAvatar = document.getElementById('storeAvatar');
+    const storeName = document.getElementById('storeName');
+    const storeStatus = document.getElementById('storeStatus');
+    const messagesArea = document.getElementById('messagesArea');
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+    const quickReplies = document.getElementById('quickReplies');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const toggleSidebarBtn = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+
+    function initChat() {
+      loadChatList();
+      setupEventListeners();
+    }
+
+    function loadChatList() {
+      chatList.innerHTML = '';
+
+      lojas.forEach((loja) => {
+        const chatItem = document.createElement('div');
+        chatItem.className = 'chat-item';
+        chatItem.onclick = (e) => openChat(e, loja);
+
+        const lastMsgArr = chatHistory[loja.id];
+        const lastMessage = lastMsgArr?.[lastMsgArr.length - 1]?.text ||
+          'Iniciar conversa';
+
+        chatItem.innerHTML = `
+          <div class="chat-item-header">
+            <div class="store-name">${loja.nome}</div>
+            <div class="chat-time">agora</div>
+          </div>
+          <div class="last-message">${lastMessage}</div>
+        `;
+
+        chatList.appendChild(chatItem);
+      });
+    }
+
+    function openChat(evt, loja) {
+      currentStore = loja;
+
+      document.querySelectorAll('.chat-item').forEach((item) =>
+        item.classList.remove('active')
+      );
+      evt.currentTarget.classList.add('active');
+
+      emptyState.style.display = 'none';
+      chatArea.style.display = 'flex';
+
+      storeAvatar.textContent = loja.nome.charAt(0).toUpperCase();
+      storeAvatar.style.background = loja.corTema || 'var(--c-primary)';
+      storeName.textContent = loja.nome;
+      storeStatus.textContent = loja.contratando
+        ? 'Contratando • Online'
+        : 'Online';
+
+      loadMessages(loja.id);
+
+      setTimeout(() => quickReplies.classList.add('show'), 500);
+    }
+
+    function loadMessages(lojaId) {
+      messagesArea.innerHTML = '';
+      if (!chatHistory[lojaId]) {
+        chatHistory[lojaId] = [
+          {
+            text: `Olá! Bem-vindo à ${currentStore.nome}! ${currentStore.descricao} Como posso te ajudar hoje?`,
+            type: 'received',
+            time: new Date(),
+          },
+        ];
+      }
+      chatHistory[lojaId].forEach((msg) =>
+        addMessageToUI(msg.text, msg.type, msg.time)
+      );
+    }
+
+    function addMessageToUI(text, type, time) {
+      const div = document.createElement('div');
+      div.className = `message ${type}`;
+      const timeStr = time.toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+      div.innerHTML = `
+        <div class="message-bubble">
+          ${text.replace(/\n/g, '<br>')}
+          <div class="message-time">${timeStr}</div>
+        </div>
+      `;
+      messagesArea.appendChild(div);
+      if (shouldAutoScroll) messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    function sendMessage() {
+      const text = messageInput.value.trim();
+      if (!text || !currentStore) return;
+      const msg = { text, type: 'sent', time: new Date() };
+      chatHistory[currentStore.id].push(msg);
+      addMessageToUI(text, 'sent', msg.time);
+      messageInput.value = '';
+      sendButton.disabled = true;
+      quickReplies.classList.remove('show');
+
+      // simular resposta
+      setTimeout(() => {
+        showTyping();
+        setTimeout(() => {
+          hideTyping();
+          generateStoreResponse(text);
+          updateChatList();
+        }, 1500);
+      }, 500);
+    }
+
+    function sendQuickReply(text) {
+      messageInput.value = text;
+      sendMessage();
+    }
+
+    function generateStoreResponse(userText) {
+      const m = userText.toLowerCase();
+      let resp = '';
+      if (m.includes('produto') || m.includes('disponível')) {
+        resp = 'Temos ótimos produtos! Aqui estão alguns destaques:\n\n';
+        currentStore.produtos.slice(0, 3).forEach((p) => {
+          resp += `• ${p.nome} - ${p.preco}\n`;
+        });
+        resp += '\nGostaria de saber mais sobre algum produto específico?';
+      } else if (
+        m.match(/vaga|contrat|trabalh|emprego/)
+      ) {
+        resp = currentStore.contratando
+          ? `Sim! Estamos contratando para ${currentStore.servico} (${currentStore.tipovaga}).\n\n📝 ${currentStore.trabalho}\n📍 ${currentStore.local}\n\nGostaria de saber mais detalhes sobre a vaga?`
+          : 'No momento não temos vagas abertas, mas você pode deixar seu currículo conosco para futuras oportunidades!';
+      } else if (m.includes('horário') || m.includes('funcionamento')) {
+        resp = `Funcionamos de segunda a sábado, das 9h às 18h. Aos domingos das 9h às 14h. 📍 Estamos localizados na ${currentStore.local}.`;
+      } else if (m.includes('preço') || m.includes('valor')) {
+        resp = 'Nossos preços são muito competitivos! Que produto te interessa? Posso passar valores específicos.';
+      } else if (m.match(/\bol[aã]|\boi/)) {
+        resp = `Olá! Fico feliz em falar com você! Como posso te ajudar hoje? Temos produtos incríveis e ${currentStore.contratando ? 'também estamos contratando!' : 'um atendimento de qualidade!'}`;
+      } else if (m.match(/obrigad|valeu/)) {
+        resp = 'Por nada! Sempre à disposição. Se precisar de mais alguma coisa, é só chamar! 😊';
+      } else {
+        const arr = [
+          'Interessante! Posso te ajudar com informações sobre nossos produtos ou serviços. O que você gostaria de saber? ',
+          'Entendi! Como posso te ajudar melhor? Temos ótimos produtos e um atendimento personalizado.',
+          'Ótima pergunta! Estou aqui para esclarecer qualquer dúvida. Em que posso te auxiliar?',
+        ];
+        resp = arr[Math.floor(Math.random() * arr.length)];
+      }
+      const storeMsg = { text: resp, type: 'received', time: new Date() };
+      chatHistory[currentStore.id].push(storeMsg);
+      addMessageToUI(resp, 'received', storeMsg.time);
+      setTimeout(() => quickReplies.classList.add('show'), 800);
+    }
+
+    function showTyping() {
+      typingIndicator.style.display = 'block';
+      if (shouldAutoScroll) messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+    function hideTyping() {
+      typingIndicator.style.display = 'none';
+    }
+    function updateChatList() {
+      loadChatList();
+      if (currentStore) {
+        const idx = lojas.findIndex((l) => l.id === currentStore.id);
+        const items = document.querySelectorAll('.chat-item');
+        items[idx]?.classList.add('active');
+      }
+    }
+
+    function setupEventListeners() {
+      toggleSidebarBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+      });
+      messagesArea.addEventListener('scroll', () => {
+        const threshold = 50;
+        shouldAutoScroll =
+          messagesArea.scrollHeight - messagesArea.scrollTop - messagesArea.clientHeight <
+          threshold;
+      });
+      messageInput.addEventListener('input', function () {
+        sendButton.disabled = !this.value.trim();
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+      });
+      messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+      searchInput.addEventListener('input', function () {
+        const f = this.value.toLowerCase();
+        document.querySelectorAll('.chat-item').forEach((item, i) => {
+          const n = lojas[i].nome.toLowerCase();
+          const d = lojas[i].descricao.toLowerCase();
+          item.style.display = n.includes(f) || d.includes(f) ? 'block' : 'none';
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initChat);
+  </script>
+</body>
+</html>

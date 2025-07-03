@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Connect - Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 400px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #2196F3;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #1976D2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .chat-info h3 {
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .status {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f5f5f5;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .message.sent {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .message.received .message-bubble {
+            background: white;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .message.sent .message-bubble {
+            background: #2196F3;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            opacity: 0.6;
+            margin-top: 4px;
+        }
+
+        .suggestions {
+            padding: 10px 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: none;
+        }
+
+        .suggestions.show {
+            display: block;
+        }
+
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .suggestion-chip {
+            background: #e3f2fd;
+            color: #2196F3;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggestion-chip:hover {
+            background: #2196F3;
+            color: white;
+        }
+
+        .chat-input {
+            padding: 15px 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-field {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            border-radius: 20px;
+            background: #f5f5f5;
+            font-size: 14px;
+        }
+
+        .send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2196F3;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .send-btn:hover {
+            background: #1976D2;
+            transform: scale(1.05);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 10px 0;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 8px 16px;
+            background: white;
+            border-radius: 18px;
+            width: fit-content;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .store-card {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+
+        .store-name {
+            font-weight: bold;
+            color: #2196F3;
+            margin-bottom: 4px;
+        }
+
+        .store-info {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .store-status {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .hiring {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .not-hiring {
+            background: #ffebee;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="avatar">MC</div>
+            <div class="chat-info">
+                <h3>Multi Connect</h3>
+                <div class="status">Assistente Virtual</div>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="messages">
+            <div class="message received">
+                <div class="message-bubble">
+                    Olá! 👋 Bem-vindo ao Multi Connect! Sou seu assistente virtual e estou aqui para ajudar você a encontrar as melhores lojas e oportunidades de trabalho. Como posso te ajudar hoje?
+                    <div class="message-time">Agora</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="suggestions" id="suggestions">
+            <div class="suggestion-chips">
+                <button class="suggestion-chip" onclick="sendSuggestion('Ver lojas disponíveis')">🏪 Ver lojas</button>
+                <button class="suggestion-chip" onclick="sendSuggestion('Buscar emprego')">💼 Buscar emprego</button>
+                <button class="suggestion-chip" onclick="sendSuggestion('Lojas que contratam')">✅ Contratando</button>
+                <button class="suggestion-chip" onclick="sendSuggestion('Produtos em destaque')">⭐ Produtos</button>
+            </div>
+        </div>
+
+        <div class="typing-indicator" id="typing">
+            <div class="typing-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" class="input-field" id="messageInput" placeholder="Digite sua mensagem...">
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Banco de dados das lojas
+        const lojas = [
+            { 
+                id: "techwave",
+                nome: "TechWave",
+                descricao: "Loja especializada em eletrônicos e gadgets de última geração.",
+                avaliacao: "⭐⭐⭐⭐",
+                local: "Rua 234",
+                tipovaga: "CLT",
+                servico: "T.I.",
+                contratando: true,
+                trabalho: "Organização de documentos, atendimento ao público e manutenção de servidores.",
+                produtos: [
+                    { nome: "Smartphone X200", preco: "R$ 1.299" },
+                    { nome: "Headset Pro", preco: "R$ 299" },
+                    { nome: "Mouse Gamer RGB", preco: "R$ 149" },
+                    { nome: "Teclado Mecânico", preco: "R$ 499" }
+                ]
+            },
+            { 
+                id: "casaverde",
+                nome: "Casa Verde",
+                descricao: "Produtos sustentáveis para o lar e jardim, com foco em ecologia.",
+                avaliacao: "⭐⭐⭐⭐⭐", 
+                local: "Rua Blé",
+                tipovaga: "Freelancer",
+                servico: "Desenvolvedor Web.",
+                contratando: false,
+                trabalho: "Desenvolvimento de website.",
+                produtos: [
+                    { nome: "Vaso reciclável", preco: "R$ 39" },
+                    { nome: "Kit jardinagem", preco: "R$ 120" },
+                    { nome: "Composteira doméstica", preco: "R$ 249" },
+                    { nome: "Luminária solar", preco: "R$ 79" }
+                ]
+            },
+            { 
+                id: "bellamoda",
+                nome: "Bella Moda",
+                descricao: "Moda feminina contemporânea com coleções exclusivas.",
+                avaliacao: "⭐⭐⭐", 
+                local: "Rua da Moda",
+                tipovaga: "Estágio",
+                servico: "Atendente.",
+                contratando: true,
+                trabalho: "Atendimento ao público.",
+                produtos: [
+                    { nome: "Vestido Longo", preco: "R$ 189" },
+                    { nome: "Blusa de Seda", preco: "R$ 129" },
+                    { nome: "Jaqueta Jeans", preco: "R$ 299" },
+                    { nome: "Saia Midi", preco: "R$ 149" }
+                ]
+            },
+            { 
+                id: "petalegria",
+                nome: "PetAlegria",
+                descricao: "Tudo para seu pet: ração, brinquedos, acessórios e carinho.",
+                avaliacao: "⭐⭐⭐⭐",
+                local: "Rua dos Pets",
+                tipovaga: "CLT",
+                servico: "Vendedor.",
+                contratando: true,
+                trabalho: "Atendimento ao público.",
+                produtos: [
+                    { nome: "Ração Premium", preco: "R$ 99" },
+                    { nome: "Brinquedo Interativo", preco: "R$ 49" },
+                    { nome: "Coleira Personalizada", preco: "R$ 29" },
+                    { nome: "Cama Confortável", preco: "R$ 199" }
+                ]
+            },
+            { 
+                id: "mundo_geek",
+                nome: "Mundo Geek",
+                descricao: "Produtos e colecionáveis para fãs de séries, HQs, games e animes.",
+                avaliacao: "⭐⭐⭐⭐",
+                local: "Rua Geek",
+                tipovaga: "estágio",
+                servico: "Atendente de caixa.",
+                contratando: true,
+                trabalho: "Atendimento ao público.",
+                produtos: [
+                    { nome: "Action Figures", preco: "R$ 149" },
+                    { nome: "Camisetas Temáticas", preco: "R$ 79" },
+                    { nome: "Colecionáveis de Séries", preco: "R$ 99" },
+                    { nome: "Canecas Personalizadas", preco: "R$ 39" }
+                ]
+            }
+        ];
+
+        const messagesContainer = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const suggestions = document.getElementById('suggestions');
+        const typingIndicator = document.getElementById('typing');
+
+        // Mostrar sugestões iniciais
+        setTimeout(() => {
+            suggestions.classList.add('show');
+        }, 1000);
+
+        // Função para enviar mensagem
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                addMessage(message, 'sent');
+                messageInput.value = '';
+                suggestions.classList.remove('show');
+                
+                // Simular resposta do bot
+                setTimeout(() => {
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        generateBotResponse(message);
+                        showNewSuggestions();
+                    }, 1500);
+                }, 500);
+            }
+        }
+
+        // Função para enviar sugestão
+        function sendSuggestion(message) {
+            addMessage(message, 'sent');
+            suggestions.classList.remove('show');
+            
+            setTimeout(() => {
+                showTyping();
+                setTimeout(() => {
+                    hideTyping();
+                    generateBotResponse(message);
+                    showNewSuggestions();
+                }, 1500);
+            }, 500);
+        }
+
+        // Adicionar mensagem ao chat
+        function addMessage(text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const time = new Date().toLocaleTimeString('pt-BR', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    ${text}
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Gerar resposta do bot baseada na mensagem
+        function generateBotResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            let response = '';
+
+            if (message.includes('lojas') || message.includes('ver lojas')) {
+                response = `🏪 Temos ${lojas.length} lojas parceiras! Aqui estão algumas:`;
+                addMessage(response, 'received');
+                
+                // Mostrar algumas lojas
+                lojas.slice(0, 3).forEach(loja => {
+                    const lojaCard = `
+                        <div class="store-card">
+                            <div class="store-name">${loja.nome}</div>
+                            <div class="store-info">${loja.descricao}</div>
+                            <div class="store-info">📍 ${loja.local}</div>
+                            <div class="store-info">${loja.avaliacao}</div>
+                        </div>
+                    `;
+                    addMessage(lojaCard, 'received');
+                });
+                
+                return;
+            }
+
+            if (message.includes('emprego') || message.includes('trabalho') || message.includes('vaga')) {
+                const lojasContratando = lojas.filter(loja => loja.contratando);
+                response = `💼 Encontrei ${lojasContratando.length} oportunidades de trabalho para você!`;
+                addMessage(response, 'received');
+                
+                lojasContratando.forEach(loja => {
+                    const vagaCard = `
+                        <div class="store-card">
+                            <div class="store-name">${loja.nome}</div>
+                            <div class="store-info">💼 ${loja.servico} (${loja.tipovaga})</div>
+                            <div class="store-info">📝 ${loja.trabalho}</div>
+                            <div class="store-info">📍 ${loja.local}</div>
+                            <span class="store-status hiring">✅ Contratando</span>
+                        </div>
+                    `;
+                    addMessage(vagaCard, 'received');
+                });
+                
+                return;
+            }
+
+            if (message.includes('contrat') || message.includes('contratan')) {
+                const lojasContratando = lojas.filter(loja => loja.contratando);
+                response = `✅ ${lojasContratando.length} lojas estão contratando agora:`;
+                addMessage(response, 'received');
+                
+                lojasContratando.forEach(loja => {
+                    const vagaCard = `
+                        <div class="store-card">
+                            <div class="store-name">${loja.nome}</div>
+                            <div class="store-info">💼 ${loja.servico} (${loja.tipovaga})</div>
+                            <div class="store-info">📍 ${loja.local}</div>
+                            <span class="store-status hiring">✅ Contratando</span>
+                        </div>
+                    `;
+                    addMessage(vagaCard, 'received');
+                });
+                
+                return;
+            }
+
+            if (message.includes('produto') || message.includes('comprar')) {
+                response = '⭐ Produtos em destaque das nossas lojas parceiras:';
+                addMessage(response, 'received');
+                
+                // Mostrar produtos de algumas lojas
+                lojas.slice(0, 2).forEach(loja => {
+                    let produtosText = `🏪 <strong>${loja.nome}</strong><br>`;
+                    loja.produtos.slice(0, 2).forEach(produto => {
+                        produtosText += `• ${produto.nome} - ${produto.preco}<br>`;
+                    });
+                    addMessage(produtosText, 'received');
+                });
+                
+                return;
+            }
+
+            if (message.includes('olá') || message.includes('oi') || message.includes('hello')) {
+                response = 'Olá! 😊 Como posso te ajudar hoje? Posso mostrar lojas, oportunidades de trabalho ou produtos em destaque!';
+            } else if (message.includes('obrigad') || message.includes('valeu')) {
+                response = 'De nada! 😊 Estou sempre aqui para ajudar. Precisa de mais alguma coisa?';
+            } else if (message.includes('tchau') || message.includes('bye')) {
+                response = 'Até logo! 👋 Volte sempre que precisar. Boa sorte na sua busca!';
+            } else {
+                response = 'Interessante! 🤔 Posso te ajudar com informações sobre nossas lojas parceiras, oportunidades de trabalho ou produtos. O que você gostaria de saber?';
+            }
+            
+            addMessage(response, 'received');
+        }
+
+        // Mostrar indicador de digitação
+        function showTyping() {
+            typingIndicator.style.display = 'block';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Esconder indicador de digitação
+        function hideTyping() {
+            typingIndicator.style.display = 'none';
+        }
+
+        // Mostrar novas sugestões
+        function showNewSuggestions() {
+            setTimeout(() => {
+                // Atualizar sugestões dinamicamente
+                const suggestionChips = document.querySelector('.suggestion-chips');
+                const randomSuggestions = [
+                    ['🔍 Buscar por categoria', '📍 Lojas próximas', '💰 Melhores preços'],
+                    ['🎯 Vagas CLT', '⏰ Vagas meio período', '🏠 Trabalho remoto'],
+                    ['🛒 Ver carrinho', '❤️ Favoritos', '📞 Contato'],
+                    ['📈 Lojas populares', '🆕 Novidades', '🎁 Promoções']
+                ];
+                
+                const randomSet = randomSuggestions[Math.floor(Math.random() * randomSuggestions.length)];
+                suggestionChips.innerHTML = randomSet.map(suggestion => 
+                    `<button class="suggestion-chip" onclick="sendSuggestion('${suggestion.split(' ').slice(1).join(' ')}')">${suggestion}</button>`
+                ).join('');
+                
+                suggestions.classList.add('show');
+            }, 1000);
+        }
+
+        // Event listeners
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        messageInput.addEventListener('input', function() {
+            sendBtn.disabled = this.value.trim() === '';
+        });
+
+        // Inicializar
+        sendBtn.disabled = true;
+    </script>
+</body>
+</html>
