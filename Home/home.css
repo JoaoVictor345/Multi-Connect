@@ -38,7 +38,6 @@ header {
   position: relative;
 }
 
-
 .search-bar input {
  width: 100%;
  padding: 12px 50px 12px 20px;
@@ -48,7 +47,6 @@ header {
  outline: none;
  transition: 0.6s;
 }
-
 
 .search-btn {
   position: absolute;
@@ -121,14 +119,14 @@ header {
   margin-right: 12px;
   flex-shrink: 0;
 }
-/* Muda aqui: deixa o info em linha e espaça nome e preço */
+
 .product-info {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  min-width: 0; /* importante para o flex funcionar bem e evitar overflow */
+  min-width: 0;
 }
 
 .product-name {
@@ -138,15 +136,15 @@ header {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex-grow: 1;      /* faz o nome ocupar o máximo espaço possível */
-  min-width: 0;      /* permite a redução do nome no overflow */
+  flex-grow: 1;
+  min-width: 0;
   margin-right: 12px;
 }
 
 .product-price {
   font-size: 0.8rem;
   color: #666;
-  flex-shrink: 0;  /* não deixa o preço encolher */
+  flex-shrink: 0;
   white-space: nowrap;
 }
 
@@ -274,37 +272,21 @@ header {
   background-color: #eee;
 }
 
-#cityButton{
+#cityButton {
   position: absolute;
-  top: 7.6%;
-}
-
-#productList {
-position: absolute;
-background: white;
-border: 1px solid #ccc;
-width: 100%;
-max-height: 200px;
-overflow-y: auto;
-z-index: 99;
-display: none;
-border-radius: 15px;
-
-scrollbar-width: none;
--ms-overflow-style: none;
-}
-
-#productList::-webkit-scrollbar {
-display: none;
-}
-
-#productList div {
-padding: 8px;
-cursor: pointer;
-}
-
-#productList div:hover {
-background-color: #eee;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #092884;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-login, .btn-cadastrar {
@@ -335,13 +317,13 @@ background-color: #eee;
   background-color: #217dbb;
 }
 
-/* MENU LATERAL REMODELADO */
+/* MENU LATERAL REMODELADO - CORRIGIDO */
 .menu {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  width: 300px;
+  width: 320px; /* Aumentado para dar mais espaço */
   background: linear-gradient(180deg, #1b6ee3 0%, #409fff 100%);
   display: flex;
   flex-direction: column;
@@ -363,6 +345,7 @@ background-color: #eee;
   padding: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0; /* Evita que o header encolha */
 }
 
 .logo-nav {
@@ -391,20 +374,40 @@ background-color: #eee;
   flex-direction: column;
   padding: 20px 0;
   list-style: none;
+  overflow-y: auto; /* Permite scroll se necessário */
+  
+  /* Estilização da scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.nav-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nav-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
 }
 
 .links1 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px; /* Aumentado o gap */
   padding: 0 20px;
+  margin-bottom: 20px; /* Espaço antes dos links2 */
 }
 
 .links2 {
   padding: 0 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 20px;
+  margin-top: auto; /* Empurra para o final */
 }
 
 .menu li {
@@ -414,15 +417,16 @@ background-color: #eee;
 .menu ul li a {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px; /* Reduzido um pouco para dar mais espaço ao texto */
   color: white;
-  font-size: 16px;
+  font-size: 15px; /* Ligeiramente menor */
   text-decoration: none;
-  padding: 15px 20px;
+  padding: 12px 16px; /* Padding otimizado */
   border-radius: 12px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  white-space: nowrap; /* Evita quebra de linha */
 }
 
 .menu ul li a::before {
@@ -452,9 +456,10 @@ background-color: #eee;
 }
 
 .menu ul li a i {
-  font-size: 20px;
-  width: 24px;
+  font-size: 18px; /* Ligeiramente menor */
+  width: 20px; /* Reduzido */
   text-align: center;
+  flex-shrink: 0; /* Evita que o ícone encolha */
 }
 
 .overlay {
@@ -483,6 +488,7 @@ background-color: #eee;
 .menu.open .nav-list li:nth-child(2) { animation-delay: 0.2s; }
 .menu.open .nav-list li:nth-child(3) { animation-delay: 0.3s; }
 .menu.open .nav-list li:nth-child(4) { animation-delay: 0.4s; }
+.menu.open .nav-list li:nth-child(5) { animation-delay: 0.5s; }
 
 @keyframes slideInFromLeft {
   from {
@@ -523,7 +529,7 @@ background-color: #eee;
 
 .welcome h1 {
   text-shadow: 1px 2px 0px black;
-  font-size: clamp(rem, 5vw, 3.5rem);
+  font-size: clamp(1rem, 5vw, 1.5rem);
   margin-bottom: 1rem;
 }
 
@@ -552,16 +558,19 @@ background-color: #eee;
 
 .welcome .search-btn {
   position: absolute;
-  right: 8px;
-  top: 9%;
+  right: 5px;
+  top: 50%;
   transform: translateY(-50%);
   background: #092884;
   border: none;
-  padding: 10px 18px;
-  border-radius: 25px;
+  padding: 10px 15px;
+  border-radius: 20px;
   color: white;
   cursor: pointer;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .historico, .lojas {
@@ -686,7 +695,10 @@ background-color: #eee;
   .logo {
     font-size: 22px;
   }
-
+  
+  .menu {
+    width: 300px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -700,7 +712,7 @@ background-color: #eee;
   }
   
   .header-right .search-bar {
-    display: none; /* Esconde a barra de pesquisa do header em mobile */
+    display: none;
   }
   
   .header-left {
@@ -729,7 +741,6 @@ background-color: #eee;
   .welcome .search-bar {
     max-width: 90%;
   }
-
   
   .historico, .lojas {
     padding: 30px 15px;
@@ -744,6 +755,17 @@ background-color: #eee;
   .store-container {
     gap: 15px;
     padding: 15px 0;
+  }
+  
+  /* Ajustes do menu para mobile */
+  .menu ul li a {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+  
+  .menu ul li a i {
+    font-size: 16px;
+    width: 18px;
   }
 }
 
@@ -794,14 +816,15 @@ background-color: #eee;
   
   .welcome .search-bar input {
     padding: 12px 50px 12px 15px;
-    margin-top: 7px;
     font-size: 14px;
   }
   
+  #cityButton,
   .welcome .search-btn {
-    position: absolute;
-    top: 2rem;
-    padding: 8px 15px;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px 12px;
     font-size: 14px;
   }
   
@@ -838,16 +861,19 @@ background-color: #eee;
   }
   
   .logo-nav img {
-    width: 150px;
+    width: 140px; /* Reduzido para caber melhor */
+    margin-right: 15px; /* Reduzido */
   }
   
   .menu ul li a {
-    padding: 12px 15px;
-    font-size: 14px;
+    padding: 10px 12px;
+    font-size: 13px;
+    gap: 10px;
   }
   
   .menu ul li a i {
-    font-size: 18px;
+    font-size: 16px;
+    width: 16px;
   }
 }
 
@@ -871,5 +897,21 @@ background-color: #eee;
   
   .menu {
     width: 240px;
+  }
+  
+  .menu ul li a {
+    font-size: 12px;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  
+  .menu ul li a i {
+    font-size: 14px;
+    width: 14px;
+  }
+  
+  .logo-nav img {
+    width: 120px;
+    margin-right: 10px;
   }
 }

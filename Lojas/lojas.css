@@ -89,6 +89,10 @@
         align-items: center;
     }
 
+    .logo a{
+        font-size: 30px;
+    }
+
     .logo img{
         width: 120px;
         filter: drop-shadow(2px 2px 0px black);
@@ -489,7 +493,7 @@
         .logo {
             justify-content: center;
         }
-
+        
         .logo img {
             width: 80px;
         }
