@@ -323,6 +323,7 @@ header {
   top: 0;
   left: 0;
   height: 100vh;
+  height: 100dvh; /* Melhor suporte para mobile */
   width: 320px; /* Aumentado para dar mais espaço */
   background: linear-gradient(180deg, #1b6ee3 0%, #409fff 100%);
   display: flex;
@@ -333,6 +334,9 @@ header {
   opacity: 0;
   visibility: hidden;
   box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  /* Garantir que funcione bem em dispositivos touch */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .menu.open {
@@ -468,11 +472,15 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
+  height: 100dvh; /* Melhor suporte para mobile */
   background: rgba(0, 0, 0, 0.6);
   z-index: 1000;
   display: none;
   backdrop-filter: blur(3px);
   transition: all 0.3s ease;
+  /* Melhorar performance em dispositivos móveis */
+  will-change: opacity;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .overlay.show {
@@ -708,7 +716,19 @@ header {
   }
   
   .menu {
-    width: 280px;
+    width: min(85vw, 300px);
+    max-width: 300px;
+  }
+  
+  .hamburger {
+    display: flex !important;
+    z-index: 1003;
+    position: relative;
+  }
+  
+  .hamburger .line {
+    width: 24px;
+    height: 2.5px;
   }
   
   .header-right .search-bar {
@@ -760,12 +780,20 @@ header {
   /* Ajustes do menu para mobile */
   .menu ul li a {
     font-size: 14px;
-    padding: 10px 12px;
+    padding: 12px 15px;
   }
   
   .menu ul li a i {
     font-size: 16px;
-    width: 18px;
+    width: 20px;
+  }
+  
+  .menu-header {
+    padding: 15px;
+  }
+  
+  .logo-nav img {
+    width: 150px;
   }
 }
 
@@ -776,7 +804,18 @@ header {
   }
   
   .menu {
-    width: 260px;
+    width: min(90vw, 280px);
+    max-width: 280px;
+  }
+  
+  .hamburger {
+    padding: 6px;
+  }
+  
+  .hamburger .line {
+    width: 22px;
+    height: 2px;
+    margin: 2.5px 0;
   }
   
   .header-left {
@@ -794,6 +833,24 @@ header {
   .perfil-foto {
     width: 35px;
     height: 35px;
+  }
+  
+  .menu ul li a {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+  
+  .menu ul li a i {
+    font-size: 14px;
+    width: 18px;
+  }
+  
+  .menu-header {
+    padding: 12px;
+  }
+  
+  .logo-nav img {
+    width: 130px;
   }
   
   .auth-buttons {
@@ -887,6 +944,16 @@ header {
     font-size: 14px;
   }
   
+  .hamburger {
+    padding: 4px;
+  }
+  
+  .hamburger .line {
+    width: 18px;
+    height: 2px;
+    margin: 2px 0;
+  }
+  
   .welcome .search-bar {
     max-width: 95%;
   }
@@ -896,7 +963,8 @@ header {
   }
   
   .menu {
-    width: 240px;
+    width: min(95vw, 250px);
+    max-width: 250px;
   }
   
   .menu ul li a {
@@ -910,8 +978,16 @@ header {
     width: 14px;
   }
   
+  .menu-header {
+    padding: 8px;
+  }
+  
   .logo-nav img {
-    width: 120px;
-    margin-right: 10px;
+    width: 110px;
+    margin-right: 8px;
+  }
+  
+  .menu-subtitle {
+    font-size: 11px;
   }
 }

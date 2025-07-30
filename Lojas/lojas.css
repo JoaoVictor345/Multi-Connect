@@ -172,6 +172,7 @@
         top: 0;
         left: 0;
         height: 100vh;
+        height: 100dvh; /* Melhor suporte para mobile */
         width: 300px;
         background: linear-gradient(180deg, #1b6ee3 0%, #409fff 100%);
         display: flex;
@@ -182,6 +183,9 @@
         opacity: 0;
         visibility: hidden;
         box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+        /* Garantir que funcione bem em dispositivos touch */
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
     }
 
     .menu.open {
@@ -294,11 +298,15 @@
         left: 0;
         width: 100%;
         height: 100%;
+        height: 100dvh; /* Melhor suporte para mobile */
         background: rgba(0, 0, 0, 0.6);
         z-index: 1000;
         display: none;
         backdrop-filter: blur(3px);
         transition: all 0.3s ease;
+        /* Melhorar performance em dispositivos móveis */
+        will-change: opacity;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .overlay.show {
@@ -472,7 +480,19 @@
         }
 
         .menu {
-            width: 280px;
+            width: min(85vw, 300px);
+            max-width: 300px;
+        }
+        
+        .hamburger {
+            display: flex !important;
+            z-index: 1003;
+            position: relative;
+        }
+        
+        .hamburger .line {
+            width: 24px;
+            height: 2.5px;
         }
     }
 
@@ -564,15 +584,18 @@
         }
 
         .menu {
-            width: 250px;
+            width: min(90vw, 280px);
+            max-width: 280px;
         }
-
+        
         .hamburger {
             padding: 6px;
         }
-
+        
         .hamburger .line {
-            width: 24px;
+            width: 22px;
+            height: 2px;
+            margin: 2.5px 0;
         }
     }
 
@@ -601,7 +624,18 @@
         }
 
         .menu {
-            width: 220px;
+            width: min(95vw, 250px);
+            max-width: 250px;
+        }
+        
+        .hamburger {
+            padding: 4px;
+        }
+        
+        .hamburger .line {
+            width: 18px;
+            height: 2px;
+            margin: 2px 0;
         }
 
         .store-container {
