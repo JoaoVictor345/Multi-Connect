@@ -85,7 +85,8 @@
       const menu = document.getElementById("menu");
       const overlay = document.getElementById("overlay");
 
-      hamburger.addEventListener("click", () => {
+      // Função para abrir/fechar menu
+      function toggleMenu() {
         hamburger.classList.toggle("active");
         menu.classList.toggle("open");
         overlay.classList.toggle("show");
@@ -93,30 +94,43 @@
         if (menu.classList.contains("open")) {
           overlay.style.display = "block";
           document.body.style.overflow = "hidden";
+          // Previne scroll em iOS
+          document.body.style.position = "fixed";
+          document.body.style.width = "100%";
         } else {
           overlay.style.display = "none";
           document.body.style.overflow = "auto";
+          document.body.style.position = "";
+          document.body.style.width = "";
         }
+      }
+
+      // Event listeners para click e touch
+      hamburger.addEventListener("click", toggleMenu);
+      hamburger.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        toggleMenu();
       });
 
-      overlay.addEventListener("click", () => {
+      // Função para fechar menu
+      function closeMenu() {
         hamburger.classList.remove("active");
         menu.classList.remove("open");
         overlay.classList.remove("show");
         overlay.style.display = "none";
         document.body.style.overflow = "auto";
-      });
+        document.body.style.position = "";
+        document.body.style.width = "";
+      }
+
+      overlay.addEventListener("click", closeMenu);
+      overlay.addEventListener("touchend", closeMenu);
 
       // Fechar menu ao clicar em um link
       const menuLinks = document.querySelectorAll('.menu a');
       menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          hamburger.classList.remove("active");
-          menu.classList.remove("open");
-          overlay.classList.remove("show");
-          overlay.style.display = "none";
-          document.body.style.overflow = "auto";
-        });
+        link.addEventListener('click', closeMenu);
+        link.addEventListener('touchend', closeMenu);
       });
 
       // Scroll horizontal nos containers
