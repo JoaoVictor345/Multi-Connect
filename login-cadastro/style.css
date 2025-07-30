@@ -85,6 +85,7 @@
 
     .forms-container {
       width: 100%;
+      max-height: 600px;
       max-width: 400px;
       overflow: hidden;
       border-radius: 15px;
@@ -145,21 +146,21 @@
       position: relative;
     }
 
-    .senha-box a{
+    .senha-box a {
       text-decoration: none;
       font-weight: bolder;
       color: #185ec0;
+      font-size: 14px;
     }
 
-    .senha-box a:hover{
+    .senha-box a:hover {
       text-decoration: underline;
     }
 
     .senha-box button {
       position: absolute;
-      top: 35%;
+      top: 12px;
       right: 12px;
-      transform: translateY(-50%);
       background: transparent;
       border: none;
       cursor: pointer;
@@ -171,9 +172,8 @@
       height: 20px;
     }
 
-    #signupOlhoFechado{
-      position: relative;
-      top: 10px;
+    .olhoCadastro {
+      top: 12px !important;
     }
 
     .btn {
@@ -224,7 +224,7 @@
       align-items: center;
       font-family: var(--font1);
       font-size: 16px;
-      margin: 20px 0;
+      margin: 10px 0;
       color: #185ec0;
     }
 
@@ -247,8 +247,8 @@
     .social-media {
       display: flex;
       justify-content: center;
-      gap: 15px;
       margin-top: 20px;
+      gap:10px;
     }
 
     .social-media a {
@@ -273,8 +273,33 @@
       height: 24px;
     }
 
+    /* Placeholder para imagens sociais quando não carregam */
+    .social-media a::before {
+      content: attr(data-platform);
+      font-size: 12px;
+      color: #666;
+      display: none;
+    }
+
+    .social-media img:not([src]) + .social-media a::before,
+    .social-media img[src=""] + .social-media a::before {
+      display: block;
+    }
+
+    /* Responsividade para Tablets */
+    @media (max-width: 1024px) {
+      .tela {
+        max-width: 900px;
+        max-height: 700px;
+      }
+      
+      .forms-container {
+        max-width: 350px;
+      }
+    }
+
     /* Responsividade para Mobile */
-    @media (max-width: 720px) {
+    @media (max-width: 768px) {
       body {
         padding: 10px;
       }
@@ -282,26 +307,30 @@
       .tela {
         flex-direction: column;
         height: auto;
-        max-height: calc(100vh - 20px);
-        border-radius: 0;
+        min-height: calc(100vh - 20px);
+        border-radius: 15px;
       }
 
       .lado-esquerdo {
         flex: none;
-        height: 200px;
+        height: 180px;
         padding: 20px;
-        background-image: url('../imgs/investimentos.avif');
+        background: linear-gradient(rgba(27, 110, 227, 0.8), rgba(27, 110, 227, 0.8)), 
+                    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect width="400" height="200" fill="%23185ec0"/><text x="200" y="100" text-anchor="middle" dy=".3em" fill="white" font-size="24" font-family="Arial">Investimentos</text></svg>');
         background-size: cover;
         background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .lado-esquerdo img{
-        width: 0px;
+      .lado-esquerdo img {
+        display: block;
       }
 
       .lado-direito {
         flex: 1;
-        padding: 2;
+        padding: 20px 15px;
         min-height: calc(100vh - 200px);
       }
 
@@ -313,7 +342,7 @@
       .voltar a {
         font-size: 16px;
         color: white;
-        background: rgba(0,0,0,0.2);
+        background: rgba(0,0,0,0.3);
         padding: 8px 12px;
         border-radius: 20px;
         backdrop-filter: blur(10px);
@@ -324,15 +353,17 @@
         width: 100%;
         box-shadow: none;
         border-radius: 0;
+        max-height: none;
       }
 
       .form {
-        padding: 20px 15px;
+        padding: 25px 20px;
       }
 
       h2 {
         font-size: 22px;
         margin-bottom: 15px;
+        text-align: end;
       }
 
       .textbox input {
@@ -355,14 +386,14 @@
       }
 
       .social-media img {
-        width: 30px;
-        height: 30px;
+        width: 28px;
+        height: 28px;
       }
     }
 
     @media (max-width: 480px) {
       .form {
-        padding: 15px 10px;
+        padding: 20px 15px;
       }
 
       h2 {
@@ -371,24 +402,65 @@
 
       .textbox input {
         padding: 12px;
+        font-size: 15px;
       }
 
       .btn {
         padding: 14px;
+        font-size: 15px;
+      }
+
+      .social-media a {
+        width: 45px;
+        height: 45px;
+      }
+
+      .social-media img {
+        width: 24px;
+        height: 24px;
       }
     }
 
+    /* Ajustes para telas muito baixas */
     @media (max-height: 600px) and (max-width: 768px) {
       .lado-esquerdo {
         height: 120px;
       }
 
-      .lado-esquerdo img {
-        max-width: 100px;
-        max-height: 100px;
+      .lado-direito {
+        min-height: calc(100vh - 140px);
+      }
+
+      .form {
+        padding: 15px;
+      }
+
+      #loginForm, #signupForm {
+        gap: 12px;
+      }
+    }
+
+    /* Landscape mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .tela {
+        flex-direction: row-reverse;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .lado-esquerdo {
+        flex: 0.4;
+        height: auto;
       }
 
       .lado-direito {
-        min-height: calc(100vh - 120px);
+        flex: 0.6;
+        min-height: 100vh;
       }
+
+      .forms-container {
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
     }
