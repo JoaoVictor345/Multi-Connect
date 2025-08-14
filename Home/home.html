@@ -9,99 +9,113 @@
   <link rel="stylesheet" href="home.css">
 </head>
 <body>
-  <header>
-    <div class="header-left">
-      <div class="hamburger" id="hamburger">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-top">
+      <div class="header-top-content">
+        <div class="user-greeting">
+          <div class="user-avatar-small">U</div>
+          <span id="greeting">Carregando...</span>
+        </div>
+        <div id="perfilArea" class="profile-area" style="display: none;">
+          <a href="../Config/Config.html"><img id="perfilFoto" class="profile-photo" src="../imgs/user(1).png" alt="Perfil"></a>
+          <span class="auth-link" onclick="logout()">Sair</span>
+        </div>
+        <div id="authButtons" class="auth-buttons">
+          <a href="../login-cadastro/login-cadastro.html">Entrar</a>
+        </div>
       </div>
-      <img class="symbol" src="../imgs/linkacao.png" alt="Multi-Connect" />
-      <div class="logo"><a href="#">MultiConnect</a></div>
     </div>
 
-    <div class="menu" id="menu">
-      <div class="menu-header">
-        <div class="logo-nav">
-          <img src="../imgs/Multi-connect1.png" alt="MultiConnect">
-        </div>
-        <p class="menu-subtitle">Sua plataforma de conexões</p>
-      </div>
-      <ul class="nav-list">
-        <div class="links1">
-          <li><a href="#" id="link1" class="active"><i class="bi bi-house-door"></i> Início</a></li>
-          <li><a href="../Lojas/lojas.html"><i class="bi bi-shop"></i> Lojas</a></li>
-          <li><a href="../Vagas/vagas.html"><i class="bi bi-people"></i> WorkConnect</a></li>
-          <li><a href="../carrinho/index.html"><i class="bi bi-cart"></i>Carrinho</a></li>
-          <li><a href="../criacao-loja/index.html"><i class="bi bi-plus-circle"></i></i>Adicione Sua Loja</a></li>
-        </div>
-        <div class="links2">
-          <li><a href="../Config/Config.html"><i class="bi bi-gear"></i> Configurações</a></li>
-        </div>
-      </ul>
-    </div>
+    <div class="header-main">
+      <div class="header-content">
+        <a href="#" class="logo">MultiConnect</a>
 
-    <div class="overlay" id="overlay"></div>
-
-    <div class="header-right">
-      <div class="search-bar">
-          <input type="text" id="searchInput" placeholder="Buscar produtos..." onfocus="showProducts()" oninput="filterProducts()">
+        <div class="search-container">
+          <div class="search-bar">
+            <input type="text" class="city-input" placeholder="Cidade..." id="cityInput" onfocus="showCities()" oninput="filterCities()">
+            <input type="text" class="search-input" placeholder="Buscar produtos..." id="searchInput" onfocus="showProducts()" oninput="filterProducts()">
             <button class="search-btn"><i class="bi bi-search"></i></button>
-            <div id="productList" class="city-list"><div class="product-item">
-                <img src="imagem_do_produto.jpg" alt="nome do produto" />
-                <div class="product-info">
-                  <div class="product-name">Nome do Produto</div>
-                  <div class="product-price">R$ 99,99</div>
-                </div>
-              </div>
-            </div>
-
           </div>
-          <div class="perfil-wrapper" id="perfilArea">
-            <a href="../Config/Config.html">
-              <img src="../imgs/user(1).png" alt="User" id="perfilFoto" class="perfil-foto" />
-            </a>
-      </div>
-      <div class="auth-buttons" id="authButtons" style="display: none;">
-        <a href="../login-cadastro/login-cadastro.html" class="btn-login">Login</a>
-        <a href="../login-cadastro/login-cadastro.html" class="btn-cadastrar">Cadastrar-se</a>
+          <div class="dropdown-list" id="cityList"></div>
+          <div class="dropdown-list" id="productList"></div>
+        </div>
+
+        <nav class="header-nav">
+          <a href="#" class="nav-item"><i class="bi bi-house-door"></i> Início</a>
+          <a href="../Lojas/lojas.html" class="nav-item"><i class="bi bi-shop"></i> Lojas</a>
+          <a href="../criacao-loja/index.html" class="nav-item"><i class="bi bi-plus-circle"></i>Add Shop</a>
+          <a href="../Vagas/vagas.html" class="nav-item"><i class="bi bi-briefcase"></i> WorkConnect</a>
+          <a href="../carrinho/index.html" class="nav-item"><i class="bi bi-cart3"></i> Carrinho</a>
+          <a href="#" class="nav-item"><i class="bi bi-heart"></i> Favoritos</a>
+        </nav>
+
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <i class="bi bi-list"></i>
+        </button>
       </div>
     </div>
   </header>
-  
-  <main>
-    <section class="welcome">
-      <div id="welcome">
-        <h1 id="greeting">Olá, Usuário!</h1>
-        <p>Bem-vindo à Multi-Connect, sua plataforma de conexões inteligentes.</p>
-      </div>
-      <div class="search-bar">
-        <input type="text" id="cityInput" placeholder="Informe sua cidade..."  onfocus="showCities()" oninput="filterCities()">
-        <button class="search-btn" id="cityButton"><i class="bi bi-search"></i>
-        </button>
-        <div id="cityList" class="city-list"></div>
-      </div>
-    </section>
 
-    <section class="historico">
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="banner-content">
+      <div class="banner-left">
+        <div class="banner-logo">
+        </div>
+        <h1 class="banner-title">Sua plataforma de conexões</h1>
+        <p class="banner-subtitle">Conecte-se com lojas locais, encontre oportunidades de trabalho e descubra produtos incríveis na sua região.</p>
+      </div>
+      <div class="banner-right">
+        <div class="promo-content">
+          <div class="promo-badge">Conecte-se agora</div>
+          <div class="promo-text">Descubra mais</div>
+          <div class="promo-discount">50% <span style="font-size: 1.8rem;">OFF</span></div>
+          <button class="promo-btn">Explorar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <div class="historico">
       <div id="historico">
         <h1>Histórico de Compras</h1>
-        <p>Veja o que você já comprou!</p>
+        <p>Bem-vindo ao MultiConnect! Faça login para acessar recursos personalizados.</p>
       </div>
-      <div class="card-container" id="cardContainer"></div>
+    </div>
+
+    <section>
+      <div class="section-header">
+        <i class="bi bi-box-seam section-icon"></i>
+        <h2 class="section-title">Produtos em Destaque</h2>
+      </div>
+      <div class="card-container" id="cardContainer">
+        <!-- Cards serão inseridos via JavaScript -->
+      </div>
     </section>
 
-    <section class="lojas">
-      <div id="lojas">
-        <h1>Lojas</h1>
-        <p>Veja as lojas disponíveis!</p>
+    <!-- Lojas Section -->
+    <section>
+      <div class="section-header">
+        <i class="bi bi-shop section-icon"></i>
+        <h2 class="section-title">Lojas na Região</h2>
       </div>
-      <div class="store-container" id="storeContainer"></div>
+      <div class="store-container" id="storeContainer">
+        <!-- Lojas serão inseridas via JavaScript -->
+      </div>
     </section>
   </main>
-  <script src="products.js"></script>
-  <script src="../Lojas/lojasData.js"></script>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-text">
+      © 2024 MultiConnect. Conectando pessoas e negócios locais.
+    </div>
+  </footer>
+
   <script src="../Scripts/home.js"></script>
-  
+  <script src="../Lojas/lojasData.js"></script>
+  <script src="products.js"></script>
 </body>
 </html>
