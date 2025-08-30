@@ -9,133 +9,119 @@
   <link rel="stylesheet" href="lojas.css">
 </head>
 <body>
-  <header>
-    <div class="header-left">
-      <div class="hamburger" id="hamburger">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-      </div>
-        <div class="menu" id="menu">
-      <div class="menu-header">
-        <div class="logo-nav">
-          <img src="../imgs/Multi-Connect(white).png" alt="MultiConnect">
-        </div>
-         <p class="menu-subtitle">Sua plataforma de conexões</p>
-      </div>
-      <ul class="nav-list">
-        <div class="links1">
-          <li><a href="../Home/home.html" id="link1"><i class="bi bi-house-door"></i> Início</a></li>
-          <li><a href="lojas.html" class="active"><i class="bi bi-shop"></i> Lojas</a></li>
-          <li><a href="../Vagas/vagas.html"><i class="bi bi-people"></i>WorkConnect</a></li>
-          <li><a href="../carrinho/index.html"><i class="bi bi-cart"></i>Carrinho</a></li>
-        </div>
-        <div class="links2">
-          <li><a href="../Config/Config.html"><i class="bi bi-gear"></i> Configurações</a></li>
-        </div>
-      </ul>
-    </div>
-      <div class="overlay" id="overlay"></div>
-      <div class="logo">
-        <img src="../imgs/linkacao.png" alt="">
-        <a href="lojas.html" class="title">Lojas</a>
-      </div>
-    </div>
-    <div class="pesquisa">
-      <div class="search-bar">
-          <input type="text" placeholder="Buscar lojas..."
-          oninput="filterStores(this.value)">
-            <button class="search-btn"><i class="bi bi-search"></i>
-            </button>
-      </div>
-      
-    </div>
+  <!-- Header -->
+  <header class="header">
     
+
+    <div class="header-main">
+      <div class="header-content">
+        <a href="../Home/home.html" class="logo">
+          <div class="logo-icon">
+            <i class="bi bi-shop"></i>
+          </div>
+          MultiConnect
+        </a>
+
+        <div class="search-container">
+          <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Buscar lojas..." id="searchInput" oninput="filterStores(this.value)">
+            <button class="search-btn"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
+
+        <nav class="header-nav">
+          <a href="../Home/home.html" class="nav-item"><i class="bi bi-house-door"></i> Início</a>
+          <a href="#" class="nav-item active"><i class="bi bi-shop"></i> Lojas</a>
+          <a href="../criacao-loja/index.html" class="nav-item"><i class="bi bi-plus-circle"></i>Add Shop</a>
+          <a href="../Vagas/vagas.html" class="nav-item"><i class="bi bi-briefcase"></i> WorkConnect</a>
+          <a href="../carrinho/index.html" class="nav-item"><i class="bi bi-cart3"></i> Carrinho</a>
+          <a href="#" class="nav-item"><i class="bi bi-heart"></i> Favoritos</a>
+        </nav>
+
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <section class="store-container" id="storeContainer">
-    <!-- Exemplo de cards de lojas -->
-    <div class="card">
-      <img class="card-img" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&h=100&fit=crop&crop=center" alt="Loja Exemplo 1">
-      <h2>Tech Store</h2>
-      <p>Sua loja de tecnologia com os melhores preços e produtos de qualidade.</p>
-      <button class="card-button">Ver mais</button>
-    </div>
-    
-    <div class="card">
-      <img class="card-img" src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=100&h=100&fit=crop&crop=center" alt="Loja Exemplo 2">
-      <h2>Fashion Center</h2>
-      <p>Moda e estilo para todos os gostos e idades. Venha conferir nossas novidades!</p>
-      <button class="card-button">Ver mais</button>
-    </div>
-    
-    <div class="card">
-      <img class="card-img" src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center" alt="Loja Exemplo 3">
-      <h2>Book World</h2>
-      <p>Livraria completa com títulos nacionais e internacionais para todos os públicos.</p>
-      <button class="card-button">Ver mais</button>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="page-header-content">
+      <h1 class="page-title">Lojas Parceiras</h1>
+      <p class="page-subtitle">Descubra lojas locais incríveis e conecte-se com negócios da sua região. Encontre produtos únicos e apoie o comércio local.</p>
     </div>
   </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section>
+      <div class="section-header">
+        <i class="bi bi-shop section-icon"></i>
+        <h2 class="section-title">Todas as Lojas</h2>
+      </div>
+      
+      <div class="loading" id="loading" style="display: none;">
+        <div class="loading-spinner"></div>
+      </div>
+      
+      <div class="store-container" id="storeContainer">
+        <!-- Exemplo de cards de lojas -->
+        <div class="store-card">
+          <div class="store-card-header">
+            <img class="store-img" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&h=100&fit=crop&crop=center" alt="Tech Store">
+            <div class="store-info">
+              <h3 class="store-name">Tech Store</h3>
+              <p class="store-description">Sua loja de tecnologia com os melhores preços e produtos de qualidade para todas as suas necessidades digitais.</p>
+            </div>
+          </div>
+          <div class="store-card-footer">
+            <a href="#" class="store-button">Ver mais</a>
+          </div>
+        </div>
+        
+        <div class="store-card">
+          <div class="store-card-header">
+            <img class="store-img" src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=100&h=100&fit=crop&crop=center" alt="Fashion Center">
+            <div class="store-info">
+              <h3 class="store-name">Fashion Center</h3>
+              <p class="store-description">Moda e estilo para todos os gostos e idades. Venha conferir nossas novidades e tendências da temporada!</p>
+            </div>
+          </div>
+          <div class="store-card-footer">
+            <a href="#" class="store-button">Ver mais</a>
+          </div>
+        </div>
+        
+        <div class="store-card">
+          <div class="store-card-header">
+            <img class="store-img" src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center" alt="Book World">
+            <div class="store-info">
+              <h3 class="store-name">Book World</h3>
+              <p class="store-description">Livraria completa com títulos nacionais e internacionais para todos os públicos, desde clássicos até lançamentos.</p>
+            </div>
+          </div>
+          <div class="store-card-footer">
+            <a href="#" class="store-button">Ver mais</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <i class="bi bi-search"></i>
+        <h3>Nenhuma loja encontrada</h3>
+        <p>Tente ajustar sua pesquisa ou explore outras categorias.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-text">
+      © 2024 MultiConnect. Conectando pessoas e negócios locais.
+    </div>
+  </footer>
   <script src="lojasData.js"></script>
-  <script>
-    function renderStores(query = '') {
-      const container = document.getElementById("storeContainer");
-      container.innerHTML = '';
-
-      lojas
-        .filter(loja => loja.nome.toLowerCase().includes(query.toLowerCase()) || loja.descricao.toLowerCase().includes(query.toLowerCase()))
-        .forEach(loja => {
-          const card = document.createElement("div");
-          card.classList.add("card");
-          card.innerHTML = `
-            <img class="card-img" src="${loja.imagem}" alt="${loja.nome}">
-            <h2>${loja.nome}</h2>
-            <p>${loja.descricao}</p>
-            <a href="../lojas-perfil/lojas-perfil.html?loja=${loja.id}">
-              <button class="card-button">Ver mais</button>
-            </a>`;
-          container.appendChild(card);
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      renderStores();
-
-      const hamburger = document.getElementById("hamburger");
-      const menu = document.getElementById("menu");
-      const overlay = document.getElementById("overlay");
-
-      hamburger.addEventListener("click", () => {
-        // Toggle da classe active no hambúrguer para a animação
-        hamburger.classList.toggle("active");
-        
-        // Toggle do menu
-        menu.classList.toggle("open");
-        
-        // Mostrar/ocultar overlay
-        if (menu.classList.contains("open")) {
-          overlay.style.display = "block";
-          setTimeout(() => overlay.classList.add("show"), 10);
-        } else {
-          overlay.classList.remove("show");
-          setTimeout(() => overlay.style.display = "none", 300);
-        }
-      });
-
-      overlay.addEventListener("click", () => {
-        // Remove a classe active do hambúrguer
-        hamburger.classList.remove("active");
-        
-        // Fecha o menu
-        menu.classList.remove("open");
-        overlay.classList.remove("show");
-        setTimeout(() => overlay.style.display = "none", 300);
-      });
-    });
-
-    function filterStores(query) {
-      renderStores(query);
-    }
-  </script>
+  <script src="../Scripts/lojas.js"></script>
 </body>
 </html>

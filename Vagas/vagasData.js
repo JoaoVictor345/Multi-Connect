@@ -1,32 +1,146 @@
-const vagas = [
-  {
-    titulo: "Assistente Administrativo",
-    descricao: "Organização de documentos, atendimento ao público e suporte ao setor administrativo.",
-    imagem: "../imgs/vaga1.png",
-    link: "#"
+ const jobs = [
+      {
+        id: 1,
+        companyName: "Tech Solutions",
+        jobTitle: "Desenvolvedor Frontend",
+        location: "São Paulo, SP",
+        jobType: "full-time",
+        description: "Estamos procurando um desenvolvedor frontend experiente para se juntar à nossa equipe. Você será responsável por criar interfaces de usuário incríveis e experiências web modernas.",
+        requirements: ["React", "JavaScript", "CSS", "Git"],
+        logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=80&h=80&fit=crop&crop=center",
+        link: "#",
+        posted: "2 dias atrás"
+      },
+      {
+        id: 2,
+        companyName: "Marketing Digital Pro",
+        jobTitle: "Especialista em Marketing",
+        location: "Rio de Janeiro, RJ",
+        jobType: "remote",
+        description: "Oportunidade para especialista em marketing digital trabalhar com campanhas inovadoras e estratégias de crescimento para marcas consolidadas no mercado.",
+        requirements: ["Google Ads", "Facebook Ads", "Analytics", "SEO"],
+        logo: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=80&h=80&fit=crop&crop=center",
+        link: "#",
+        posted: "1 semana atrás"
+      },
+      {
+        id: 3,
+        companyName: "Design Studio",
+        jobTitle: "UI/UX Designer",
+        location: "Belo Horizonte, MG",
+        jobType: "part-time",
+        description: "Procuramos um designer criativo para criar experiências digitais memoráveis. Trabalhe em projetos desafiadores com uma equipe talentosa.",
+        requirements: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+        logo: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=80&h=80&fit=crop&crop=center",
+        link: "#",
+        posted: "3 dias atrás"
+      },
+      {
+        id: 4,
+        companyName: "DataCorp Analytics",
+        jobTitle: "Analista de Dados",
+        location: "Fortaleza, CE",
+        jobType: "contract",
+        description: "Estamos em busca de um analista de dados para transformar informações em insights valiosos. Trabalhe com big data e machine learning.",
+        requirements: ["Python", "SQL", "Power BI", "Statistics"],
+        logo: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=80&h=80&fit=crop&crop=center",
+        link: "#",
+        posted: "5 dias atrás"
+      },
+        {
+    id: 5,
+    companyName: "CloudTech Solutions",
+    jobTitle: "Desenvolvedor Backend",
+    location: "São Paulo, SP",
+    jobType: "full-time",
+    description: "Buscamos um desenvolvedor backend para trabalhar com arquiteturas modernas em nuvem. Experiência com microserviços e APIs RESTful é essencial.",
+    requirements: ["Node.js", "MongoDB", "Docker", "AWS"],
+    logo: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=80&h=80&fit=crop&crop=center",
+    link: "#",
+    posted: "1 dia atrás"
   },
   {
-    titulo: "Desenvolvedor Front-End",
-    descricao: "Desenvolvimento de interfaces responsivas em HTML, CSS e JavaScript.",
-    imagem: "../imgs/vaga2.png",
-    link: "#"
+    id: 6,
+    companyName: "Fintech Brasil",
+    jobTitle: "Product Manager",
+    location: "Remote",
+    jobType: "remote",
+    description: "Oportunidade única para liderar produtos financeiros inovadores. Trabalhe com equipes ágeis e tecnologias de ponta no setor fintech.",
+    requirements: ["Agile", "Product Strategy", "Data Analysis", "Fintech"],
+    logo: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=80&h=80&fit=crop&crop=center",
+    link: "#",
+    posted: "4 dias atrás"
   },
   {
-    titulo: "Analista de Suporte Técnico",
-    descricao: "Atendimento e suporte aos usuários, manutenção de hardware e software.",
-    imagem: "../imgs/vaga3.png",
-    link: "#"
+    id: 7,
+    companyName: "Agência Criativa",
+    jobTitle: "Redator Publicitário",
+    location: "Rio de Janeiro, RJ",
+    jobType: "full-time",
+    description: "Procuramos um redator criativo para campanhas publicitárias impactantes. Experiência em diferentes mídias e conhecimento de trends digitais.",
+    requirements: ["Copywriting", "Marketing Digital", "Criatividade", "Social Media"],
+    logo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=80&h=80&fit=crop&crop=center",
+    link: "#",
+    posted: "6 dias atrás"
   },
   {
-    titulo: "Marketing Digital",
-    descricao: "Criação de campanhas, gestão de redes sociais e análise de métricas.",
-    imagem: "../imgs/vaga4.png",
-    link: "#"
+    id: 8,
+    companyName: "EduTech Inovação",
+    jobTitle: "Desenvolvedor Mobile",
+    location: "Brasília, DF",
+    jobType: "contract",
+    description: "Desenvolva aplicativos educacionais que transformam vidas. Trabalhe com React Native e crie soluções que impactam milhares de estudantes.",
+    requirements: ["React Native", "iOS", "Android", "Firebase"],
+    logo: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=80&h=80&fit=crop&crop=center",
+    link: "#",
+    posted: "2 dias atrás"
   },
   {
-    titulo: "Estágio em RH",
-    descricao: "Apoio nos processos seletivos, triagem de currículos e entrevistas.",
-    imagem: "../imgs/vaga5.png",
-    link: "#"
+    id: 9,
+    companyName: "Consultoria Empresarial",
+    jobTitle: "Business Analyst",
+    location: "Porto Alegre, RS",
+    jobType: "full-time",
+    description: "Analise processos empresariais e proponha melhorias estratégicas. Trabalhe com grandes clientes e projetos de transformação digital.",
+    requirements: ["Business Analysis", "SQL", "Process Mapping", "Excel"],
+    logo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=center",
+    link: "#",
+    posted: "1 semana atrás"
+  },
+  {
+    id: 10,
+    companyName: "GameDev Studio",
+    jobTitle: "Game Designer",
+    location: "Curitiba, PR",
+    jobType: "part-time",
+    description: "Crie jogos incríveis e experiências interativas únicas. Trabalhe em um ambiente criativo com foco em inovação e diversão.",
+    requirements: ["Unity", "C#", "Game Design", "3D Modeling"],
+    logo: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=80&h=80&fit=crop&crop=center",
+    link: "#",
+    posted: "3 dias atrás"
+  },
+  {
+    id: 11,
+    companyName: "HealthTech Solutions",
+    jobTitle: "DevOps Engineer",
+    location: "Salvador, BA",
+    jobType: "remote",
+    description: "Gerencie infraestrutura cloud para aplicações de saúde digital. Trabalhe com tecnologias modernas garantindo alta disponibilidade e segurança.",
+    requirements: ["Kubernetes", "AWS", "CI/CD", "Terraform"],
+    logo: "https://imgs.search.brave.com/VFTRm5yedw-vLvQx-yTCXpDm9JXFh1dMHHO1DTsQNlk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM2/MzU4ODE4OS9waG90/by9oZWFsdGh5LWxp/ZmVzdHlsZS1vbi1r/ZXRvZ2VuaWMtZGll/dC1lYXRpbmctY2xl/YW4ta2V0by1mb29k/LWdvb2QtaGVhbHRo/LWRpZXRhcnktaW4t/aGVhcnQtZGlzaC5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/UlZXX2EyQnEzZVll/VVdxa1ViVFVIa2lR/YkdKYUFNYTlRMmZ5/bGpHeW1nWT0",
+    link: "#",
+    posted: "5 dias atrás"
+  },
+  {
+    id: 12,
+    companyName: "E-commerce Plus",
+    jobTitle: "Gerente de Vendas",
+    location: "Recife, PE",
+    jobType: "full-time",
+    description: "Lidere equipe de vendas em ambiente e-commerce dinâmico. Oportunidade de crescimento em empresa em expansão nacional.",
+    requirements: ["Gestão de Equipes", "E-commerce", "CRM", "Negociação"],
+    logo: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=80&h=80&fit=crop&crop=center",
+    link: "#",
+    posted: "4 dias atrás"
   }
-];
+    ];

@@ -522,7 +522,6 @@ table td {
 /* Mobile Large - 481px a 768px */
 @media (max-width: 768px) {
     .header-content {
-        flex-direction: column;
         gap: 15px;
         padding: 0 15px;
     }
@@ -531,11 +530,11 @@ table td {
         margin: 0;
         max-width: 100%;
         order: 2;
+        display: none;
     }
     
     .nav-icons {
         order: 1;
-        align-self: flex-end;
     }
     
     .logo {

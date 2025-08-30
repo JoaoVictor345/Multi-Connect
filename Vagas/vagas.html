@@ -3,131 +3,666 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vagas - WorkConnect</title>
+  <title>WorkConnect - MultiConnect</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="vagas.css">
   <link rel="shortcut icon" href="../imgs/Multi-Favicon.ico" type="image/x-icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-blue: #1e40af;
+      --primary-blue-dark: #1e3a8a;
+      --primary-blue-light: #3b82f6;
+      --secondary-cyan: #0ea5e9;
+      --accent-blue: #60a5fa;
+      --text-white: #ffffff;
+      --text-dark: #1f2937;
+      --text-gray: #6b7280;
+      --text-light: #9ca3af;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-gradient: #dbeafe;
+      --border-light: #e2e8f0;
+      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+      --success-green: #10b981;
+      --warning-yellow: #f59e0b;
+      --danger-red: #ef4444;
+      --purple-internship: #8b5cf6;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-secondary);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+      color: var(--text-white);
+      box-shadow: var(--shadow-lg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-main {
+      padding: 16px 0;
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-white);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 35px;
+      height: 35px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo-icon i {
+      font-size: 20px;
+      color: var(--text-white);
+    }
+
+    .search-container {
+      flex: 1;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .search-bar {
+      display: flex;
+      height: 40px;
+      background: var(--bg-primary);
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar:focus-within {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1), var(--shadow-lg);
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      background: transparent;
+      color: var(--text-dark);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-light);
+    }
+
+    .search-btn {
+      background: var(--secondary-cyan);
+      border: none;
+      padding: 14px 24px;
+      cursor: pointer;
+      color: var(--text-white);
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .search-btn:hover {
+      background: #0284c7;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-item.active {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-white);
+      font-size: 22px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--bg-gradient) 0%, var(--bg-primary) 50%, var(--accent-blue) 100%);
+      color: var(--text-dark);
+      position: relative;
+      overflow: hidden;
+      padding: 60px 0;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%233b82f6' fill-opacity='0.05'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+      z-index: 0;
+    }
+
+    .page-header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 15px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-gray);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 35px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--border-light);
+    }
+
+    .section-icon {
+      color: var(--secondary-cyan);
+      font-size: 22px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Job Cards */
+    .jobs-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 24px;
+      padding: 25px 0 15px;
+    }
+
+    .job-card {
+      background: var(--bg-primary);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-light);
+      transition: all 0.4s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .job-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-blue);
+    }
+
+    .job-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 25px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .company-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      object-fit: cover;
+      background: linear-gradient(135deg, var(--primary-blue-light), var(--secondary-cyan));
+      box-shadow: var(--shadow-md);
+      flex-shrink: 0;
+    }
+
+    .job-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .company-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-dark);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .job-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--secondary-cyan);
+      margin-bottom: 8px;
+    }
+
+    .job-location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--text-gray);
+      margin-bottom: 8px;
+    }
+
+    .job-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .job-type-full-time {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success-green);
+    }
+
+    .job-type-part-time {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning-yellow);
+    }
+
+    .job-type-contract {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--danger-red);
+    }
+
+    .job-type-remote {
+      background: rgba(96, 165, 250, 0.1);
+      color: var(--accent-blue);
+    }
+
+    .job-type-internship {
+      background: rgba(139, 92, 246, 0.1);
+      color: var(--purple-internship);
+    }
+
+    .job-card-body {
+      padding: 20px 25px;
+      flex-grow: 1;
+    }
+
+    .job-description {
+      font-size: 14px;
+      color: var(--text-gray);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+
+    .job-requirements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 15px;
+    }
+
+    .requirement-tag {
+      background: var(--bg-secondary);
+      color: var(--text-gray);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid var(--border-light);
+    }
+
+    .job-card-footer {
+      padding: 20px 25px 25px;
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .job-posted {
+      font-size: 12px;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .apply-button {
+      background: linear-gradient(135deg, var(--accent-blue), var(--secondary-cyan));
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-white);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .apply-button:hover {
+      background: linear-gradient(135deg, var(--primary-blue-light), var(--primary-blue));
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-gray);
+    }
+
+    .empty-state i {
+      font-size: 64px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .empty-state h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--text-gray);
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
+      color: var(--text-white);
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    /* Loading Animation */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border-light);
+      border-top: 3px solid var(--primary-blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-nav {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .search-container {
+        max-width: 300px;
+      }
+
+      .header-content {
+        gap: 15px;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .page-title {
+        font-size: 2rem;
+      }
+
+      .jobs-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .job-card-header {
+        padding: 20px;
+      }
+
+      .company-logo {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-content {
+        padding: 0 15px;
+      }
+
+      .main-content {
+        padding: 40px 15px;
+      }
+
+      .page-header {
+        padding: 40px 0;
+      }
+
+      .search-container {
+        display: none;
+      }
+
+      .logo {
+        font-size: 1.3rem;
+      }
+
+      .page-title {
+        font-size: 1.8rem;
+      }
+
+      .jobs-container {
+        gap: 15px;
+      }
+
+      .job-card-header {
+        padding: 15px;
+        gap: 12px;
+      }
+
+      .company-logo {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-main">
+      <div class="header-content">
+        <a href="../Home/home.html" class="logo">
+          <div class="logo-icon">
+            <i class="bi bi-briefcase"></i>
+          </div>
+          WorkConnect
+        </a>
 
-  <header>
-    
-    <div class="header-left">
-      <div class="hamburger" id="hamburger">
-        <div class="line"></div><div class="line"></div><div class="line"></div>
-      </div>
-          <div class="menu" id="menu">
-      <div class="menu-header">
-        <div class="logo-nav">
-          <img src="../imgs/Multi-Connect(white).png" alt="MultiConnect">
+        <div class="search-container">
+          <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Buscar vagas de emprego..." id="searchInput" oninput="filterJobs(this.value)">
+            <button class="search-btn"><i class="bi bi-search"></i></button>
+          </div>
         </div>
-        <p class="menu-subtitle">Sua plataforma de conexões</p>
-      </div>
-      <ul class="nav-list">
-        <div class="links1">
-          <li><a href="../Home/home.html" id="link1"><i class="bi bi-house-door"></i> Início</a></li>
-          <li><a href="../Lojas/lojas.html"><i class="bi bi-shop"></i> Lojas</a></li>
-          <li><a href="vagas.html" class="active"><i class="bi bi-people"></i>WorkConnect</a></li>
-          <li><a href="../carrinho/index.html"><i class="bi bi-cart"></i>Carrinho</a></li>
-        </div>
-        <div class="links2">
-          <li><a href="../Config/Config.html"><i class="bi bi-gear"></i> Configurações</a></li>
-        </div>
-      </ul>
-    </div>
 
-      <div class="overlay" id="overlay"></div>
-      <div class="logo">
-        <h1>Vagas</h1>
-      </div>
-    </div>
+        <nav class="header-nav">
+          <a href="../Home/home.html" class="nav-item"><i class="bi bi-house-door"></i> Início</a>
+          <a href="../Lojas/lojas.html" class="nav-item"><i class="bi bi-shop"></i> Lojas</a>
+          <a href="#" class="nav-item active"><i class="bi bi-briefcase"></i> WorkConnect</a>
+          <a href="../carrinho/index.html" class="nav-item"><i class="bi bi-cart3"></i> Carrinho</a>
+          <a href="#" class="nav-item"><i class="bi bi-heart"></i> Favoritos</a>
+        </nav>
 
-    <div class="pesquisa">
-      <div class="search-bar">
-          <input type="text" placeholder="Buscar lojas..."
-          oninput="filterJobs(this.value)">
-            <button class="search-btn"><i class="bi bi-search"></i>
-            </button>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <i class="bi bi-list"></i>
+        </button>
       </div>
     </div>
   </header>
 
-  <section class="store-container" id="jobContainer"></section>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="page-header-content">
+      <h1 class="page-title">Oportunidades de Trabalho</h1>
+      <p class="page-subtitle">Encontre as melhores vagas de emprego em empresas locais. Conecte-se com oportunidades que combinam com seu perfil e construa sua carreira conosco.</p>
+    </div>
+  </section>
 
-  <script src="../Lojas/lojasData.js"></script>
-  <script>
-    function renderJobs(query = '') {
-      const container = document.getElementById("jobContainer");
-      container.innerHTML = '';
+  <!-- Main Content -->
+  <main class="main-content">
+    <section>
+      <div class="section-header">
+        <i class="bi bi-briefcase section-icon"></i>
+        <h2 class="section-title">Vagas Disponíveis</h2>
+      </div>
+      
+      <div class="loading" id="loading" style="display: none;">
+        <div class="loading-spinner"></div>
+      </div>
+      
+      <div class="jobs-container" id="jobContainer">
+        <!-- Jobs will be dynamically loaded here -->
+      </div>
 
-      lojas
-        .filter(loja => loja.contratando &&
-          (loja.nome.toLowerCase().includes(query.toLowerCase()) ||
-          loja.servico.toLowerCase().includes(query.toLowerCase()) ||
-          loja.trabalho.toLowerCase().includes(query.toLowerCase()))
-        )
-        .forEach(loja => {
-          const card = document.createElement("div");
-          card.classList.add("card");
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <i class="bi bi-search"></i>
+        <h3>Nenhuma vaga encontrada</h3>
+        <p>Tente ajustar sua pesquisa ou explore outras oportunidades.</p>
+      </div>
+    </section>
+  </main>
 
-          card.innerHTML = `
-            <div class="store-info">
-              <div class="img_logo"><img class="card-img" src="${loja.imagem}" alt="${loja.nome}"></div>
-              <div class="details">
-                <h2>${loja.nome}</h2>
-                <p><strong>Local:</strong> ${loja.local}</p>
-                <p><strong>Tipo de vaga:</strong> ${loja.tipovaga}</p>
-                <p><strong>Cargo:</strong> ${loja.servico}</p>
-                <p><strong>Descrição:</strong> ${loja.trabalho}</p>
-              </div>
-            </div>
-            <div class="button">
-              <a href="${loja.link}" target="_blank">
-                <button class="card-button">Acessar</button>
-              </a>
-            </div>
-          `;
-          container.appendChild(card);
-        });
-    }
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-text">
+      © 2024 WorkConnect - MultiConnect. Conectando talentos e oportunidades.
+    </div>
+  </footer>
 
-    document.addEventListener("DOMContentLoaded", () => {
-      renderJobs();
-
- const hamburger = document.getElementById("hamburger");
-      const menu = document.getElementById("menu");
-      const overlay = document.getElementById("overlay");
-
-      hamburger.addEventListener("click", () => {
-        // Toggle da classe active no hambúrguer para a animação
-        hamburger.classList.toggle("active");
-        
-        // Toggle do menu
-        menu.classList.toggle("open");
-        
-        // Mostrar/ocultar overlay
-        if (menu.classList.contains("open")) {
-          overlay.style.display = "block";
-          setTimeout(() => overlay.classList.add("show"), 10);
-        } else {
-          overlay.classList.remove("show");
-          setTimeout(() => overlay.style.display = "none", 300);
-        }
-      });
-
-      overlay.addEventListener("click", () => {
-        // Remove a classe active do hambúrguer
-        hamburger.classList.remove("active");
-        
-        // Fecha o menu
-        menu.classList.remove("open");
-        overlay.classList.remove("show");
-        setTimeout(() => overlay.style.display = "none", 300);
-      });
-    });
-    function filterJobs(query) {
-      renderJobs(query);
-    }
-  </script>
+  <script src="script.js"></script>
+  <script src="vagasData.js"></script>
 </body>
 </html>

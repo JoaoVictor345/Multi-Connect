@@ -387,6 +387,8 @@
       });
     });
 
+    
+
     // Expor funções globalmente para uso inline
     window.showCities = showCities;
     window.filterCities = filterCities;

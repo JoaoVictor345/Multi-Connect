@@ -302,7 +302,7 @@
 
     .nav-item:hover {
       background: rgba(255, 255, 255, 0.2);
-      color: var(--accent-blue);
+      color: var(--text-white);
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
@@ -957,7 +957,7 @@
       }
 
       .search-container {
-        max-width: 250px;
+        display: none;
       }
 
       .logo {
