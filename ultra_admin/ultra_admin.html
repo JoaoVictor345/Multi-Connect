@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Ultra Admin - MultiConnect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../imgs/Multi-Favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="ultra_admin.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar d-flex flex-column p-3">
+        <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <i class="fa fa-cogs fa-fw me-2 fs-4"></i>
+            <span class="fs-4">Ultra Admin</span>
+        </a>
+        <hr class="text-secondary">
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" data-target="dashboard"><i class="fa fa-tachometer-alt fa-fw"></i>Dashboard Geral</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#" data-target="gestao-lojas"><i class="fa fa-store fa-fw"></i>Gestão de Lojas</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#" data-target="gestao-usuarios"><i class="fa fa-users fa-fw"></i>Gestão de Usuários</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#" data-target="gestao-conteudo"><i class="fa fa-file-alt fa-fw"></i>Gestão de Conteúdo</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#" data-target="admin-financeira"><i class="fa fa-dollar-sign fa-fw"></i>Admin. Financeira</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#" data-target="configuracoes"><i class="fa fa-cogs fa-fw"></i>Configurações</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#" data-target="seguranca-logs"><i class="fa fa-shield-alt fa-fw"></i>Segurança e Logs</a>
+            </li>
+        </ul>
+        <hr class="text-secondary">
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../imgs/user(1).png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>Ultra Admin</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" href="#">Configurações</a></li>
+                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Sair</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- 1. Dashboard Geral -->
+        <section id="dashboard" class="section active">
+            <h2 class="pb-2 border-bottom">Dashboard Geral</h2>
+            <p class="text-muted">Visão geral da plataforma MultiConnect.</p>
+            <div class="row">
+                <!-- Cards de Métricas -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row g-0 align-items-center">
+                                <div class="col">
+                                    <div class="text-xs fw-bold text-primary text-uppercase mb-1">Lojas Cadastradas</div>
+                                    <div class="h5 mb-0 fw-bold text-gray-800">1,250</div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-store fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row g-0 align-items-center">
+                                <div class="col">
+                                    <div class="text-xs fw-bold text-success text-uppercase mb-1">Usuários Ativos</div>
+                                    <div class="h5 mb-0 fw-bold text-gray-800">15,780</div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-users fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row g-0 align-items-center">
+                                <div class="col">
+                                    <div class="text-xs fw-bold text-info text-uppercase mb-1">Vagas Ativas</div>
+                                    <div class="h5 mb-0 fw-bold text-gray-800">5,400</div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-briefcase fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row g-0 align-items-center">
+                                <div class="col">
+                                    <div class="text-xs fw-bold text-warning text-uppercase mb-1">Anúncios Ativos</div>
+                                    <div class="h5 mb-0 fw-bold text-gray-800">22,100</div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-bullhorn fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Gráficos -->
+            <div class="row">
+                <div class="col-lg-7 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header py-3"><h6 class="m-0 fw-bold text-primary">Crescimento de Usuários (Últimos 6 meses)</h6></div>
+                        <div class="card-body"><div style="height: 320px;"><canvas id="userGrowthChart"></canvas></div></div>
+                    </div>
+                </div>
+                <div class="col-lg-5 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header py-3"><h6 class="m-0 fw-bold text-primary">Distribuição de Conteúdo</h6></div>
+                        <div class="card-body"><div style="height: 320px;"><canvas id="contentPieChart"></canvas></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Gestão de Lojas -->
+        <section id="gestao-lojas" class="section">
+            <h2 class="pb-2 border-bottom">Gestão de Lojas</h2>
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <input type="text" class="form-control w-50" placeholder="Buscar loja por nome, ID ou proprietário...">
+                        <select class="form-select w-auto">
+                            <option selected>Filtrar por status...</option>
+                            <option value="1">Aprovada</option>
+                            <option value="2">Pendente</option>
+                            <option value="3">Suspensa</option>
+                            <option value="4">Reprovada</option>
+                        </select>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th><th>Nome da Loja</th><th>Proprietário</th><th>Data de Cadastro</th><th>Status</th><th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#1024</td><td>Loja do Zé</td><td>Francisco Ivande</td><td>15/05/2024</td><td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-success" title="Aprovar"><i class="fa fa-check"></i></button>
+                                        <button class="btn btn-sm btn-danger" title="Reprovar"><i class="fa fa-times"></i></button>
+                                        <button class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#1023</td><td>Tech Imports</td><td>Maria Oliveira</td><td>14/05/2024</td><td><span class="badge bg-success">Aprovada</span></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-secondary" title="Suspender"><i class="fa fa-ban"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Gestão de Usuários -->
+        <section id="gestao-usuarios" class="section">
+            <h2 class="pb-2 border-bottom">Gestão de Usuários</h2>
+            <div class="card shadow">
+                <div class="card-body">
+                    <input type="text" class="form-control mb-3" placeholder="Buscar usuário por nome, email ou ID...">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th><th>Nome</th><th>Email</th><th>Data de Cadastro</th><th>Tipo</th><th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#5543</td><td>Carlos Pereira</td><td>carlos.p@email.com</td><td>12/05/2024</td><td>Comum</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-info text-white" title="Resetar Senha"><i class="fa fa-key"></i></button>
+                                        <button class="btn btn-sm btn-warning text-dark" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                        <button class="btn btn-sm btn-danger" title="Excluir"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-secondary" title="Gerenciar Permissões"><i class="fa fa-user-shield"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#1023</td><td>Maria Oliveira</td><td>maria.o@email.com</td><td>10/05/2024</td><td>Dono de Loja</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-info text-white" title="Resetar Senha"><i class="fa fa-key"></i></button>
+                                        <button class="btn btn-sm btn-warning text-dark" title="Bloquear"><i class="fa fa-lock"></i></button>
+                                        <button class="btn btn-sm btn-danger" title="Excluir"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-secondary" title="Gerenciar Permissões"><i class="fa fa-user-shield"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Gestão de Conteúdo -->
+        <section id="gestao-conteudo" class="section">
+            <h2 class="pb-2 border-bottom">Gestão de Conteúdo</h2>
+            <div class="card shadow">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="contentTab" role="tablist">
+                        <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#vagas" type="button">Vagas de Emprego</button></li>
+                        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#produtos" type="button">Produtos/Serviços</button></li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="contentTabContent">
+                        <div class="tab-pane fade show active" id="vagas" role="tabpanel">
+                            <h4 class="mt-2">Vagas Pendentes de Aprovação</h4>
+                            <div class="table-responsive"><table class="table table-hover mt-2 align-middle">
+                                <thead class="table-light"><tr><th>Título da Vaga</th><th>Empresa</th><th>Data</th><th class="text-center">Ações</th></tr></thead>
+                                <tbody><tr><td>Desenvolvedor Full-Stack Pleno</td><td>Tech Imports</td><td>16/05/2024</td><td class="text-center"><button class="btn btn-sm btn-success" title="Aprovar"><i class="fa fa-check"></i></button> <button class="btn btn-sm btn-danger" title="Reprovar"><i class="fa fa-times"></i></button> <button class="btn btn-sm btn-primary" title="Ver Detalhes"><i class="fa fa-eye"></i></button></td></tr></tbody>
+                            </table></div>
+                        </div>
+                        <div class="tab-pane fade" id="produtos" role="tabpanel">
+                            <h4 class="mt-2">Monitoramento de Anúncios</h4>
+                            <div class="table-responsive"><table class="table table-hover mt-2 align-middle">
+                                <thead class="table-light"><tr><th>Anúncio</th><th>Loja</th><th>Data</th><th class="text-center">Ações</th></tr></thead>
+                                <tbody><tr><td>Smartphone XYZ - Novo</td><td>Loja do Zé</td><td>15/05/2024</td><td class="text-center"><button class="btn btn-sm btn-warning" title="Remover Conteúdo"><i class="fa fa-trash-alt"></i></button> <button class="btn btn-sm btn-primary" title="Ver Detalhes"><i class="fa fa-eye"></i></button></td></tr></tbody>
+                            </table></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Administração Financeira -->
+        <section id="admin-financeira" class="section">
+            <h2 class="pb-2 border-bottom">Administração Financeira</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow h-100"><div class="card-body">
+                        <h5 class="card-title">Gerenciar Planos</h5>
+                        <p class="card-text">Adicione, edite ou remova os planos de assinatura da plataforma.</p>
+                        <button class="btn btn-primary">Gerenciar Planos</button>
+                    </div></div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow h-100"><div class="card-body">
+                        <h5 class="card-title">Relatórios Financeiros</h5>
+                        <p class="card-text">Visualize relatórios de receitas, transações e assinaturas.</p>
+                        <button class="btn btn-success">Ver Relatórios</button>
+                    </div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Configurações da Plataforma -->
+        <section id="configuracoes" class="section">
+            <h2 class="pb-2 border-bottom">Configurações da Plataforma</h2>
+            <div class="card shadow"><div class="card-body"><form>
+                <div class="mb-3"><label for="logo" class="form-label">Logo da Plataforma</label><input class="form-control" type="file" id="logo"></div>
+                <div class="mb-3"><label for="termos" class="form-label">Termos e Condições</label><textarea class="form-control" id="termos" rows="5" placeholder="Edite o conteúdo dos Termos e Condições..."></textarea></div>
+                <div class="mb-3"><label for="privacidade" class="form-label">Política de Privacidade</label><textarea class="form-control" id="privacidade" rows="5" placeholder="Edite o conteúdo da Política de Privacidade..."></textarea></div>
+                <div class="mb-3">
+                    <label for="notificacao" class="form-label">Notificação Global</label>
+                    <textarea class="form-control" id="notificacao" rows="3" placeholder="Escreva um aviso para ser exibido para todos os usuários..."></textarea>
+                    <div class="form-text">Esta mensagem aparecerá como um banner no topo da página para todos os usuários logados.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            </form></div></div>
+        </section>
+
+        <!-- 7. Segurança e Logs -->
+        <section id="seguranca-logs" class="section">
+            <h2 class="pb-2 border-bottom">Segurança e Logs</h2>
+            <div class="card shadow"><div class="card-body">
+                <h5 class="card-title">Histórico de Alterações e Acessos</h5>
+                <p class="card-text">Auditoria de ações realizadas no painel de administração.</p>
+                <div class="table-responsive"><table class="table table-striped table-hover">
+                    <thead class="table-light"><tr><th>Data/Hora</th><th>Administrador</th><th>Ação</th><th>Detalhes</th></tr></thead>
+                    <tbody>
+                        <tr><td>16/05/2024 10:30:15</td><td>João Victor</td><td>Aprovação de Loja</td><td>Loja #1022 (Super Ofertas) aprovada.</td></tr>
+                        <tr><td>16/05/2024 09:15:00</td><td>João levir</td><td>Login</td><td>Acesso ao painel a partir do IP 192.168.1.1</td></tr>
+                        <tr><td>15/05/2024 18:45:22</td><td>José Felipe</td><td>Remoção de Conteúdo</td><td>Anúncio #8734 removido por violar as políticas.</td></tr>
+                    </tbody>
+                </table></div>
+            </div></div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/ultra_admin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+        :root {
+            --bs-primary-rgb: 78, 115, 223;
+            --bs-success-rgb: 28, 200, 138;
+            --bs-info-rgb: 54, 185, 204;
+            --bs-warning-rgb: 246, 194, 62;
+        }
+        body {
+            background-color: #f8f9fc;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #212529;
+            transition: all 0.3s;
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.55);
+            transition: all 0.2s;
+        }
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            color: #fff;
+            background-color: #495057;
+        }
+        .sidebar .nav-link .fa-fw {
+            margin-right: 10px;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            transition: margin-left 0.3s;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card.border-left-primary { border-left: 0.25rem solid #4e73df !important; }
+        .card.border-left-success { border-left: 0.25rem solid #1cc88a !important; }
+        .card.border-left-info { border-left: 0.25rem solid #36b9cc !important; }
+        .card.border-left-warning { border-left: 0.25rem solid #f6c23e !important; }
+        .text-gray-300 { color: #dddfeb !important; }

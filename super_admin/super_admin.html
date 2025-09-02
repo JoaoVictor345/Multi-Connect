@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Super Admin - Multi-Connect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="../imgs/Multi-Favicon.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="super_admin.css" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <h2>Multi-Connect</h2>
+        <span>Painel do Administrador</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-item">
+          <a href="#" class="nav-link active" data-section="dashboard">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#" class="nav-link" data-section="produtos">
+            <i class="nav-icon fas fa-box"></i>
+            <span>Produtos</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#" class="nav-link" data-section="pedidos">
+            <i class="nav-icon fas fa-shopping-cart"></i>
+            <span>Pedidos</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#" class="nav-link" data-section="clientes">
+            <i class="nav-icon fas fa-users"></i>
+            <span>Clientes</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#" class="nav-link" data-section="funcionarios">
+            <i class="nav-icon fas fa-user-tie"></i>
+            <span>Funcionários</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#" class="nav-link" data-section="financeiro">
+            <i class="nav-icon fas fa-chart-line"></i>
+            <span>Financeiro</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1 id="page-title">Dashboard</h1>
+      </div>
+      <div class="header-right">
+        <div class="notification-icon">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </div>
+        <div class="user-profile">
+          <div class="user-avatar">SA</div>
+          <div class="info">
+            <div style="font-weight: 600; color: #1e293b">Super Admin</div>
+            <div style="font-size: 0.8rem; color: #64748b">Minha Loja</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Dashboard Section -->
+      <div class="content-section active" id="dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <i class="fas fa-shopping-bag icon"></i>
+            <h3>127</h3>
+            <p>Pedidos Hoje</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-dollar-sign icon"></i>
+            <h3>R$ 15.847</h3>
+            <p>Receita do Dia</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-users icon"></i>
+            <h3>2.341</h3>
+            <p>Clientes Ativos</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-star icon"></i>
+            <h3>48</h3>
+            <p>Produtos em Destaque</p>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <h4>Vendas dos Últimos 7 Dias</h4>
+          <canvas id="salesChart" height="50"></canvas>
+        </div>
+      </div>
+
+      <!-- Produtos Section -->
+      <div class="content-section" id="produtos">
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Gerenciar Produtos</h4>
+            <div class="table-actions">
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#produtoModal"
+              >
+                <i class="fas fa-plus"></i> Adicionar Produto
+              </button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Categoria</th>
+                  <th>Preço</th>
+                  <th>Estoque</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Smartphone Galaxy S24</td>
+                  <td>Eletrônicos</td>
+                  <td>R$ 2.899,00</td>
+                  <td>45</td>
+                  <td><span class="status-badge status-active">Ativo</span></td>
+                  <td>
+                    <button class="action-btn btn-edit">Editar</button>
+                    <button class="action-btn btn-delete">Excluir</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Notebook Dell Inspiron</td>
+                  <td>Eletrônicos</td>
+                  <td>R$ 3.299,00</td>
+                  <td>12</td>
+                  <td><span class="status-badge status-active">Ativo</span></td>
+                  <td>
+                    <button class="action-btn btn-edit">Editar</button>
+                    <button class="action-btn btn-delete">Excluir</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Tênis Nike Air Max</td>
+                  <td>Calçados</td>
+                  <td>R$ 549,00</td>
+                  <td>0</td>
+                  <td>
+                    <span class="status-badge status-pending">Sem Estoque</span>
+                  </td>
+                  <td>
+                    <button class="action-btn btn-edit">Editar</button>
+                    <button class="action-btn btn-delete">Excluir</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pedidos Section -->
+      <div class="content-section" id="pedidos">
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Gerenciar Pedidos</h4>
+            <div class="table-actions">
+              <select class="form-select" style="width: auto">
+                <option>Todos os Status</option>
+                <option>Pendente</option>
+                <option>Processando</option>
+                <option>Enviado</option>
+                <option>Entregue</option>
+                <option>Cancelado</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID Pedido</th>
+                  <th>Cliente</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                  <th>Data</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#PED-001234</td>
+                  <td>João Silva</td>
+                  <td>R$ 1.299,00</td>
+                  <td>
+                    <span class="status-badge status-pending">Pendente</span>
+                  </td>
+                  <td>30/08/2025</td>
+                  <td>
+                    <button class="action-btn btn-edit">Atualizar</button>
+                    <button class="action-btn btn-view">Detalhes</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#PED-001235</td>
+                  <td>Maria Santos</td>
+                  <td>R$ 849,00</td>
+                  <td>
+                    <span class="status-badge status-completed">Entregue</span>
+                  </td>
+                  <td>29/08/2025</td>
+                  <td>
+                    <button class="action-btn btn-edit">Atualizar</button>
+                    <button class="action-btn btn-view">Detalhes</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#PED-001236</td>
+                  <td>Carlos Lima</td>
+                  <td>R$ 549,00</td>
+                  <td>
+                    <span class="status-badge status-cancelled">Cancelado</span>
+                  </td>
+                  <td>28/08/2025</td>
+                  <td>
+                    <button class="action-btn btn-edit">Atualizar</button>
+                    <button class="action-btn btn-view">Detalhes</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clientes Section -->
+      <div class="content-section" id="clientes">
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Gerenciar Clientes</h4>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Compras Realizadas</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>João Silva</td>
+                  <td>joao.silva@email.com</td>
+                  <td>23 compras</td>
+                  <td>
+                    <button
+                      class="action-btn btn-view"
+                      data-bs-toggle="modal"
+                      data-bs-target="#clienteModal"
+                    >
+                      Ver Histórico
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Maria Santos</td>
+                  <td>maria.santos@email.com</td>
+                  <td>15 compras</td>
+                  <td>
+                    <button
+                      class="action-btn btn-view"
+                      data-bs-toggle="modal"
+                      data-bs-target="#clienteModal"
+                    >
+                      Ver Histórico
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Carlos Lima</td>
+                  <td>carlos.lima@email.com</td>
+                  <td>8 compras</td>
+                  <td>
+                    <button
+                      class="action-btn btn-view"
+                      data-bs-toggle="modal"
+                      data-bs-target="#clienteModal"
+                    >
+                      Ver Histórico
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funcionários Section -->
+      <div class="content-section" id="funcionarios">
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Gerenciar Funcionários</h4>
+            <div class="table-actions">
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#funcionarioModal"
+              >
+                <i class="fas fa-plus"></i> Adicionar Funcionário
+              </button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Cargo</th>
+                  <th>Permissão</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ana Costa</td>
+                  <td>Gerente de Vendas</td>
+                  <td><span class="status-badge status-active">Admin</span></td>
+                  <td>
+                    <button class="action-btn btn-edit">Editar</button>
+                    <button class="action-btn btn-delete">Remover</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Pedro Oliveira</td>
+                  <td>Assistente</td>
+                  <td>
+                    <span class="status-badge status-pending">Usuário</span>
+                  </td>
+                  <td>
+                    <button class="action-btn btn-edit">Editar</button>
+                    <button class="action-btn btn-delete">Remover</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financeiro Section -->
+      <div class="content-section" id="financeiro">
+        <div class="stats-grid" style="margin-bottom: 2rem">
+          <div class="stat-card">
+            <i class="fas fa-wallet icon"></i>
+            <h3>R$ 45.230</h3>
+            <p>Saldo Acumulado</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-handshake icon"></i>
+            <h3>R$ 2.261</h3>
+            <p>Comissões Multi-Connect</p>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <div class="table-header">
+            <h4>Transações Financeiras</h4>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Pedido</th>
+                  <th>Valor</th>
+                  <th>Comissão Multi-Connect</th>
+                  <th>Valor Líquido</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>30/08/2025</td>
+                  <td>#PED-001234</td>
+                  <td>R$ 1.299,00</td>
+                  <td>R$ 64,95 (5%)</td>
+                  <td>R$ 1.234,05</td>
+                </tr>
+                <tr>
+                  <td>29/08/2025</td>
+                  <td>#PED-001235</td>
+                  <td>R$ 849,00</td>
+                  <td>R$ 42,45 (5%)</td>
+                  <td>R$ 806,55</td>
+                </tr>
+                <tr>
+                  <td>28/08/2025</td>
+                  <td>#PED-001236</td>
+                  <td>R$ 549,00</td>
+                  <td>R$ 27,45 (5%)</td>
+                  <td>R$ 521,55</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Produto -->
+    <div class="modal fade" id="produtoModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Adicionar Produto</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Nome do Produto</label>
+                  <input type="text" class="form-control" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Categoria</label>
+                  <select class="form-select" required>
+                    <option value="">Selecionar categoria</option>
+                    <option>Eletrônicos</option>
+                    <option>Roupas</option>
+                    <option>Calçados</option>
+                    <option>Casa e Jardim</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Preço</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    step="0.01"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Estoque</label>
+                  <input type="number" class="form-control" required />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select class="form-select">
+                  <option value="ativo">Ativo</option>
+                  <option value="inativo">Inativo</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary">
+              Salvar Produto
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Cliente Histórico -->
+    <div class="modal fade" id="clienteModal" tabindex="-1">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Histórico do Cliente - João Silva</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-4">
+              <div class="col-md-3">
+                <div class="text-center">
+                  <div
+                    class="user-avatar"
+                    style="
+                      width: 80px;
+                      height: 80px;
+                      font-size: 2rem;
+                      margin: 0 auto;
+                    "
+                  >
+                    JS
+                  </div>
+                  <h5 class="mt-2">João Silva</h5>
+                  <p class="text-muted">Cliente desde: Jan 2024</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div
+                      class="stat-card"
+                      style="padding: 1rem; margin-bottom: 1rem"
+                    >
+                      <h4>23</h4>
+                      <p>Total de Pedidos</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div
+                      class="stat-card"
+                      style="padding: 1rem; margin-bottom: 1rem"
+                    >
+                      <h4>R$ 15.847</h4>
+                      <p>Total Gasto</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div
+                      class="stat-card"
+                      style="padding: 1rem; margin-bottom: 1rem"
+                    >
+                      <h4>R$ 689</h4>
+                      <p>Ticket Médio</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h6>Histórico de Pedidos</h6>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Pedido</th>
+                    <th>Data</th>
+                    <th>Produtos</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#PED-001234</td>
+                    <td>30/08/2025</td>
+                    <td>Smartphone Galaxy S24</td>
+                    <td>R$ 1.299,00</td>
+                    <td>
+                      <span class="status-badge status-pending">Pendente</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>#PED-001180</td>
+                    <td>15/08/2025</td>
+                    <td>Tênis Nike Air Max</td>
+                    <td>R$ 549,00</td>
+                    <td>
+                      <span class="status-badge status-completed"
+                        >Entregue</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>#PED-001089</td>
+                    <td>02/08/2025</td>
+                    <td>Notebook Dell Inspiron</td>
+                    <td>R$ 3.299,00</td>
+                    <td>
+                      <span class="status-badge status-completed"
+                        >Entregue</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Funcionário -->
+    <div class="modal fade" id="funcionarioModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Adicionar Funcionário</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Nome Completo</label>
+                <input type="text" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Cargo</label>
+                <input type="text" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Nível de Permissão</label>
+                <select class="form-select" required>
+                  <option value="">Selecionar permissão</option>
+                  <option value="admin">Administrador</option>
+                  <option value="gerente">Gerente</option>
+                  <option value="usuario">Usuário</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Senha Temporária</label>
+                <input type="password" class="form-control" required />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary">
+              Adicionar Funcionário
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/super_admin.js"></script>
+  </body>
+</html>

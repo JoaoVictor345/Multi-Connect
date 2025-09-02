@@ -4,6 +4,11 @@
         const shippingCost = 15.00;
         const discountAmount = 0.00;
 
+
+        function continueShopping(){
+            window.location.href = '../Lojas/lojas.html'
+        }
+
         function renderCartItems() {
             const cartContainer = document.getElementById('cartItems');
             
